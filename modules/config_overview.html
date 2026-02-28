@@ -1,0 +1,636 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CONFIG機能の概要 &mdash; ゲーム制作 v1.0</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=90d9a163"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../_static/translations.js?v=4755f45a"></script>
+      <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="検索" href="../search.html" />
+    <link rel="next" title="HOME機能の概要" href="home_overview.html" />
+    <link rel="prev" title="システム概要" href="../system_overview.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            ゲーム制作
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">システム概要:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../system_overview.html">システム概要</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../system_overview.html#id2">アーキテクチャ概要</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../system_overview.html#id3">システム全体の構成</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../system_overview.html#id4">3層アーキテクチャ</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../system_overview.html#id5">データフロー</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../system_overview.html#id6">共通基盤</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../system_overview.html#id7">レイヤー間通信</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../system_overview.html#id8">リソース管理</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../system_overview.html#id9">技術スタック</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../system_overview.html#id10">モジュール概要</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../system_overview.html#id11">実装済みモジュール</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../system_overview.html#id12">計画中モジュール</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">モジュール別概要:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">CONFIG機能の概要</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">概要</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">主要機能</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id3">操作設定</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">音響設定</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">データ管理</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">画面構成</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">技術仕様</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id8">アーキテクチャ</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">データフロー</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id10">関連ページ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="home_overview.html">HOME機能の概要</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="home_overview.html#id1">概要</a></li>
+<li class="toctree-l2"><a class="reference internal" href="home_overview.html#id2">主要機能</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="home_overview.html#id3">メニュー選択</a></li>
+<li class="toctree-l3"><a class="reference internal" href="home_overview.html#id4">画面構成</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="home_overview.html#id5">技術仕様</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="home_overview.html#id6">アーキテクチャ</a></li>
+<li class="toctree-l3"><a class="reference internal" href="home_overview.html#id7">状態管理</a></li>
+<li class="toctree-l3"><a class="reference internal" href="home_overview.html#id8">データフロー</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="home_overview.html#id9">関連ファイル</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="home_overview.html#controller">Controller層</a></li>
+<li class="toctree-l3"><a class="reference internal" href="home_overview.html#service">Service層</a></li>
+<li class="toctree-l3"><a class="reference internal" href="home_overview.html#component">Component層</a></li>
+<li class="toctree-l3"><a class="reference internal" href="home_overview.html#id10">リクエスト・レスポンス</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="home_overview.html#id11">今後の拡張予定</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="save_overview.html">SAVE機能の概要</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="save_overview.html#id1">概要</a></li>
+<li class="toctree-l2"><a class="reference internal" href="save_overview.html#id2">主要機能</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="save_overview.html#id3">データ管理</a></li>
+<li class="toctree-l3"><a class="reference internal" href="save_overview.html#id4">セーブスロット</a></li>
+<li class="toctree-l3"><a class="reference internal" href="save_overview.html#id5">データ保護</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="save_overview.html#id6">技術仕様</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="save_overview.html#id7">アーキテクチャ</a></li>
+<li class="toctree-l3"><a class="reference internal" href="save_overview.html#id8">データ形式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="save_overview.html#id9">ファイル構成</a></li>
+<li class="toctree-l3"><a class="reference internal" href="save_overview.html#id10">暗号化仕様</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="save_overview.html#id11">データフロー</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="save_overview.html#id12">保存処理</a></li>
+<li class="toctree-l3"><a class="reference internal" href="save_overview.html#id13">読み込み処理</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="save_overview.html#id14">関連ファイル</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="save_overview.html#controller">Controller層</a></li>
+<li class="toctree-l3"><a class="reference internal" href="save_overview.html#service">Service層</a></li>
+<li class="toctree-l3"><a class="reference internal" href="save_overview.html#id15">共通機能</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="save_overview.html#id16">エラーハンドリング</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="save_overview.html#id17">想定エラー</a></li>
+<li class="toctree-l3"><a class="reference internal" href="save_overview.html#id18">復旧手順</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="save_overview.html#id19">今後の拡張予定</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="end_overview.html">END機能の概要</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="end_overview.html#id1">概要</a></li>
+<li class="toctree-l2"><a class="reference internal" href="end_overview.html#id2">主要機能</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="end_overview.html#id3">終了処理</a></li>
+<li class="toctree-l3"><a class="reference internal" href="end_overview.html#id4">確認処理</a></li>
+<li class="toctree-l3"><a class="reference internal" href="end_overview.html#id5">画面構成</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="end_overview.html#id6">技術仕様</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="end_overview.html#id7">アーキテクチャ</a></li>
+<li class="toctree-l3"><a class="reference internal" href="end_overview.html#id8">終了シーケンス</a></li>
+<li class="toctree-l3"><a class="reference internal" href="end_overview.html#id9">リソース管理</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="end_overview.html#id10">解放対象リソース</a></li>
+<li class="toctree-l4"><a class="reference internal" href="end_overview.html#id11">解放順序</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="end_overview.html#id12">データフロー</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="end_overview.html#id13">正常終了</a></li>
+<li class="toctree-l3"><a class="reference internal" href="end_overview.html#id14">異常終了対応</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="end_overview.html#id15">関連ファイル</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="end_overview.html#controller">Controller層</a></li>
+<li class="toctree-l3"><a class="reference internal" href="end_overview.html#service">Service層</a></li>
+<li class="toctree-l3"><a class="reference internal" href="end_overview.html#id16">リクエスト・レスポンス</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="end_overview.html#id17">エラーハンドリング</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="end_overview.html#id18">想定ケース</a></li>
+<li class="toctree-l3"><a class="reference internal" href="end_overview.html#id19">ログ出力</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="end_overview.html#id20">今後の拡張予定</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API・開発者向け:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api/api_reference.html">APIリファレンス - 概要</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api/api_reference.html#id1">概要</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/api_reference.html#id2">アーキテクチャ構成</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_reference.html#id3">3層構造の統一</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_reference.html#id4">レイヤー間通信</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../api/api_reference.html#id5">共通インターフェース</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_reference.html#request">Request オブジェクト</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_reference.html#response">Response オブジェクト</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_reference.html#id6">結果判定メソッド</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../api/api_reference.html#id7">モジュール別API仕様</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_reference.html#id8">主要モジュール概要</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../api/api_reference.html#id9">使用パターン</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_reference.html#id10">標準的な使用パターン</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_reference.html#id11">エラーハンドリング</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_reference.html#id12">バリデーション</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../api/api_reference.html#id13">型安全性</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_reference.html#id14">型注釈の活用</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_reference.html#mypy">mypyによる型チェック</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../api/api_reference.html#id15">テスト支援</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_reference.html#id16">モックとテスト</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_reference.html#id17">ファクトリーメソッド</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../api/api_reference.html#id18">パフォーマンス考慮事項</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_reference.html#id19">効率的な使用</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_reference.html#id20">メモリ使用量</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../api/api_reference.html#id21">拡張性</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_reference.html#id22">新モジュール追加</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_reference.html#id23">下位互換性</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../api/api_reference.html#id24">関連ドキュメント</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../api/module_api.html">モジュール別APIリファレンス</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api/module_api.html#config">CONFIGモジュール</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api/module_api.html#controller">Controller層</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/module_api.html#module-common.config.service.action">Service層</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#common.config.service.action.Action"><code class="docutils literal notranslate"><span class="pre">Action</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../api/module_api.html#component">Component層</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#module-common.config.service.component.actionRequestValidator">Validator系</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#module-common.config.service.component.statusConvertManager">Manager系</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#check">Check系</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../api/module_api.html#home">HOMEモジュール</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api/module_api.html#id1">Controller層</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/module_api.html#id2">Service層</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#common.home.service.sound.Sound"><code class="docutils literal notranslate"><span class="pre">Sound</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#common.home.service.status.Status"><code class="docutils literal notranslate"><span class="pre">Status</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../api/module_api.html#id3">Component層</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#id4">Validator系</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#id5">Manager系</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../api/module_api.html#save">SAVEモジュール</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api/module_api.html#id6">Controller層</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#common.save.sound.Sound"><code class="docutils literal notranslate"><span class="pre">Sound</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../api/module_api.html#id7">Service層</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#common.save.service.sound.Sound"><code class="docutils literal notranslate"><span class="pre">Sound</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#common.save.service.status.Status"><code class="docutils literal notranslate"><span class="pre">Status</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../api/module_api.html#end">ENDモジュール</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api/module_api.html#id8">Controller層</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/module_api.html#id9">Service層</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#common.end.service.status.Status"><code class="docutils literal notranslate"><span class="pre">Status</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../api/module_api.html#id10">共通モジュール</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api/module_api.html#module-common.layer.response.response">レイヤー間通信</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#common.layer.response.response.Response"><code class="docutils literal notranslate"><span class="pre">Response</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#common.layer.code.code.Code"><code class="docutils literal notranslate"><span class="pre">Code</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../api/module_api.html#module-common.config.constants">定数・列挙型</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#common.config.constants.ButtonPosition"><code class="docutils literal notranslate"><span class="pre">ButtonPosition</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#common.config.constants.ConfigButtonIndex"><code class="docutils literal notranslate"><span class="pre">ConfigButtonIndex</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#common.config.constants.GoKeyTypes"><code class="docutils literal notranslate"><span class="pre">GoKeyTypes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#common.config.constants.SetButtonIndex"><code class="docutils literal notranslate"><span class="pre">SetButtonIndex</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#common.config.constants.SliderPosition"><code class="docutils literal notranslate"><span class="pre">SliderPosition</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#common.config.constants.StepKeyTypes"><code class="docutils literal notranslate"><span class="pre">StepKeyTypes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#common.config.constants.TabTypes"><code class="docutils literal notranslate"><span class="pre">TabTypes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#common.config.constants.TextContents"><code class="docutils literal notranslate"><span class="pre">TextContents</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#common.config.constants.TextPosition"><code class="docutils literal notranslate"><span class="pre">TextPosition</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#common.config.constants.VolumeSliderSize"><code class="docutils literal notranslate"><span class="pre">VolumeSliderSize</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#common.config.constants.WayKeyTypes"><code class="docutils literal notranslate"><span class="pre">WayKeyTypes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#common.constants.ButtonIndex"><code class="docutils literal notranslate"><span class="pre">ButtonIndex</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#common.constants.Colors"><code class="docutils literal notranslate"><span class="pre">Colors</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#common.constants.SoundIndex"><code class="docutils literal notranslate"><span class="pre">SoundIndex</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../api/module_api.html#module-common.debug.debug">共通機能</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#common.debug.debug.ERROR_LOG"><code class="docutils literal notranslate"><span class="pre">ERROR_LOG()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#common.debug.debug.LOG"><code class="docutils literal notranslate"><span class="pre">LOG()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#common.debug.debug.init"><code class="docutils literal notranslate"><span class="pre">init()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/development_guide.html">開発ガイド</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../guides/development_guide.html#id2">開発環境セットアップ</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../guides/development_guide.html#id3">必要なツール</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guides/development_guide.html#id4">環境構築</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/development_guide.html#id5">アーキテクチャ規約</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../guides/development_guide.html#id6">3層構造の統一</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guides/development_guide.html#id7">ファイル命名規則</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guides/development_guide.html#id8">クラス設計原則</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guides/development_guide.html#request-response">Request/Response パターン</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/development_guide.html#id9">新モジュール追加手順</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../guides/development_guide.html#id10">1. ディレクトリ構造作成</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guides/development_guide.html#id11">2. 基本ファイル作成</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guides/development_guide.html#service">3. Service層の実装</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guides/development_guide.html#id12">4. テストファイル作成</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guides/development_guide.html#id13">5. ドキュメント追加</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guides/development_guide.html#api">6. API参照に追加</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/development_guide.html#id14">テスト作成ガイド</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../guides/development_guide.html#id15">テスト方針</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guides/development_guide.html#id16">テストファイル構成</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guides/development_guide.html#id17">共通テストテンプレート</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/development_guide.html#id18">ドキュメント作成ガイド</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../guides/development_guide.html#id19">ドキュメント構成</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guides/development_guide.html#id20">ドキュメント規約</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/development_guide.html#id21">コード品質管理</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../guides/development_guide.html#id22">静的解析</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guides/development_guide.html#id23">継続的インテグレーション</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/development_guide.html#id24">モジュール別注意点</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../guides/development_guide.html#config">CONFIG</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guides/development_guide.html#home">HOME</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guides/development_guide.html#save">SAVE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guides/development_guide.html#end">END</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/development_guide.html#id25">トラブルシューティング</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../guides/development_guide.html#id26">よくある問題と対処法</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html">createExe プロジェクト - モジュール管理ガイド</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id1">目次</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id2">新モジュール追加手順</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id3">1. ディレクトリ構造作成</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id4">2. 基本ファイル作成</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#controller">Controller層ファイル作成</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#service">Service層ファイル作成</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id5">3. リクエスト・レスポンスオブジェクト作成</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id6">4. テストファイル作成</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id7">5. ドキュメント作成</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id8">モジュール概要ドキュメント</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#index-rst">index.rstに追加</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#api">API仕様に追加</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id9">6. 変更履歴更新</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id10">既存モジュール改修手順</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id11">1. 影響範囲の確認</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id12">2. 既存テストの実行</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id13">3. 修正実装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id14">4. テスト更新・追加</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id15">5. ドキュメント更新</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id16">モジュール概要の更新</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id17">APIドキュメントの確認</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id18">ドキュメント更新手順</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id19">1. モジュール概要ドキュメント作成・更新</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id20">2. index.rstの更新</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id21">3. API仕様の更新</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id22">4. 変更履歴の更新</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id23">5. ドキュメント生成確認</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id24">テスト追加手順</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id25">1. テストファイル作成</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id26">2. テストケース実装</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id27">基本テンプレート</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id28">3. テスト実行・カバレッジ確認</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id29">品質チェック手順</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id30">1. コード品質チェック</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id31">2. テストカバレッジチェック</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id32">3. ドキュメント品質チェック</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id33">4. 統合テスト</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id34">チェックリスト</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id35">新モジュール追加チェックリスト</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id36">既存モジュール改修チェックリスト</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id37">トラブルシューティング</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id38">よくある問題と対処法</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id39">サポート情報</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">変更履歴</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../changelog.html#v1-3-0-2026-02-26">v1.3.0 (2026-02-26)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#id2">新機能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#id3">改善</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#id4">バグ修正</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#id5">技術的改善</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#id6">ドキュメント構成変更</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../changelog.html#v1-2-0-2026-01-15">v1.2.0 (2026-01-15)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#id7">新機能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#id8">改善</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../changelog.html#v1-1-0-2025-12-01">v1.1.0 (2025-12-01)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#id9">新機能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#id10">バグ修正</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../changelog.html#v1-0-0-2025-10-01">v1.0.0 (2025-10-01)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#id11">初回リリース</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../changelog.html#id12">既知の問題</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#v1-3-0">v1.3.0</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../changelog.html#id13">今後の予定</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#v1-4-0-2026-04-01">v1.4.0 (予定: 2026-04-01)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#v1-5-0-2026-07-01">v1.5.0 (予定: 2026-07-01)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ゲーム制作</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">CONFIG機能の概要</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="config">
+<h1>CONFIG機能の概要<a class="headerlink" href="#config" title="Link to this heading"></a></h1>
+<section id="id1">
+<h2>概要<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<p>CONFIG機能は、ゲームの設定を管理するための機能群です。
+ユーザーのキー操作設定、音量調整、テスト再生などの機能を提供します。</p>
+</section>
+<section id="id2">
+<h2>主要機能<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<section id="id3">
+<h3>操作設定<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>方向キー設定 (WAYキー)</strong>:</p>
+<ul>
+<li><p>TYPE_1: W/A/S/D キー</p></li>
+<li><p>TYPE_2: 矢印キー</p></li>
+</ul>
+</li>
+<li><p><strong>直進キー設定 (GOキー)</strong>:</p>
+<ul>
+<li><p>TYPE_1: スペースキー</p></li>
+<li><p>TYPE_2: エンターキー</p></li>
+</ul>
+</li>
+<li><p><strong>足踏みキー設定 (STEPキー)</strong>:</p>
+<ul>
+<li><p>TYPE_1: 左シフトキー</p></li>
+<li><p>TYPE_2: 左コントロールキー</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="id4">
+<h3>音響設定<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>音量調整</strong>: 0-100の範囲でマスター音量を調整</p></li>
+<li><p><strong>テスト再生</strong>: 設定した音量でサンプル音声を再生</p></li>
+<li><p><strong>チャンネル管理</strong>: 複数音声の同時再生制御</p></li>
+</ul>
+</section>
+<section id="id5">
+<h3>データ管理<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>設定の保存</strong>: 変更した設定を永続化</p></li>
+<li><p><strong>設定の読み込み</strong>: 起動時に前回の設定を復元</p></li>
+<li><p><strong>デフォルト値</strong>: 未設定時の初期値管理</p></li>
+</ul>
+</section>
+</section>
+<section id="id6">
+<h2>画面構成<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<p>CONFIG画面は2つのタブで構成されています:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 75.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>タブ</p></th>
+<th class="head"><p>内容</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>操作 (OPERATION)</strong></p></td>
+<td><p>キー設定の変更、テスト実行</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>音声 (SOUND)</strong></p></td>
+<td><p>音量調整、サウンドテスト</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id7">
+<h2>技術仕様<a class="headerlink" href="#id7" title="Link to this heading"></a></h2>
+<section id="id8">
+<h3>アーキテクチャ<a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
+<p>3層構造で実装されています:</p>
+<ol class="arabic simple">
+<li><p><strong>Controller層</strong> (<code class="docutils literal notranslate"><span class="pre">common/config/*.py</span></code>)</p></li>
+<li><p><strong>Service層</strong> (<code class="docutils literal notranslate"><span class="pre">common/config/service/*.py</span></code>)</p></li>
+<li><p><strong>Component層</strong> (<code class="docutils literal notranslate"><span class="pre">common/config/service/component/*.py</span></code>)</p></li>
+</ol>
+</section>
+<section id="id9">
+<h3>データフロー<a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>ユーザー操作
+     ↓
+Controller (action.py, sound.py, etc.)
+     ↓
+Service (ビジネスロジック)
+     ↓
+Component (バリデーション、保存管理)
+     ↓
+永続化ストレージ
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id10">
+<h2>関連ページ<a class="headerlink" href="#id10" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="../api/module_api.html"><span class="doc">モジュール別APIリファレンス</span></a> - 詳細なAPI仕様</p></li>
+<li><p><a class="reference internal" href="../guides/development_guide.html"><span class="doc">開発ガイド</span></a> - 開発ガイド</p></li>
+<li><p><a class="reference internal" href="../changelog.html"><span class="doc">変更履歴</span></a> - 変更履歴</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../system_overview.html" class="btn btn-neutral float-left" title="システム概要" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="home_overview.html" class="btn btn-neutral float-right" title="HOME機能の概要" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Kurosu.
+      <span class="lastupdated">最終更新: 2026-02-28
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

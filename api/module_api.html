@@ -1,0 +1,2350 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>モジュール別APIリファレンス &mdash; ゲーム制作 v1.0</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=90d9a163"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../_static/translations.js?v=4755f45a"></script>
+      <script src="../_static/design-tabs.js?v=f930bc37"></script>
+      <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+      <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs";
+
+
+
+
+
+const initStyles = () => {
+    const defaultStyle = document.createElement('style');
+    defaultStyle.textContent = `pre.mermaid {
+    /* Same as .mermaid-container > pre */
+    display: block;
+    width: 100%;
+}
+
+pre.mermaid > svg {
+    /* Same as .mermaid-container > pre > svg */
+    height: 500px;
+    width: 100%;
+    max-width: 100% !important;
+}`;
+    document.head.appendChild(defaultStyle);
+
+    const fullscreenStyle = document.createElement('style');
+    fullscreenStyle.textContent = `.mermaid-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.mermaid-container > pre {
+    display: block;
+    width: 100%;
+}
+
+.mermaid-container > pre > svg {
+    height: 500px;
+    width: 100%;
+    max-width: 100% !important;
+}
+
+.mermaid-fullscreen-btn {
+    width: 28px;
+    height: 28px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    font-size: 14px;
+    line-height: 1;
+    padding: 0;
+    color: #333;
+}
+
+.mermaid-fullscreen-btn:hover {
+    opacity: 100% !important;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+    transform: scale(1.1);
+}
+
+.mermaid-fullscreen-btn.dark-theme {
+    background: rgba(50, 50, 50, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #e0e0e0;
+}
+
+.mermaid-fullscreen-btn.dark-theme:hover {
+    background: rgba(60, 60, 60, 1);
+    box-shadow: 0 3px 10px rgba(255, 255, 255, 0.2);
+}
+
+.mermaid-fullscreen-modal {
+    display: none;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 95vw;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.98);
+    z-index: 9999;
+    padding: 20px;
+    overflow: auto;
+}
+
+.mermaid-fullscreen-modal.dark-theme {
+    background: rgba(0, 0, 0, 0.98);
+}
+
+.mermaid-fullscreen-modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mermaid-container-fullscreen {
+    position: relative;
+    width: 95vw;
+    height: 90vh;
+    max-width: 95vw;
+    max-height: 90vh;
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    overflow: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mermaid-container-fullscreen.dark-theme {
+    background: #1a1a1a;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+}
+
+.mermaid-container-fullscreen pre.mermaid {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mermaid-container-fullscreen .mermaid svg {
+    height: 100% !important;
+    width: 100% !important;
+    cursor: grab;
+}
+
+.mermaid-fullscreen-close {
+    position: fixed !important;
+    top: 20px !important;
+    right: 20px !important;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: all 0.2s;
+    font-size: 24px;
+    line-height: 1;
+    color: #333;
+}
+
+.mermaid-fullscreen-close:hover {
+    background: white;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+    transform: scale(1.1);
+}
+
+.mermaid-fullscreen-close.dark-theme {
+    background: rgba(50, 50, 50, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #e0e0e0;
+}
+
+.mermaid-fullscreen-close.dark-theme:hover {
+    background: rgba(60, 60, 60, 1);
+    box-shadow: 0 6px 16px rgba(255, 255, 255, 0.2);
+}
+
+.mermaid-fullscreen-modal .mermaid-fullscreen-btn {
+    display: none !important;
+}`;
+    document.head.appendChild(fullscreenStyle);
+}
+
+// Detect if page has dark background
+const isDarkTheme = () => {
+    // We use a set of heuristics:
+    // 1. Check for common dark mode classes or attributes
+    // 2. Check computed background color brightness
+    if (document.documentElement.classList.contains('dark') ||
+        document.documentElement.getAttribute('data-theme') === 'dark' ||
+        document.body.classList.contains('dark') ||
+        document.body.getAttribute('data-theme') === 'dark') {
+        // console.log("Dark theme detected via class/attribute");
+        return true;
+    }
+    if (document.documentElement.classList.contains('light') ||
+        document.documentElement.getAttribute('data-theme') === 'light' ||
+        document.body.classList.contains('light') ||
+        document.body.getAttribute('data-theme') === 'light') {
+        // console.log("Light theme detected via class/attribute");
+        return false;
+    }
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        // console.log("Dark theme detected via prefers-color-scheme");
+        return true;
+    }
+    const bgColor = window.getComputedStyle(document.body).backgroundColor;
+    const match = bgColor.match(/rgb\((\d+),\s*(\d+),\s*(\d+)/);
+    if (match) {
+        const r = parseInt(match[1]);
+        const g = parseInt(match[2]);
+        const b = parseInt(match[3]);
+        const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+        // console.log("Background color brightness:", brightness);
+        return brightness < 128;
+    }
+    // console.log("No dark or light theme detected, defaulting to light theme");
+    return false;
+};
+
+let darkTheme = isDarkTheme();
+let modal = null;
+let modalContent = null;
+let previousScrollOffset = [window.scrollX, window.scrollY];
+
+const runMermaid = async (rerun) => {
+    console.log("Running mermaid diagrams, rerun =", rerun);
+    // clear all existing mermaid charts
+    let all_mermaids = document.querySelectorAll(".mermaid");
+
+    if (rerun) {
+        all_mermaids.forEach((el) => {
+            if(!el.hasAttribute("data-original-code")) {
+                // store original code
+                // console.log(`Storing original code for first run: `, el.innerHTML);
+                el.setAttribute('data-original-code', el.innerHTML);
+            }
+            if(el.getAttribute("data-processed") === "true") {
+                // remove and restore original
+                el.removeAttribute("data-processed");
+                // console.log(`Restoring original code for re-run: `, el.getAttribute('data-original-code'));
+                el.innerHTML = el.getAttribute('data-original-code');
+            } else {
+                // store original code
+                // console.log(`Storing original code for re-run: `, el.innerHTML);
+                el.setAttribute('data-original-code', el.innerHTML);
+            }
+        });
+        await mermaid.run();
+    }
+
+    all_mermaids = document.querySelectorAll(".mermaid");
+    const mermaids_processed = document.querySelectorAll(".mermaid[data-processed='true']");
+
+    if ("False" === "True") {
+        const mermaids_to_add_zoom = -1 === -1 ? all_mermaids.length : -1;
+        if(mermaids_to_add_zoom > 0) {
+            var svgs = d3.selectAll("");
+            if(all_mermaids.length !== mermaids_processed.length) {
+                setTimeout(() => runMermaid(false), 200);
+                return;
+            } else if(svgs.size() !== mermaids_to_add_zoom) {
+                setTimeout(() => runMermaid(false), 200);
+                return;
+            } else {
+                svgs.each(function() {
+                    var svg = d3.select(this);
+                    svg.html("<g class='wrapper'>" + svg.html() + "</g>");
+                    var inner = svg.select("g");
+                    var zoom = d3.zoom().on("zoom", function(event) {
+                        inner.attr("transform", event.transform);
+                    });
+                    svg.call(zoom);
+                });
+            }
+        }
+    } else if(all_mermaids.length !== mermaids_processed.length) {
+        // Wait for mermaid to process all diagrams
+        setTimeout(() => runMermaid(false), 200);
+        return;
+    }
+
+    // Stop here if not adding fullscreen capability
+    if ("True" !== "True") return;
+
+    if (modal !== null ) {
+        // Destroy existing modal
+        modal.remove();
+        modal = null;
+        modalContent = null;
+    }
+
+    modal = document.createElement('div');
+    modal.className = 'mermaid-fullscreen-modal' + (darkTheme ? ' dark-theme' : '');
+    modal.setAttribute('role', 'dialog');
+    modal.setAttribute('aria-modal', 'true');
+    modal.setAttribute('aria-label', 'Fullscreen diagram viewer');
+    modal.innerHTML = `
+        <button class="mermaid-fullscreen-close${darkTheme ? ' dark-theme' : ''}" aria-label="Close fullscreen">✕</button>
+        <div class="mermaid-container-fullscreen${darkTheme ? ' dark-theme' : ''}"></div>
+    `;
+    document.body.appendChild(modal);
+
+    modalContent = modal.querySelector('.mermaid-container-fullscreen');
+    const closeBtn = modal.querySelector('.mermaid-fullscreen-close');
+
+    const closeModal = () => {
+        modal.classList.remove('active');
+        modalContent.innerHTML = '';
+        document.body.style.overflow = ''
+        window.scrollTo({left: previousScrollOffset[0], top: previousScrollOffset[1], behavior: 'instant'});
+    };
+
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+            closeModal();
+        }
+    });
+
+    document.querySelectorAll('.mermaid').forEach((mermaidDiv) => {
+        if (mermaidDiv.parentNode.classList.contains('mermaid-container') ||
+            mermaidDiv.closest('.mermaid-fullscreen-modal')) {
+            // Already processed, adjust button class if needed
+            const existingBtn = mermaidDiv.parentNode.querySelector('.mermaid-fullscreen-btn');
+            if (existingBtn) {
+                existingBtn.className = 'mermaid-fullscreen-btn' + (darkTheme ? ' dark-theme' : '');
+            }
+            return;
+        }
+
+        const container = document.createElement('div');
+        container.className = 'mermaid-container';
+        mermaidDiv.parentNode.insertBefore(container, mermaidDiv);
+        container.appendChild(mermaidDiv);
+
+        const fullscreenBtn = document.createElement('button');
+        fullscreenBtn.className = 'mermaid-fullscreen-btn' + (darkTheme ? ' dark-theme' : '');
+        fullscreenBtn.setAttribute('aria-label', 'View diagram in fullscreen');
+        fullscreenBtn.textContent = '⛶';
+        fullscreenBtn.style.opacity = '50%';
+
+        // Calculate dynamic position based on diagram's margin and padding
+        const diagramStyle = window.getComputedStyle(mermaidDiv);
+        const marginTop = parseFloat(diagramStyle.marginTop) || 0;
+        const marginRight = parseFloat(diagramStyle.marginRight) || 0;
+        const paddingTop = parseFloat(diagramStyle.paddingTop) || 0;
+        const paddingRight = parseFloat(diagramStyle.paddingRight) || 0;
+        fullscreenBtn.style.top = `${marginTop + paddingTop + 4}px`;
+        fullscreenBtn.style.right = `${marginRight + paddingRight + 4}px`;
+
+        fullscreenBtn.addEventListener('click', () => {
+            previousScrollOffset = [window.scroll, window.scrollY];
+            const clone = mermaidDiv.cloneNode(true);
+            modalContent.innerHTML = '';
+            modalContent.appendChild(clone);
+
+            const svg = clone.querySelector('svg');
+            if (svg) {
+                svg.removeAttribute('width');
+                svg.removeAttribute('height');
+                svg.style.width = '100%';
+                svg.style.height = 'auto';
+                svg.style.maxWidth = '100%';
+                svg.style.sdisplay = 'block';
+
+                if ("False" === "True") {
+                    setTimeout(() => {
+                        const g = svg.querySelector('g');
+                        if (g) {
+                            var svgD3 = d3.select(svg);
+                            svgD3.html("<g class='wrapper'>" + svgD3.html() + "</g>");
+                            var inner = svgD3.select("g");
+                            var zoom = d3.zoom().on("zoom", function(event) {
+                                inner.attr("transform", event.transform);
+                            });
+                            svgD3.call(zoom);
+                        }
+                    }, 100);
+                }
+            }
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+        container.appendChild(fullscreenBtn);
+    });
+};
+
+const load = async () => {
+    initStyles();
+
+    await runMermaid(true);
+
+    const reRunIfThemeChanges = async () => {
+        const newDarkTheme = isDarkTheme();
+        if (newDarkTheme !== darkTheme) {
+            darkTheme = newDarkTheme;
+            console.log("Theme change detected, re-running mermaid with", darkTheme ? "dark" : "default", "theme");
+            await mermaid.initialize(
+                {...JSON.parse(
+                    `{"startOnLoad": false}`
+                ),
+                ...{ darkMode: darkTheme, theme: darkTheme ? 'dark' : 'default' },
+                }
+            );
+            await runMermaid(true);
+        }
+    };
+
+    // Update theme classes when theme changes
+    const themeObserver = new MutationObserver(reRunIfThemeChanges);
+    themeObserver.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['class', 'style', 'data-theme']
+    });
+    themeObserver.observe(document.body, {
+        attributes: true,
+        attributeFilter: ['class', 'style', 'data-theme']
+    });
+};
+
+
+
+
+
+console.log("Initializing mermaid with", darkTheme ? "dark" : "default", "theme");
+mermaid.initialize(
+    {...JSON.parse(
+        `{"startOnLoad": false}`
+    ),
+    ...{ darkMode: darkTheme, theme: darkTheme ? 'dark' : 'default' },
+    }
+);
+
+window.addEventListener("load", load);</script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="検索" href="../search.html" />
+    <link rel="next" title="開発ガイド" href="../guides/development_guide.html" />
+    <link rel="prev" title="APIリファレンス - 概要" href="api_reference.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            ゲーム制作
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">システム概要:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../system_overview.html">システム概要</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../system_overview.html#id2">アーキテクチャ概要</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../system_overview.html#id3">システム全体の構成</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../system_overview.html#id4">3層アーキテクチャ</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../system_overview.html#id5">データフロー</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../system_overview.html#id6">共通基盤</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../system_overview.html#id7">レイヤー間通信</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../system_overview.html#id8">リソース管理</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../system_overview.html#id9">技術スタック</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../system_overview.html#id10">モジュール概要</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../system_overview.html#id11">実装済みモジュール</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../system_overview.html#id12">計画中モジュール</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">モジュール別概要:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../modules/config_overview.html">CONFIG機能の概要</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../modules/config_overview.html#id1">概要</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/config_overview.html#id2">主要機能</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../modules/config_overview.html#id3">操作設定</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modules/config_overview.html#id4">音響設定</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modules/config_overview.html#id5">データ管理</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/config_overview.html#id6">画面構成</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/config_overview.html#id7">技術仕様</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../modules/config_overview.html#id8">アーキテクチャ</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modules/config_overview.html#id9">データフロー</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/config_overview.html#id10">関連ページ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/home_overview.html">HOME機能の概要</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../modules/home_overview.html#id1">概要</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/home_overview.html#id2">主要機能</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../modules/home_overview.html#id3">メニュー選択</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modules/home_overview.html#id4">画面構成</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/home_overview.html#id5">技術仕様</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../modules/home_overview.html#id6">アーキテクチャ</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modules/home_overview.html#id7">状態管理</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modules/home_overview.html#id8">データフロー</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/home_overview.html#id9">関連ファイル</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../modules/home_overview.html#controller">Controller層</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modules/home_overview.html#service">Service層</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modules/home_overview.html#component">Component層</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modules/home_overview.html#id10">リクエスト・レスポンス</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/home_overview.html#id11">今後の拡張予定</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/save_overview.html">SAVE機能の概要</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../modules/save_overview.html#id1">概要</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/save_overview.html#id2">主要機能</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../modules/save_overview.html#id3">データ管理</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modules/save_overview.html#id4">セーブスロット</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modules/save_overview.html#id5">データ保護</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/save_overview.html#id6">技術仕様</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../modules/save_overview.html#id7">アーキテクチャ</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modules/save_overview.html#id8">データ形式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modules/save_overview.html#id9">ファイル構成</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modules/save_overview.html#id10">暗号化仕様</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/save_overview.html#id11">データフロー</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../modules/save_overview.html#id12">保存処理</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modules/save_overview.html#id13">読み込み処理</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/save_overview.html#id14">関連ファイル</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../modules/save_overview.html#controller">Controller層</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modules/save_overview.html#service">Service層</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modules/save_overview.html#id15">共通機能</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/save_overview.html#id16">エラーハンドリング</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../modules/save_overview.html#id17">想定エラー</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modules/save_overview.html#id18">復旧手順</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/save_overview.html#id19">今後の拡張予定</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/end_overview.html">END機能の概要</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../modules/end_overview.html#id1">概要</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/end_overview.html#id2">主要機能</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../modules/end_overview.html#id3">終了処理</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modules/end_overview.html#id4">確認処理</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modules/end_overview.html#id5">画面構成</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/end_overview.html#id6">技術仕様</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../modules/end_overview.html#id7">アーキテクチャ</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modules/end_overview.html#id8">終了シーケンス</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modules/end_overview.html#id9">リソース管理</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../modules/end_overview.html#id10">解放対象リソース</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../modules/end_overview.html#id11">解放順序</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/end_overview.html#id12">データフロー</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../modules/end_overview.html#id13">正常終了</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modules/end_overview.html#id14">異常終了対応</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/end_overview.html#id15">関連ファイル</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../modules/end_overview.html#controller">Controller層</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modules/end_overview.html#service">Service層</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modules/end_overview.html#id16">リクエスト・レスポンス</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/end_overview.html#id17">エラーハンドリング</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../modules/end_overview.html#id18">想定ケース</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modules/end_overview.html#id19">ログ出力</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/end_overview.html#id20">今後の拡張予定</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API・開発者向け:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="api_reference.html">APIリファレンス - 概要</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api_reference.html#id1">概要</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference.html#id2">アーキテクチャ構成</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api_reference.html#id3">3層構造の統一</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_reference.html#id4">レイヤー間通信</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference.html#id5">共通インターフェース</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api_reference.html#request">Request オブジェクト</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_reference.html#response">Response オブジェクト</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_reference.html#id6">結果判定メソッド</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference.html#id7">モジュール別API仕様</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api_reference.html#id8">主要モジュール概要</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference.html#id9">使用パターン</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api_reference.html#id10">標準的な使用パターン</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_reference.html#id11">エラーハンドリング</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_reference.html#id12">バリデーション</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference.html#id13">型安全性</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api_reference.html#id14">型注釈の活用</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_reference.html#mypy">mypyによる型チェック</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference.html#id15">テスト支援</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api_reference.html#id16">モックとテスト</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_reference.html#id17">ファクトリーメソッド</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference.html#id18">パフォーマンス考慮事項</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api_reference.html#id19">効率的な使用</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_reference.html#id20">メモリ使用量</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference.html#id21">拡張性</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api_reference.html#id22">新モジュール追加</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_reference.html#id23">下位互換性</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference.html#id24">関連ドキュメント</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">モジュール別APIリファレンス</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#config">CONFIGモジュール</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#controller">Controller層</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-common.config.service.action">Service層</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#common.config.service.action.Action"><code class="docutils literal notranslate"><span class="pre">Action</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#component">Component層</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#module-common.config.service.component.actionRequestValidator">Validator系</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-common.config.service.component.statusConvertManager">Manager系</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#check">Check系</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#home">HOMEモジュール</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Controller層</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">Service層</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#common.home.service.sound.Sound"><code class="docutils literal notranslate"><span class="pre">Sound</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#common.home.service.status.Status"><code class="docutils literal notranslate"><span class="pre">Status</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">Component層</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id4">Validator系</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">Manager系</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#save">SAVEモジュール</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id6">Controller層</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#common.save.sound.Sound"><code class="docutils literal notranslate"><span class="pre">Sound</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">Service層</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#common.save.service.sound.Sound"><code class="docutils literal notranslate"><span class="pre">Sound</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#common.save.service.status.Status"><code class="docutils literal notranslate"><span class="pre">Status</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#end">ENDモジュール</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id8">Controller層</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">Service層</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#common.end.service.status.Status"><code class="docutils literal notranslate"><span class="pre">Status</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id10">共通モジュール</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#module-common.layer.response.response">レイヤー間通信</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#common.layer.response.response.Response"><code class="docutils literal notranslate"><span class="pre">Response</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#common.layer.code.code.Code"><code class="docutils literal notranslate"><span class="pre">Code</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-common.config.constants">定数・列挙型</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#common.config.constants.ButtonPosition"><code class="docutils literal notranslate"><span class="pre">ButtonPosition</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#common.config.constants.ConfigButtonIndex"><code class="docutils literal notranslate"><span class="pre">ConfigButtonIndex</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#common.config.constants.GoKeyTypes"><code class="docutils literal notranslate"><span class="pre">GoKeyTypes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#common.config.constants.SetButtonIndex"><code class="docutils literal notranslate"><span class="pre">SetButtonIndex</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#common.config.constants.SliderPosition"><code class="docutils literal notranslate"><span class="pre">SliderPosition</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#common.config.constants.StepKeyTypes"><code class="docutils literal notranslate"><span class="pre">StepKeyTypes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#common.config.constants.TabTypes"><code class="docutils literal notranslate"><span class="pre">TabTypes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#common.config.constants.TextContents"><code class="docutils literal notranslate"><span class="pre">TextContents</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#common.config.constants.TextPosition"><code class="docutils literal notranslate"><span class="pre">TextPosition</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#common.config.constants.VolumeSliderSize"><code class="docutils literal notranslate"><span class="pre">VolumeSliderSize</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#common.config.constants.WayKeyTypes"><code class="docutils literal notranslate"><span class="pre">WayKeyTypes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#common.constants.ButtonIndex"><code class="docutils literal notranslate"><span class="pre">ButtonIndex</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#common.constants.Colors"><code class="docutils literal notranslate"><span class="pre">Colors</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#common.constants.SoundIndex"><code class="docutils literal notranslate"><span class="pre">SoundIndex</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-common.debug.debug">共通機能</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#common.debug.debug.ERROR_LOG"><code class="docutils literal notranslate"><span class="pre">ERROR_LOG()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#common.debug.debug.LOG"><code class="docutils literal notranslate"><span class="pre">LOG()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#common.debug.debug.init"><code class="docutils literal notranslate"><span class="pre">init()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/development_guide.html">開発ガイド</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../guides/development_guide.html#id2">開発環境セットアップ</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../guides/development_guide.html#id3">必要なツール</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guides/development_guide.html#id4">環境構築</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/development_guide.html#id5">アーキテクチャ規約</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../guides/development_guide.html#id6">3層構造の統一</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guides/development_guide.html#id7">ファイル命名規則</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guides/development_guide.html#id8">クラス設計原則</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guides/development_guide.html#request-response">Request/Response パターン</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/development_guide.html#id9">新モジュール追加手順</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../guides/development_guide.html#id10">1. ディレクトリ構造作成</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guides/development_guide.html#id11">2. 基本ファイル作成</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guides/development_guide.html#service">3. Service層の実装</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guides/development_guide.html#id12">4. テストファイル作成</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guides/development_guide.html#id13">5. ドキュメント追加</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guides/development_guide.html#api">6. API参照に追加</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/development_guide.html#id14">テスト作成ガイド</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../guides/development_guide.html#id15">テスト方針</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guides/development_guide.html#id16">テストファイル構成</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guides/development_guide.html#id17">共通テストテンプレート</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/development_guide.html#id18">ドキュメント作成ガイド</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../guides/development_guide.html#id19">ドキュメント構成</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guides/development_guide.html#id20">ドキュメント規約</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/development_guide.html#id21">コード品質管理</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../guides/development_guide.html#id22">静的解析</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guides/development_guide.html#id23">継続的インテグレーション</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/development_guide.html#id24">モジュール別注意点</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../guides/development_guide.html#config">CONFIG</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guides/development_guide.html#home">HOME</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guides/development_guide.html#save">SAVE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guides/development_guide.html#end">END</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/development_guide.html#id25">トラブルシューティング</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../guides/development_guide.html#id26">よくある問題と対処法</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html">createExe プロジェクト - モジュール管理ガイド</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id1">目次</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id2">新モジュール追加手順</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id3">1. ディレクトリ構造作成</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id4">2. 基本ファイル作成</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#controller">Controller層ファイル作成</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#service">Service層ファイル作成</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id5">3. リクエスト・レスポンスオブジェクト作成</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id6">4. テストファイル作成</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id7">5. ドキュメント作成</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id8">モジュール概要ドキュメント</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#index-rst">index.rstに追加</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#api">API仕様に追加</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id9">6. 変更履歴更新</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id10">既存モジュール改修手順</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id11">1. 影響範囲の確認</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id12">2. 既存テストの実行</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id13">3. 修正実装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id14">4. テスト更新・追加</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id15">5. ドキュメント更新</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id16">モジュール概要の更新</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id17">APIドキュメントの確認</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id18">ドキュメント更新手順</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id19">1. モジュール概要ドキュメント作成・更新</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id20">2. index.rstの更新</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id21">3. API仕様の更新</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id22">4. 変更履歴の更新</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id23">5. ドキュメント生成確認</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id24">テスト追加手順</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id25">1. テストファイル作成</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id26">2. テストケース実装</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id27">基本テンプレート</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id28">3. テスト実行・カバレッジ確認</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id29">品質チェック手順</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id30">1. コード品質チェック</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id31">2. テストカバレッジチェック</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id32">3. ドキュメント品質チェック</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id33">4. 統合テスト</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id34">チェックリスト</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id35">新モジュール追加チェックリスト</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id36">既存モジュール改修チェックリスト</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id37">トラブルシューティング</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id38">よくある問題と対処法</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id39">サポート情報</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">変更履歴</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../changelog.html#v1-3-0-2026-02-26">v1.3.0 (2026-02-26)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#id2">新機能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#id3">改善</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#id4">バグ修正</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#id5">技術的改善</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#id6">ドキュメント構成変更</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../changelog.html#v1-2-0-2026-01-15">v1.2.0 (2026-01-15)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#id7">新機能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#id8">改善</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../changelog.html#v1-1-0-2025-12-01">v1.1.0 (2025-12-01)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#id9">新機能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#id10">バグ修正</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../changelog.html#v1-0-0-2025-10-01">v1.0.0 (2025-10-01)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#id11">初回リリース</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../changelog.html#id12">既知の問題</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#v1-3-0">v1.3.0</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../changelog.html#id13">今後の予定</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#v1-4-0-2026-04-01">v1.4.0 (予定: 2026-04-01)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#v1-5-0-2026-07-01">v1.5.0 (予定: 2026-07-01)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ゲーム制作</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">モジュール別APIリファレンス</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="api">
+<h1>モジュール別APIリファレンス<a class="headerlink" href="#api" title="Link to this heading"></a></h1>
+<p>本ページでは、各モジュールの詳細なAPI仕様を提供します。
+全モジュールは3層アーキテクチャ（Controller/Service/Component）で統一されています。</p>
+<section id="config">
+<h2>CONFIGモジュール<a class="headerlink" href="#config" title="Link to this heading"></a></h2>
+<p>設定管理機能のAPI仕様です。</p>
+<section id="controller">
+<h3>Controller層<a class="headerlink" href="#controller" title="Link to this heading"></a></h3>
+</section>
+<section id="module-common.config.service.action">
+<span id="service"></span><h3>Service層<a class="headerlink" href="#module-common.config.service.action" title="Link to this heading"></a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="common.config.service.action.Action">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">common.config.service.action.</span></span><span class="sig-name descname"><span class="pre">Action</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ConfigActionRequest</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#common.config.service.action.Action" title="Link to this definition"></a></dt>
+<dd><p>ベースクラス: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>設定画面のアクションを実行するクラス。</p>
+<p>画面上の各種設定項目に対する操作を処理し、設定フォームに反映させる。
+具体的には、タブの選択、方向キー設定、直進キー設定、足踏みキー設定、音量設定、テスト選択などの操作を行う。</p>
+<div class="admonition note">
+<p class="admonition-title">注釈</p>
+<p>このクラスはビジネスロジックの検証と処理結果の返却を担当し、フォームの直接的な更新は行わない。</p>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="common.config.service.action.Action.select_go_key_type">
+<span class="sig-name descname"><span class="pre">select_go_key_type</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#common.layer.response.response.Response" title="common.layer.response.response.Response"><span class="pre">Response</span></a></span></span><a class="headerlink" href="#common.config.service.action.Action.select_go_key_type" title="Link to this definition"></a></dt>
+<dd><p>GOキーの種類をユーザーの操作に基づいて選択する。ユーザーの操作に基づいて、GOキーの種類が選択されたかどうかを判断する。</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header sd-bg-primary sd-bg-text-primary">
+<span class="sd-summary-icon"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-eye" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2c1.981 0 3.671.992 4.933 2.078 1.27 1.091 2.187 2.345 2.637 3.023a1.62 1.62 0 0 1 0 1.798c-.45.678-1.367 1.932-2.637 3.023C11.67 13.008 9.981 14 8 14c-1.981 0-3.671-.992-4.933-2.078C1.797 10.83.88 9.576.43 8.898a1.62 1.62 0 0 1 0-1.798c.45-.677 1.367-1.931 2.637-3.022C4.33 2.992 6.019 2 8 2ZM1.679 7.932a.12.12 0 0 0 0 .136c.411.622 1.241 1.75 2.366 2.717C5.176 11.758 6.527 12.5 8 12.5c1.473 0 2.825-.742 3.955-1.715 1.124-.967 1.954-2.096 2.366-2.717a.12.12 0 0 0 0-.136c-.412-.621-1.242-1.75-2.366-2.717C10.824 4.242 9.473 3.5 8 3.5c-1.473 0-2.825.742-3.955 1.715-1.124.967-1.954 2.096-2.366 2.717ZM8 10a2 2 0 1 1-.001-3.999A2 2 0 0 1 8 10Z"></path></svg></span><span class="sd-summary-text">処理フロー図を確認する</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<pre  class="mermaid">
+        
+flowchart TD
+	%% --- Common Styles ---
+	classDef error fill:#f96,stroke:#333,stroke-width:2px
+	classDef success fill:#9f9,stroke:#333,stroke-width:2px
+	classDef info fill:#eee,stroke:#999,stroke-dasharray: 5 5
+	Start([&quot;select_go_key_type&quot;]) --&gt; V{&quot;KeyTypeValidator&quot;} -- &quot;NG&quot; --&gt; R1[&quot;Code.ARGUMENT_ERROR&lt;br/&gt;data: KEY_TYPE_ERROR&quot;]:::error
+	V -- &quot;OK&quot; --&gt; C1{&quot;TYPE_1?&quot;} -- &quot;Yes&quot; --&gt; R2[&quot;Code.OK&lt;br/&gt;data: GoKeyTypes.TYPE_1&quot;]:::success
+	C1 -- &quot;No&quot; --&gt; C2{&quot;TYPE_2?&quot;} -- &quot;Yes&quot; --&gt; R3[&quot;Code.OK&lt;br/&gt;data: GoKeyTypes.TYPE_2&quot;]:::success
+	C2 -- &quot;No&quot; --&gt; R4[&quot;Code.DO_NOTHING&quot;]:::info
+    </pre></div>
+</details><dl class="field-list simple">
+<dt class="field-odd">戻り値<span class="colon">:</span></dt>
+<dd class="field-odd"><p>GOキーの種類の選択結果を含む <code class="docutils literal notranslate"><span class="pre">Response</span></code> オブジェクト。GOキーの種類が選択された場合は選択されたGOキーの種類を返す。引数が無効な場合はARGUMENT_ERRORを返す。何も変更がない場合はDO_NOTHINGを返す</p>
+</dd>
+<dt class="field-even">戻り値の型<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">Response</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="common.config.service.action.Action.select_step_key_type">
+<span class="sig-name descname"><span class="pre">select_step_key_type</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#common.layer.response.response.Response" title="common.layer.response.response.Response"><span class="pre">Response</span></a></span></span><a class="headerlink" href="#common.config.service.action.Action.select_step_key_type" title="Link to this definition"></a></dt>
+<dd><p>STEPキーの種類をユーザーの操作に基づいて選択する。ユーザーのクリック操作に基づいて、STEPキーの種類を判断する。</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header sd-bg-primary sd-bg-text-primary">
+<span class="sd-summary-icon"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-eye" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2c1.981 0 3.671.992 4.933 2.078 1.27 1.091 2.187 2.345 2.637 3.023a1.62 1.62 0 0 1 0 1.798c-.45.678-1.367 1.932-2.637 3.023C11.67 13.008 9.981 14 8 14c-1.981 0-3.671-.992-4.933-2.078C1.797 10.83.88 9.576.43 8.898a1.62 1.62 0 0 1 0-1.798c.45-.677 1.367-1.931 2.637-3.022C4.33 2.992 6.019 2 8 2ZM1.679 7.932a.12.12 0 0 0 0 .136c.411.622 1.241 1.75 2.366 2.717C5.176 11.758 6.527 12.5 8 12.5c1.473 0 2.825-.742 3.955-1.715 1.124-.967 1.954-2.096 2.366-2.717a.12.12 0 0 0 0-.136c-.412-.621-1.242-1.75-2.366-2.717C10.824 4.242 9.473 3.5 8 3.5c-1.473 0-2.825.742-3.955 1.715-1.124.967-1.954 2.096-2.366 2.717ZM8 10a2 2 0 1 1-.001-3.999A2 2 0 0 1 8 10Z"></path></svg></span><span class="sd-summary-text">処理フロー図を確認する</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<pre  class="mermaid">
+        
+flowchart TD
+	%% --- Common Styles ---
+	classDef error fill:#f96,stroke:#333,stroke-width:2px
+	classDef success fill:#9f9,stroke:#333,stroke-width:2px
+	classDef info fill:#eee,stroke:#999,stroke-dasharray: 5 5
+	Start([&quot;select_step_key_type&quot;]) --&gt; V{&quot;KeyTypeValidator&quot;} -- &quot;NG&quot; --&gt; R1[&quot;Code.ARGUMENT_ERROR&quot;]:::error
+	V -- &quot;OK&quot; --&gt; C1{&quot;TYPE_1?&quot;} -- &quot;Yes&quot; --&gt; R2[&quot;Code.OK&lt;br/&gt;data: TYPE_2&quot;]:::success
+	C1 -- &quot;No&quot; --&gt; C2{&quot;TYPE_2?&quot;} -- &quot;Yes&quot; --&gt; R3[&quot;Code.OK&lt;br/&gt;data: TYPE_1&quot;]:::success
+	C2 -- &quot;No&quot; --&gt; R4[&quot;Code.DO_NOTHING&quot;]:::info
+    </pre></div>
+</details><dl class="field-list simple">
+<dt class="field-odd">戻り値<span class="colon">:</span></dt>
+<dd class="field-odd"><p>STEPキーの種類の選択結果を含む <code class="docutils literal notranslate"><span class="pre">Response</span></code> オブジェクト。STEPキーの種類が選択された場合は選択されたSTEPキーの種類を返す。引数が無効な場合はARGUMENT_ERRORを返す。何も変更がない場合はDO_NOTHINGを返す</p>
+</dd>
+<dt class="field-even">戻り値の型<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">Response</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="common.config.service.action.Action.select_tab">
+<span class="sig-name descname"><span class="pre">select_tab</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#common.layer.response.response.Response" title="common.layer.response.response.Response"><span class="pre">Response</span></a></span></span><a class="headerlink" href="#common.config.service.action.Action.select_tab" title="Link to this definition"></a></dt>
+<dd><p>タブボタンのクリックに基づいて、タブを選択する。ユーザーの操作に基づいて、タブが選択されたかどうかを判断する。</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header sd-bg-primary sd-bg-text-primary">
+<span class="sd-summary-icon"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-eye" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2c1.981 0 3.671.992 4.933 2.078 1.27 1.091 2.187 2.345 2.637 3.023a1.62 1.62 0 0 1 0 1.798c-.45.678-1.367 1.932-2.637 3.023C11.67 13.008 9.981 14 8 14c-1.981 0-3.671-.992-4.933-2.078C1.797 10.83.88 9.576.43 8.898a1.62 1.62 0 0 1 0-1.798c.45-.677 1.367-1.931 2.637-3.022C4.33 2.992 6.019 2 8 2ZM1.679 7.932a.12.12 0 0 0 0 .136c.411.622 1.241 1.75 2.366 2.717C5.176 11.758 6.527 12.5 8 12.5c1.473 0 2.825-.742 3.955-1.715 1.124-.967 1.954-2.096 2.366-2.717a.12.12 0 0 0 0-.136c-.412-.621-1.242-1.75-2.366-2.717C10.824 4.242 9.473 3.5 8 3.5c-1.473 0-2.825.742-3.955 1.715-1.124.967-1.954 2.096-2.366 2.717ZM8 10a2 2 0 1 1-.001-3.999A2 2 0 0 1 8 10Z"></path></svg></span><span class="sd-summary-text">処理フロー図を確認する</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<pre  class="mermaid">
+        
+flowchart TD
+	%% --- Common Styles ---
+	classDef error fill:#f96,stroke:#333,stroke-width:2px
+	classDef success fill:#9f9,stroke:#333,stroke-width:2px
+	classDef info fill:#eee,stroke:#999,stroke-dasharray: 5 5
+	Start([&quot;select_tab&quot;]) --&gt; V{&quot;KeyTypeValidator&quot;} -- &quot;NG&quot; --&gt; R1[&quot;Code.ARGUMENT_ERROR&quot;]:::error
+	V -- &quot;OK&quot; --&gt; C1{&quot;OPERATION?&quot;} -- &quot;Yes&quot; --&gt; R2[&quot;Code.OK&lt;br/&gt;data: TabTypes.OPERATION&quot;]:::success
+	C1 -- &quot;No&quot; --&gt; C2{&quot;SOUND?&quot;} -- &quot;Yes&quot; --&gt; R3[&quot;Code.OK&lt;br/&gt;data: TabTypes.SOUND&quot;]:::success
+	C2 -- &quot;No&quot; --&gt; R4[&quot;Code.DO_NOTHING&quot;]:::info
+    </pre></div>
+</details><dl class="field-list simple">
+<dt class="field-odd">戻り値<span class="colon">:</span></dt>
+<dd class="field-odd"><p>タブボタンの選択結果を含む <code class="docutils literal notranslate"><span class="pre">Response</span></code> オブジェクト。タブが選択された場合は選択されたタブの種類を返す。引数が無効な場合はARGUMENT_ERRORを返す。何も変更がない場合はDO_NOTHINGを返す</p>
+</dd>
+<dt class="field-even">戻り値の型<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">Response</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="common.config.service.action.Action.select_test">
+<span class="sig-name descname"><span class="pre">select_test</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#common.layer.response.response.Response" title="common.layer.response.response.Response"><span class="pre">Response</span></a></span></span><a class="headerlink" href="#common.config.service.action.Action.select_test" title="Link to this definition"></a></dt>
+<dd><p>テストアクションを選択する。ユーザーの操作に基づいて、テストアクションが選択されたかどうかを判断する。</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header sd-bg-primary sd-bg-text-primary">
+<span class="sd-summary-icon"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-eye" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2c1.981 0 3.671.992 4.933 2.078 1.27 1.091 2.187 2.345 2.637 3.023a1.62 1.62 0 0 1 0 1.798c-.45.678-1.367 1.932-2.637 3.023C11.67 13.008 9.981 14 8 14c-1.981 0-3.671-.992-4.933-2.078C1.797 10.83.88 9.576.43 8.898a1.62 1.62 0 0 1 0-1.798c.45-.677 1.367-1.931 2.637-3.022C4.33 2.992 6.019 2 8 2ZM1.679 7.932a.12.12 0 0 0 0 .136c.411.622 1.241 1.75 2.366 2.717C5.176 11.758 6.527 12.5 8 12.5c1.473 0 2.825-.742 3.955-1.715 1.124-.967 1.954-2.096 2.366-2.717a.12.12 0 0 0 0-.136c-.412-.621-1.242-1.75-2.366-2.717C10.824 4.242 9.473 3.5 8 3.5c-1.473 0-2.825.742-3.955 1.715-1.124.967-1.954 2.096-2.366 2.717ZM8 10a2 2 0 1 1-.001-3.999A2 2 0 0 1 8 10Z"></path></svg></span><span class="sd-summary-text">処理フロー図を確認する</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<pre  class="mermaid">
+        
+flowchart TD
+	%% --- Common Styles ---
+	classDef error fill:#f96,stroke:#333,stroke-width:2px
+	classDef success fill:#9f9,stroke:#333,stroke-width:2px
+	classDef info fill:#eee,stroke:#999,stroke-dasharray: 5 5
+	Start([&quot;select_test&quot;]) --&gt; C{&quot;test_click?&quot;} -- &quot;Yes&quot; --&gt; R1[&quot;Code.OK&lt;br/&gt;data: True&quot;]:::success
+	C -- &quot;No&quot; --&gt; R2[&quot;Code.DO_NOTHING&lt;br/&gt;data: False&quot;]:::info
+    </pre></div>
+</details><dl class="field-list simple">
+<dt class="field-odd">戻り値<span class="colon">:</span></dt>
+<dd class="field-odd"><p>テストアクションの選択結果を含む <code class="docutils literal notranslate"><span class="pre">Response</span></code> オブジェクト。テストアクションが選択された場合はTrueを返し、選択されなかった場合はFalseを返す</p>
+</dd>
+<dt class="field-even">戻り値の型<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">Response</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="common.config.service.action.Action.select_volume">
+<span class="sig-name descname"><span class="pre">select_volume</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#common.layer.response.response.Response" title="common.layer.response.response.Response"><span class="pre">Response</span></a></span></span><a class="headerlink" href="#common.config.service.action.Action.select_volume" title="Link to this definition"></a></dt>
+<dd><p>音量レベルをユーザーの操作に基づいて選択する。音量スライダーのクリック位置に基づいて、音量レベルを計算して返す。</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header sd-bg-primary sd-bg-text-primary">
+<span class="sd-summary-icon"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-eye" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2c1.981 0 3.671.992 4.933 2.078 1.27 1.091 2.187 2.345 2.637 3.023a1.62 1.62 0 0 1 0 1.798c-.45.678-1.367 1.932-2.637 3.023C11.67 13.008 9.981 14 8 14c-1.981 0-3.671-.992-4.933-2.078C1.797 10.83.88 9.576.43 8.898a1.62 1.62 0 0 1 0-1.798c.45-.677 1.367-1.931 2.637-3.022C4.33 2.992 6.019 2 8 2ZM1.679 7.932a.12.12 0 0 0 0 .136c.411.622 1.241 1.75 2.366 2.717C5.176 11.758 6.527 12.5 8 12.5c1.473 0 2.825-.742 3.955-1.715 1.124-.967 1.954-2.096 2.366-2.717a.12.12 0 0 0 0-.136c-.412-.621-1.242-1.75-2.366-2.717C10.824 4.242 9.473 3.5 8 3.5c-1.473 0-2.825.742-3.955 1.715-1.124.967-1.954 2.096-2.366 2.717ZM8 10a2 2 0 1 1-.001-3.999A2 2 0 0 1 8 10Z"></path></svg></span><span class="sd-summary-text">処理フロー図を確認する</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<pre  class="mermaid">
+        
+flowchart TD
+	%% --- Common Styles ---
+	classDef error fill:#f96,stroke:#333,stroke-width:2px
+	classDef success fill:#9f9,stroke:#333,stroke-width:2px
+	classDef info fill:#eee,stroke:#999,stroke-dasharray: 5 5
+	Start([&quot;select_volume&quot;]) --&gt; C{&quot;slider_click?&quot;} -- &quot;No&quot; --&gt; R1[&quot;Code.DO_NOTHING&lt;br/&gt;data: VOLUME_ERROR&quot;]:::info
+	C -- &quot;Yes&quot; --&gt; P{&quot;位置判定&quot;} -- &quot;範囲内&quot; --&gt; R2[&quot;Code.OK&lt;br/&gt;data: int音量&quot;]:::success
+	P -- &quot;MIN未満&quot; --&gt; R3[&quot;Code.OK&lt;br/&gt;data: VOLUME_MIN&quot;]:::success
+	P -- &quot;MAX超過&quot; --&gt; R4[&quot;Code.OK&lt;br/&gt;data: VOLUME_MAX&quot;]:::success
+    </pre></div>
+</details><dl class="field-list simple">
+<dt class="field-odd">戻り値<span class="colon">:</span></dt>
+<dd class="field-odd"><p>音量レベルを含む <code class="docutils literal notranslate"><span class="pre">Response</span></code> オブジェクト。クリック位置が音量スライダーの範囲内にある場合は計算された音量レベルを返し、範囲外の場合は最小または最大の音量レベルを返す。クリックされていない場合は DO_NOTHING を返す</p>
+</dd>
+<dt class="field-even">戻り値の型<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">Response</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="common.config.service.action.Action.select_way_key_type">
+<span class="sig-name descname"><span class="pre">select_way_key_type</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#common.layer.response.response.Response" title="common.layer.response.response.Response"><span class="pre">Response</span></a></span></span><a class="headerlink" href="#common.config.service.action.Action.select_way_key_type" title="Link to this definition"></a></dt>
+<dd><p>WAYキーの種類をユーザーの操作に基づいて選択する。ユーザーのクリック操作に基づいて、WAYキーの種類を判断する。</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header sd-bg-primary sd-bg-text-primary">
+<span class="sd-summary-icon"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-eye" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2c1.981 0 3.671.992 4.933 2.078 1.27 1.091 2.187 2.345 2.637 3.023a1.62 1.62 0 0 1 0 1.798c-.45.678-1.367 1.932-2.637 3.023C11.67 13.008 9.981 14 8 14c-1.981 0-3.671-.992-4.933-2.078C1.797 10.83.88 9.576.43 8.898a1.62 1.62 0 0 1 0-1.798c.45-.677 1.367-1.931 2.637-3.022C4.33 2.992 6.019 2 8 2ZM1.679 7.932a.12.12 0 0 0 0 .136c.411.622 1.241 1.75 2.366 2.717C5.176 11.758 6.527 12.5 8 12.5c1.473 0 2.825-.742 3.955-1.715 1.124-.967 1.954-2.096 2.366-2.717a.12.12 0 0 0 0-.136c-.412-.621-1.242-1.75-2.366-2.717C10.824 4.242 9.473 3.5 8 3.5c-1.473 0-2.825.742-3.955 1.715-1.124.967-1.954 2.096-2.366 2.717ZM8 10a2 2 0 1 1-.001-3.999A2 2 0 0 1 8 10Z"></path></svg></span><span class="sd-summary-text">処理フロー図を確認する</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<pre  class="mermaid">
+        
+flowchart TD
+	%% --- Common Styles ---
+	classDef error fill:#f96,stroke:#333,stroke-width:2px
+	classDef success fill:#9f9,stroke:#333,stroke-width:2px
+	classDef info fill:#eee,stroke:#999,stroke-dasharray: 5 5
+	Start([&quot;select_way_key_type&quot;]) --&gt; V{&quot;KeyTypeValidator&quot;} -- &quot;NG&quot; --&gt; R1[&quot;result: Code.ARGUMENT_ERROR&lt;br/&gt;data: KEY_TYPE_ERROR&quot;]:::error
+	V -- &quot;OK&quot; --&gt; C1{&quot;TYPE_1 をクリック?&quot;} -- &quot;Yes&quot; --&gt; R2[&quot;result: Code.OK&lt;br/&gt;data: WayKeyTypes.TYPE_1&quot;]:::success
+	C1 -- &quot;No&quot; --&gt; C2{&quot;TYPE_2 をクリック?&quot;} -- &quot;Yes&quot; --&gt; R3[&quot;result: Code.OK&lt;br/&gt;data: WayKeyTypes.TYPE_2&quot;]:::success
+	C2 -- &quot;No&quot; --&gt; R4[&quot;result: Code.DO_NOTHING&lt;br/&gt;data: KEY_TYPE_ERROR&quot;]:::info
+    </pre></div>
+</details><dl class="field-list simple">
+<dt class="field-odd">戻り値<span class="colon">:</span></dt>
+<dd class="field-odd"><p>WAYキーの種類の選択結果を含む <code class="docutils literal notranslate"><span class="pre">Response</span></code> オブジェクト。WAYキーの種類が選択された場合は選択されたWAYキーの種類を返す。引数が無効な場合はARGUMENT_ERRORを返す。何も変更がない場合はDO_NOTHINGを返す</p>
+</dd>
+<dt class="field-even">戻り値の型<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">Response</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="component">
+<h3>Component層<a class="headerlink" href="#component" title="Link to this heading"></a></h3>
+<section id="module-common.config.service.component.actionRequestValidator">
+<span id="validator"></span><h4>Validator系<a class="headerlink" href="#module-common.config.service.component.actionRequestValidator" title="Link to this heading"></a></h4>
+<dl class="py class">
+<dt class="sig sig-object py" id="common.config.service.component.actionRequestValidator.RequestValidator">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">common.config.service.component.actionRequestValidator.</span></span><span class="sig-name descname"><span class="pre">RequestValidator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ConfigActionRequest</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#common.config.service.component.actionRequestValidator.RequestValidator" title="Link to this definition"></a></dt>
+<dd><p>ベースクラス: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>リクエストの妥当性を検証するクラス。</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>_request</strong> (<code class="docutils literal notranslate"><span class="pre">ConfigActionRequest</span></code>) -- 検証対象のリクエスト</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">注釈</p>
+<p>このクラスは <code class="docutils literal notranslate"><span class="pre">dataclass</span></code> の <code class="docutils literal notranslate"><span class="pre">frozen=True</span></code> として定義されており、作成後にフィールド値を変更することはできない。</p>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="common.config.service.component.actionRequestValidator.RequestValidator.raise_if_invalid">
+<span class="sig-name descname"><span class="pre">raise_if_invalid</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#common.config.service.component.actionRequestValidator.RequestValidator.raise_if_invalid" title="Link to this definition"></a></dt>
+<dd><p>リクエストの妥当性を検証する。</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header sd-bg-primary sd-bg-text-primary">
+<span class="sd-summary-icon"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-eye" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2c1.981 0 3.671.992 4.933 2.078 1.27 1.091 2.187 2.345 2.637 3.023a1.62 1.62 0 0 1 0 1.798c-.45.678-1.367 1.932-2.637 3.023C11.67 13.008 9.981 14 8 14c-1.981 0-3.671-.992-4.933-2.078C1.797 10.83.88 9.576.43 8.898a1.62 1.62 0 0 1 0-1.798c.45-.677 1.367-1.931 2.637-3.022C4.33 2.992 6.019 2 8 2ZM1.679 7.932a.12.12 0 0 0 0 .136c.411.622 1.241 1.75 2.366 2.717C5.176 11.758 6.527 12.5 8 12.5c1.473 0 2.825-.742 3.955-1.715 1.124-.967 1.954-2.096 2.366-2.717a.12.12 0 0 0 0-.136c-.412-.621-1.242-1.75-2.366-2.717C10.824 4.242 9.473 3.5 8 3.5c-1.473 0-2.825.742-3.955 1.715-1.124.967-1.954 2.096-2.366 2.717ZM8 10a2 2 0 1 1-.001-3.999A2 2 0 0 1 8 10Z"></path></svg></span><span class="sd-summary-text">処理フロー図を確認する</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<pre  class="mermaid">
+        
+flowchart TD
+	%% --- Common Styles ---
+	classDef error fill:#f96,stroke:#333,stroke-width:2px
+	classDef success fill:#9f9,stroke:#333,stroke-width:2px
+	classDef info fill:#eee,stroke:#999,stroke-dasharray: 5 5
+	Start([&quot;raise_if_invalid&quot;]) --&gt; L[&quot;14属性走査&quot;] --&gt; R1[&quot;None/ValueError&quot;]
+    </pre></div>
+</details><dl class="field-list simple">
+<dt class="field-odd">例外<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.14)"><strong>ValueError</strong></a> -- リクエストが無効な場合に発生</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class" id="module-common.config.service.component.actionKeyTypeValidator">
+<dt class="sig sig-object py" id="common.config.service.component.actionKeyTypeValidator.KeyTypeValidator">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">common.config.service.component.actionKeyTypeValidator.</span></span><span class="sig-name descname"><span class="pre">KeyTypeValidator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">key_type_max</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">click_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#common.config.service.component.actionKeyTypeValidator.KeyTypeValidator" title="Link to this definition"></a></dt>
+<dd><p>ベースクラス: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>キータイプの妥当性を検証するクラス。</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>key_type</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a>) -- 検証対象のキータイプ</p></li>
+<li><p><strong>key_type_max</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a>) -- キータイプの最大値</p></li>
+<li><p><strong>click_list</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a><em>]</em>) -- 関連するクリック状態のリスト</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">注釈</p>
+<p>このクラスは <code class="docutils literal notranslate"><span class="pre">dataclass</span></code> の <code class="docutils literal notranslate"><span class="pre">frozen=True</span></code> として定義されており、作成後にフィールド値を変更することはできない。</p>
+</div>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.config.service.component.actionKeyTypeValidator.KeyTypeValidator.click_list">
+<span class="sig-name descname"><span class="pre">click_list</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#common.config.service.component.actionKeyTypeValidator.KeyTypeValidator.click_list" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="common.config.service.component.actionKeyTypeValidator.KeyTypeValidator.is_invalid">
+<span class="sig-name descname"><span class="pre">is_invalid</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#common.config.service.component.actionKeyTypeValidator.KeyTypeValidator.is_invalid" title="Link to this definition"></a></dt>
+<dd><p>キータイプの妥当性を検証する。</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header sd-bg-primary sd-bg-text-primary">
+<span class="sd-summary-icon"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-eye" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2c1.981 0 3.671.992 4.933 2.078 1.27 1.091 2.187 2.345 2.637 3.023a1.62 1.62 0 0 1 0 1.798c-.45.678-1.367 1.932-2.637 3.023C11.67 13.008 9.981 14 8 14c-1.981 0-3.671-.992-4.933-2.078C1.797 10.83.88 9.576.43 8.898a1.62 1.62 0 0 1 0-1.798c.45-.677 1.367-1.931 2.637-3.022C4.33 2.992 6.019 2 8 2ZM1.679 7.932a.12.12 0 0 0 0 .136c.411.622 1.241 1.75 2.366 2.717C5.176 11.758 6.527 12.5 8 12.5c1.473 0 2.825-.742 3.955-1.715 1.124-.967 1.954-2.096 2.366-2.717a.12.12 0 0 0 0-.136c-.412-.621-1.242-1.75-2.366-2.717C10.824 4.242 9.473 3.5 8 3.5c-1.473 0-2.825.742-3.955 1.715-1.124.967-1.954 2.096-2.366 2.717ZM8 10a2 2 0 1 1-.001-3.999A2 2 0 0 1 8 10Z"></path></svg></span><span class="sd-summary-text">処理フロー図を確認する</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<pre  class="mermaid">
+        
+flowchart TD
+	%% --- Common Styles ---
+	classDef error fill:#f96,stroke:#333,stroke-width:2px
+	classDef success fill:#9f9,stroke:#333,stroke-width:2px
+	classDef info fill:#eee,stroke:#999,stroke-dasharray: 5 5
+	Start([&quot;is_invalid&quot;]) --&gt; C{&quot;異常値?&quot;} -- &quot;Yes&quot; --&gt; R1[&quot;True&quot;]:::error
+	C -- &quot;No&quot; --&gt; R2[&quot;False&quot;]:::success
+    </pre></div>
+</details><dl class="field-list simple">
+<dt class="field-odd">戻り値<span class="colon">:</span></dt>
+<dd class="field-odd"><p>キータイプが無効な場合はTrue、そうでない場合はFalse</p>
+</dd>
+<dt class="field-even">戻り値の型<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.config.service.component.actionKeyTypeValidator.KeyTypeValidator.key_type">
+<span class="sig-name descname"><span class="pre">key_type</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><a class="headerlink" href="#common.config.service.component.actionKeyTypeValidator.KeyTypeValidator.key_type" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.config.service.component.actionKeyTypeValidator.KeyTypeValidator.key_type_max">
+<span class="sig-name descname"><span class="pre">key_type_max</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><a class="headerlink" href="#common.config.service.component.actionKeyTypeValidator.KeyTypeValidator.key_type_max" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class" id="module-common.config.service.component.displayRequestValidator">
+<dt class="sig sig-object py" id="common.config.service.component.displayRequestValidator.RequestValidator">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">common.config.service.component.displayRequestValidator.</span></span><span class="sig-name descname"><span class="pre">RequestValidator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ConfigDisplayRequest</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#common.config.service.component.displayRequestValidator.RequestValidator" title="Link to this definition"></a></dt>
+<dd><p>ベースクラス: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>リクエストの妥当性を検証するクラス。</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>_request</strong> (<code class="docutils literal notranslate"><span class="pre">ConfigDisplayRequest</span></code>) -- 検証対象のリクエスト</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">注釈</p>
+<p>このクラスは <code class="docutils literal notranslate"><span class="pre">dataclass</span></code> の <code class="docutils literal notranslate"><span class="pre">frozen=True</span></code> として定義されており、作成後にフィールド値を変更することはできない。</p>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="common.config.service.component.displayRequestValidator.RequestValidator.raise_if_invalid">
+<span class="sig-name descname"><span class="pre">raise_if_invalid</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#common.config.service.component.displayRequestValidator.RequestValidator.raise_if_invalid" title="Link to this definition"></a></dt>
+<dd><p>リクエストの妥当性を検証する。</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header sd-bg-primary sd-bg-text-primary">
+<span class="sd-summary-icon"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-eye" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2c1.981 0 3.671.992 4.933 2.078 1.27 1.091 2.187 2.345 2.637 3.023a1.62 1.62 0 0 1 0 1.798c-.45.678-1.367 1.932-2.637 3.023C11.67 13.008 9.981 14 8 14c-1.981 0-3.671-.992-4.933-2.078C1.797 10.83.88 9.576.43 8.898a1.62 1.62 0 0 1 0-1.798c.45-.677 1.367-1.931 2.637-3.022C4.33 2.992 6.019 2 8 2ZM1.679 7.932a.12.12 0 0 0 0 .136c.411.622 1.241 1.75 2.366 2.717C5.176 11.758 6.527 12.5 8 12.5c1.473 0 2.825-.742 3.955-1.715 1.124-.967 1.954-2.096 2.366-2.717a.12.12 0 0 0 0-.136c-.412-.621-1.242-1.75-2.366-2.717C10.824 4.242 9.473 3.5 8 3.5c-1.473 0-2.825.742-3.955 1.715-1.124.967-1.954 2.096-2.366 2.717ZM8 10a2 2 0 1 1-.001-3.999A2 2 0 0 1 8 10Z"></path></svg></span><span class="sd-summary-text">処理フロー図を確認する</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<pre  class="mermaid">
+        
+flowchart TD
+	%% --- Common Styles ---
+	classDef error fill:#f96,stroke:#333,stroke-width:2px
+	classDef success fill:#9f9,stroke:#333,stroke-width:2px
+	classDef info fill:#eee,stroke:#999,stroke-dasharray: 5 5
+	Start([&quot;raise_if_invalid&quot;]) --&gt; L[&quot;17属性走査&quot;] --&gt; R1[&quot;None/ValueError&quot;]
+    </pre></div>
+</details><dl class="field-list simple">
+<dt class="field-odd">例外<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.14)"><strong>ValueError</strong></a> -- リクエストが無効な場合に発生</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">注釈</p>
+<p>厳密な型チェックは行わず、<code class="docutils literal notranslate"><span class="pre">int</span></code> か <code class="docutils literal notranslate"><span class="pre">bool</span></code> かのみ確認する。</p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class" id="module-common.config.service.component.statusRequestValidator">
+<dt class="sig sig-object py" id="common.config.service.component.statusRequestValidator.RequestValidator">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">common.config.service.component.statusRequestValidator.</span></span><span class="sig-name descname"><span class="pre">RequestValidator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ConfigStatusRequest</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#common.config.service.component.statusRequestValidator.RequestValidator" title="Link to this definition"></a></dt>
+<dd><p>ベースクラス: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>リクエストの妥当性を検証するクラス。</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>_request</strong> (<code class="docutils literal notranslate"><span class="pre">ConfigStatusRequest</span></code>) -- 検証対象のリクエスト</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">注釈</p>
+<p>このクラスは <code class="docutils literal notranslate"><span class="pre">dataclass</span></code> の <code class="docutils literal notranslate"><span class="pre">frozen=True</span></code> として定義されており、作成後にフィールド値を変更することはできない。</p>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="common.config.service.component.statusRequestValidator.RequestValidator.raise_if_invalid">
+<span class="sig-name descname"><span class="pre">raise_if_invalid</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#common.config.service.component.statusRequestValidator.RequestValidator.raise_if_invalid" title="Link to this definition"></a></dt>
+<dd><p>リクエストの妥当性を検証する。</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header sd-bg-primary sd-bg-text-primary">
+<span class="sd-summary-icon"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-eye" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2c1.981 0 3.671.992 4.933 2.078 1.27 1.091 2.187 2.345 2.637 3.023a1.62 1.62 0 0 1 0 1.798c-.45.678-1.367 1.932-2.637 3.023C11.67 13.008 9.981 14 8 14c-1.981 0-3.671-.992-4.933-2.078C1.797 10.83.88 9.576.43 8.898a1.62 1.62 0 0 1 0-1.798c.45-.677 1.367-1.931 2.637-3.022C4.33 2.992 6.019 2 8 2ZM1.679 7.932a.12.12 0 0 0 0 .136c.411.622 1.241 1.75 2.366 2.717C5.176 11.758 6.527 12.5 8 12.5c1.473 0 2.825-.742 3.955-1.715 1.124-.967 1.954-2.096 2.366-2.717a.12.12 0 0 0 0-.136c-.412-.621-1.242-1.75-2.366-2.717C10.824 4.242 9.473 3.5 8 3.5c-1.473 0-2.825.742-3.955 1.715-1.124.967-1.954 2.096-2.366 2.717ZM8 10a2 2 0 1 1-.001-3.999A2 2 0 0 1 8 10Z"></path></svg></span><span class="sd-summary-text">処理フロー図を確認する</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<pre  class="mermaid">
+        
+flowchart TD
+	%% --- Common Styles ---
+	classDef error fill:#f96,stroke:#333,stroke-width:2px
+	classDef success fill:#9f9,stroke:#333,stroke-width:2px
+	classDef info fill:#eee,stroke:#999,stroke-dasharray: 5 5
+	Start([&quot;raise_if_invalid&quot;]) --&gt; L[&quot;4属性走査&quot;] --&gt; R1[&quot;None/ValueError&quot;]
+    </pre></div>
+</details><dl class="field-list simple">
+<dt class="field-odd">例外<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.14)"><strong>ValueError</strong></a> -- リクエストが無効な場合に発生</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">注釈</p>
+<p>厳密な型チェックは行わず、<code class="docutils literal notranslate"><span class="pre">int</span></code> か <code class="docutils literal notranslate"><span class="pre">bool</span></code> か <code class="docutils literal notranslate"><span class="pre">str</span></code> かのみ確認する。</p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-common.config.service.component.statusConvertManager">
+<span id="manager"></span><h4>Manager系<a class="headerlink" href="#module-common.config.service.component.statusConvertManager" title="Link to this heading"></a></h4>
+<dl class="py class">
+<dt class="sig sig-object py" id="common.config.service.component.statusConvertManager.StatusConvertManager">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">common.config.service.component.statusConvertManager.</span></span><span class="sig-name descname"><span class="pre">StatusConvertManager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_load_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#common.config.service.component.statusConvertManager.StatusConvertManager" title="Link to this definition"></a></dt>
+<dd><p>ベースクラス: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>データの変換を行うクラス。ロードしたデータを設定フォームのデータに変換する。</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>_load_data</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em> | </em><em>None</em>) -- ロードしたデータ。ロードに成功した場合はロードしたデータを格納し、ロードに失敗した場合や未保存の場合は None または空文字列を格納する</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">注釈</p>
+<p>このクラスは <code class="docutils literal notranslate"><span class="pre">dataclass</span></code> の <code class="docutils literal notranslate"><span class="pre">frozen=True</span></code> として定義されており、作成後にフィールド値を変更することはできない。</p>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="common.config.service.component.statusConvertManager.StatusConvertManager.load_data_to_config_data">
+<span class="sig-name descname"><span class="pre">load_data_to_config_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#common.config.service.component.statusConvertManager.StatusConvertManager.load_data_to_config_data" title="Link to this definition"></a></dt>
+<dd><p>ロードしたデータを変換する。</p>
+<p><code class="docutils literal notranslate"><span class="pre">_load_data</span></code> が None または空文字列である場合は、デフォルトの設定値とする。</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header sd-bg-primary sd-bg-text-primary">
+<span class="sd-summary-icon"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-eye" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2c1.981 0 3.671.992 4.933 2.078 1.27 1.091 2.187 2.345 2.637 3.023a1.62 1.62 0 0 1 0 1.798c-.45.678-1.367 1.932-2.637 3.023C11.67 13.008 9.981 14 8 14c-1.981 0-3.671-.992-4.933-2.078C1.797 10.83.88 9.576.43 8.898a1.62 1.62 0 0 1 0-1.798c.45-.677 1.367-1.931 2.637-3.022C4.33 2.992 6.019 2 8 2ZM1.679 7.932a.12.12 0 0 0 0 .136c.411.622 1.241 1.75 2.366 2.717C5.176 11.758 6.527 12.5 8 12.5c1.473 0 2.825-.742 3.955-1.715 1.124-.967 1.954-2.096 2.366-2.717a.12.12 0 0 0 0-.136c-.412-.621-1.242-1.75-2.366-2.717C10.824 4.242 9.473 3.5 8 3.5c-1.473 0-2.825.742-3.955 1.715-1.124.967-1.954 2.096-2.366 2.717ZM8 10a2 2 0 1 1-.001-3.999A2 2 0 0 1 8 10Z"></path></svg></span><span class="sd-summary-text">処理フロー図を確認する</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<blockquote>
+<div><pre  class="mermaid">
+        
+flowchart TD
+	%% --- Common Styles ---
+	classDef error fill:#f96,stroke:#333,stroke-width:2px
+	classDef success fill:#9f9,stroke:#333,stroke-width:2px
+	classDef info fill:#eee,stroke:#999,stroke-dasharray: 5 5
+	Start([&quot;load_data_to_config_data 開始&quot;]) --&gt; N{&quot;None または空文字列?&quot;}
+	N -- &quot;Yes&quot; --&gt; D[&quot;DEFAULT_SAVE_CONF_TUPLE を返却&quot;]:::info
+	N -- &quot;No&quot; --&gt; T[&quot;Try: split(',') &amp; int() 変換&quot;]
+	T -- &quot;成功&quot; --&gt; R[&quot;(way_key_type, go_key_type, volume) を返却&quot;]:::success
+	T -. &quot;例外発生&quot; .-&gt; Catch[&quot;DEFAULT_SAVE_CONF_TUPLE を返却&quot;]:::error
+	D --&gt; End([&quot;終了&quot;])
+	R --&gt; End
+	Catch --&gt; End
+
+    </pre></div></blockquote>
+</div>
+</details><dl class="field-list simple">
+<dt class="field-odd">戻り値<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ConfigFormの設定に用いるデータのタプル (way_key_type, go_key_type, volume) を返す</p>
+</dd>
+<dt class="field-even">戻り値の型<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)">tuple</a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)">int</a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)">int</a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)">int</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="check">
+<h4>Check系<a class="headerlink" href="#check" title="Link to this heading"></a></h4>
+</section>
+</section>
+</section>
+<section id="home">
+<h2>HOMEモジュール<a class="headerlink" href="#home" title="Link to this heading"></a></h2>
+<p>ホーム画面機能のAPI仕様です。</p>
+<section id="id1">
+<h3>Controller層<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+</section>
+<section id="id2">
+<h3>Service層<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<dl class="py class" id="module-common.home.service.sound">
+<dt class="sig sig-object py" id="common.home.service.sound.Sound">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">common.home.service.sound.</span></span><span class="sig-name descname"><span class="pre">Sound</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">HomeSoundRequest</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#common.home.service.sound.Sound" title="Link to this definition"></a></dt>
+<dd><p>ベースクラス: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="common.home.service.sound.Sound.start">
+<span class="sig-name descname"><span class="pre">start</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#common.home.service.sound.Sound.start" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class" id="module-common.home.service.status">
+<dt class="sig sig-object py" id="common.home.service.status.Status">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">common.home.service.status.</span></span><span class="sig-name descname"><span class="pre">Status</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">HomeStatusRequest</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#common.home.service.status.Status" title="Link to this definition"></a></dt>
+<dd><p>ベースクラス: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="common.home.service.status.Status.get_next_status">
+<span class="sig-name descname"><span class="pre">get_next_status</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#common.home.service.status.Status.get_next_status" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="id3">
+<h3>Component層<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<section id="id4">
+<h4>Validator系<a class="headerlink" href="#id4" title="Link to this heading"></a></h4>
+<dl class="py class" id="module-common.home.service.component.displayRequestValidator">
+<dt class="sig sig-object py" id="common.home.service.component.displayRequestValidator.RequestValidator">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">common.home.service.component.displayRequestValidator.</span></span><span class="sig-name descname"><span class="pre">RequestValidator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">HomeDisplayRequest</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#common.home.service.component.displayRequestValidator.RequestValidator" title="Link to this definition"></a></dt>
+<dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractRequestValidator</span></code></p>
+<p>リクエストの妥当性を検証するクラス。</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>_request</strong> (<code class="docutils literal notranslate"><span class="pre">HomeDisplayRequest</span></code>) -- 検証対象のリクエスト</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">注釈</p>
+<p>このクラスは <code class="docutils literal notranslate"><span class="pre">dataclass</span></code> の <code class="docutils literal notranslate"><span class="pre">frozen=True</span></code> として定義されており、作成後にフィールド値を変更することはできない。</p>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="common.home.service.component.displayRequestValidator.RequestValidator.raise_if_invalid">
+<span class="sig-name descname"><span class="pre">raise_if_invalid</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#common.home.service.component.displayRequestValidator.RequestValidator.raise_if_invalid" title="Link to this definition"></a></dt>
+<dd><p>リクエストの妥当性を検証する。</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header sd-bg-primary sd-bg-text-primary">
+<span class="sd-summary-icon"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-eye" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2c1.981 0 3.671.992 4.933 2.078 1.27 1.091 2.187 2.345 2.637 3.023a1.62 1.62 0 0 1 0 1.798c-.45.678-1.367 1.932-2.637 3.023C11.67 13.008 9.981 14 8 14c-1.981 0-3.671-.992-4.933-2.078C1.797 10.83.88 9.576.43 8.898a1.62 1.62 0 0 1 0-1.798c.45-.677 1.367-1.931 2.637-3.022C4.33 2.992 6.019 2 8 2ZM1.679 7.932a.12.12 0 0 0 0 .136c.411.622 1.241 1.75 2.366 2.717C5.176 11.758 6.527 12.5 8 12.5c1.473 0 2.825-.742 3.955-1.715 1.124-.967 1.954-2.096 2.366-2.717a.12.12 0 0 0 0-.136c-.412-.621-1.242-1.75-2.366-2.717C10.824 4.242 9.473 3.5 8 3.5c-1.473 0-2.825.742-3.955 1.715-1.124.967-1.954 2.096-2.366 2.717ZM8 10a2 2 0 1 1-.001-3.999A2 2 0 0 1 8 10Z"></path></svg></span><span class="sd-summary-text">処理フロー図を確認する</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<pre  class="mermaid">
+        flowchart TD
+	%% --- Common Styles ---
+	classDef error fill:#f96,stroke:#333,stroke-width:2px
+	classDef success fill:#9f9,stroke:#333,stroke-width:2px
+	classDef info fill:#eee,stroke:#999,stroke-dasharray: 5 5
+
+	%% --- Main Flow ---
+	START([&quot;開始: raise_if_invalid&quot;]) --&gt; INIT_ATTRS[&quot;bool属性リスト初期化&lt;br/&gt;start_touch, load_touch,&lt;br/&gt;config_touch, exit_touch&quot;]
+	
+	INIT_ATTRS --&gt; LOOP_START[&quot;for attr in bool_attributes:&lt;br/&gt;各bool属性の検証ループ開始&quot;]
+	LOOP_START --&gt; CHECK_HASATTR{&quot;hasattr(self._request, attr)?&lt;br/&gt;属性存在確認&quot;}
+	
+	CHECK_HASATTR --&gt;|False| LOG_MISSING[&quot;ERROR_LOG:&lt;br/&gt;[RequestValidator] Request missing&lt;br/&gt;required attribute: {attr}&quot;]
+	CHECK_HASATTR --&gt;|True| GET_VALUE[&quot;value = getattr(self._request, attr)&lt;br/&gt;属性値を取得&quot;]
+	
+	LOG_MISSING --&gt; RAISE_MISSING[&quot;ValueError:&lt;br/&gt;RequestValidator: Missing&lt;br/&gt;attribute '{attr}'&quot;]
+	
+	GET_VALUE --&gt; CHECK_NONE{&quot;value is None?&lt;br/&gt;None値チェック&quot;}
+	CHECK_NONE --&gt;|True| LOG_NONE[&quot;ERROR_LOG:&lt;br/&gt;[RequestValidator] Request attribute&lt;br/&gt;'{attr}' is None&quot;]
+	CHECK_NONE --&gt;|False| CHECK_BOOL{&quot;isinstance(value, bool)?&lt;br/&gt;bool型チェック&quot;}
+	
+	LOG_NONE --&gt; RAISE_NONE[&quot;ValueError:&lt;br/&gt;RequestValidator: Attribute&lt;br/&gt;'{attr}' cannot be None&quot;]
+	
+	CHECK_BOOL --&gt;|False| LOG_TYPE_ERROR[&quot;ERROR_LOG:&lt;br/&gt;[RequestValidator] Request attribute&lt;br/&gt;'{attr}' has invalid type: {type(value)}&quot;]
+	CHECK_BOOL --&gt;|True| NEXT_ATTR[&quot;次の属性へ&lt;br/&gt;ループ継続&quot;]
+	
+	LOG_TYPE_ERROR --&gt; RAISE_TYPE_ERROR[&quot;ValueError:&lt;br/&gt;RequestValidator: Invalid type for&lt;br/&gt;attribute '{attr}', expected bool&quot;]
+	
+	NEXT_ATTR --&gt; LOOP_CHECK{&quot;全bool属性チェック完了?&quot;}
+	LOOP_CHECK --&gt;|No| CHECK_HASATTR
+	LOOP_CHECK --&gt;|Yes| CHECK_SCREEN_HASATTR{&quot;hasattr(self._request, 'screen')?&lt;br/&gt;screen属性存在確認&quot;}
+	
+	CHECK_SCREEN_HASATTR --&gt;|False| LOG_SCREEN_MISSING[&quot;ERROR_LOG:&lt;br/&gt;[RequestValidator] Request missing&lt;br/&gt;'screen' attribute&quot;]
+	CHECK_SCREEN_HASATTR --&gt;|True| CHECK_SCREEN_NONE{&quot;self._request.screen is None?&lt;br/&gt;screen値のNoneチェック&quot;}
+	
+	LOG_SCREEN_MISSING --&gt; RAISE_SCREEN_MISSING[&quot;ValueError:&lt;br/&gt;RequestValidator: Missing&lt;br/&gt;'screen' attribute&quot;]
+	
+	CHECK_SCREEN_NONE --&gt;|True| LOG_SCREEN_NONE[&quot;ERROR_LOG:&lt;br/&gt;[RequestValidator] Request attribute&lt;br/&gt;'screen' is None&quot;]
+	CHECK_SCREEN_NONE --&gt;|False| CHECK_SCREEN_TYPE{&quot;isinstance(self._request.screen, Surface)?&lt;br/&gt;Surface型チェック&quot;}
+	
+	LOG_SCREEN_NONE --&gt; RAISE_SCREEN_NONE[&quot;ValueError:&lt;br/&gt;RequestValidator: 'screen'&lt;br/&gt;attribute cannot be None&quot;]
+	
+	CHECK_SCREEN_TYPE --&gt;|False| LOG_SCREEN_TYPE[&quot;ERROR_LOG:&lt;br/&gt;[RequestValidator] Request attribute&lt;br/&gt;'screen' has invalid type:&lt;br/&gt;{type(self._request.screen)}&quot;]
+	CHECK_SCREEN_TYPE --&gt;|True| CHECK_IMGLIST_HASATTR{&quot;hasattr(self._request, 'img_list')?&lt;br/&gt;img_list属性存在確認&quot;}
+	
+	LOG_SCREEN_TYPE --&gt; RAISE_SCREEN_TYPE[&quot;ValueError:&lt;br/&gt;RequestValidator: Invalid type for&lt;br/&gt;attribute 'screen', expected Surface&quot;]
+	
+	CHECK_IMGLIST_HASATTR --&gt;|False| LOG_IMGLIST_MISSING[&quot;ERROR_LOG:&lt;br/&gt;[RequestValidator] Request missing&lt;br/&gt;'img_list' attribute&quot;]
+	CHECK_IMGLIST_HASATTR --&gt;|True| CHECK_IMGLIST_NONE{&quot;self._request.img_list is None?&lt;br/&gt;img_list値のNoneチェック&quot;}
+	
+	LOG_IMGLIST_MISSING --&gt; RAISE_IMGLIST_MISSING[&quot;ValueError:&lt;br/&gt;RequestValidator: Missing&lt;br/&gt;'img_list' attribute&quot;]
+	
+	CHECK_IMGLIST_NONE --&gt;|True| LOG_IMGLIST_NONE[&quot;ERROR_LOG:&lt;br/&gt;[RequestValidator] Request attribute&lt;br/&gt;'img_list' is None&quot;]
+	CHECK_IMGLIST_NONE --&gt;|False| CHECK_IMGLIST_TYPE{&quot;isinstance(self._request.img_list, list)?&lt;br/&gt;list型チェック&quot;}
+	
+	LOG_IMGLIST_NONE --&gt; RAISE_IMGLIST_NONE[&quot;ValueError:&lt;br/&gt;RequestValidator: 'img_list'&lt;br/&gt;attribute cannot be None&quot;]
+	
+	CHECK_IMGLIST_TYPE --&gt;|False| LOG_IMGLIST_TYPE[&quot;ERROR_LOG:&lt;br/&gt;[RequestValidator] Request attribute&lt;br/&gt;'img_list' has invalid type:&lt;br/&gt;{type(self._request.img_list)}&quot;]
+	CHECK_IMGLIST_TYPE --&gt;|True| VALIDATION_SUCCESS[&quot;検証完了&lt;br/&gt;例外なし&lt;br/&gt;return None&quot;]
+	
+	LOG_IMGLIST_TYPE --&gt; RAISE_IMGLIST_TYPE[&quot;ValueError:&lt;br/&gt;RequestValidator: Invalid type for&lt;br/&gt;attribute 'img_list', expected list&quot;]
+	
+	VALIDATION_SUCCESS --&gt; END([&quot;正常終了&quot;])
+	
+	RAISE_MISSING --&gt; ERROR_END([&quot;例外で終了&quot;])
+	RAISE_NONE --&gt; ERROR_END
+	RAISE_TYPE_ERROR --&gt; ERROR_END
+	RAISE_SCREEN_MISSING --&gt; ERROR_END
+	RAISE_SCREEN_NONE --&gt; ERROR_END
+	RAISE_SCREEN_TYPE --&gt; ERROR_END
+	RAISE_IMGLIST_MISSING --&gt; ERROR_END
+	RAISE_IMGLIST_NONE --&gt; ERROR_END
+	RAISE_IMGLIST_TYPE --&gt; ERROR_END
+
+	%% --- Apply Styles ---
+	START:::info
+	INIT_ATTRS:::info
+	LOOP_START:::info
+	CHECK_HASATTR:::info
+	GET_VALUE:::info
+	CHECK_NONE:::info
+	CHECK_BOOL:::info
+	NEXT_ATTR:::info
+	LOOP_CHECK:::info
+	CHECK_SCREEN_HASATTR:::info
+	CHECK_SCREEN_NONE:::info
+	CHECK_SCREEN_TYPE:::info
+	CHECK_IMGLIST_HASATTR:::info
+	CHECK_IMGLIST_NONE:::info
+	CHECK_IMGLIST_TYPE:::info
+	VALIDATION_SUCCESS:::success
+	LOG_MISSING:::error
+	LOG_NONE:::error
+	LOG_TYPE_ERROR:::error
+	LOG_SCREEN_MISSING:::error
+	LOG_SCREEN_NONE:::error
+	LOG_SCREEN_TYPE:::error
+	LOG_IMGLIST_MISSING:::error
+	LOG_IMGLIST_NONE:::error
+	LOG_IMGLIST_TYPE:::error
+	RAISE_MISSING:::error
+	RAISE_NONE:::error
+	RAISE_TYPE_ERROR:::error
+	RAISE_SCREEN_MISSING:::error
+	RAISE_SCREEN_NONE:::error
+	RAISE_SCREEN_TYPE:::error
+	RAISE_IMGLIST_MISSING:::error
+	RAISE_IMGLIST_NONE:::error
+	RAISE_IMGLIST_TYPE:::error
+	END:::success
+	ERROR_END:::error
+
+    </pre></div>
+</details><dl class="field-list simple">
+<dt class="field-odd">例外<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.14)"><strong>ValueError</strong></a> -- リクエストが無効な場合に発生</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">注釈</p>
+<p>厳密な型チェックを行い、bool、Surface、listの型を正確に検証する。</p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="id5">
+<h4>Manager系<a class="headerlink" href="#id5" title="Link to this heading"></a></h4>
+</section>
+</section>
+</section>
+<section id="save">
+<h2>SAVEモジュール<a class="headerlink" href="#save" title="Link to this heading"></a></h2>
+<p>セーブ・ロード機能のAPI仕様です。</p>
+<section id="id6">
+<h3>Controller層<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<dl class="py class" id="module-common.save.sound">
+<dt class="sig sig-object py" id="common.save.sound.Sound">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">common.save.sound.</span></span><span class="sig-name descname"><span class="pre">Sound</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bases</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">namespace</span></span></em>, <em class="sig-param"><span class="positional-only-separator o"><abbr title="Positional-only parameter separator (PEP 570)"><span class="pre">/</span></abbr></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#common.save.sound.Sound" title="Link to this definition"></a></dt>
+<dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractSound</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="common.save.sound.Sound.create_request_data">
+<span class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">create_request_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sound_form</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_form</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ope_form</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config_form</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#common.save.sound.Sound.create_request_data" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="common.save.sound.Sound.execute">
+<span class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">execute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#common.save.sound.Sound.execute" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="id7">
+<h3>Service層<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
+<dl class="py class" id="module-common.save.service.sound">
+<dt class="sig sig-object py" id="common.save.service.sound.Sound">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">common.save.service.sound.</span></span><span class="sig-name descname"><span class="pre">Sound</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#common.save.service.sound.Sound" title="Link to this definition"></a></dt>
+<dd><p>ベースクラス: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="common.save.service.sound.Sound.start">
+<span class="sig-name descname"><span class="pre">start</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#common.save.service.sound.Sound.start" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class" id="module-common.save.service.status">
+<dt class="sig sig-object py" id="common.save.service.status.Status">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">common.save.service.status.</span></span><span class="sig-name descname"><span class="pre">Status</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#common.save.service.status.Status" title="Link to this definition"></a></dt>
+<dd><p>ベースクラス: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="common.save.service.status.Status.get_next_status">
+<span class="sig-name descname"><span class="pre">get_next_status</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#common.save.service.status.Status.get_next_status" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+<section id="end">
+<h2>ENDモジュール<a class="headerlink" href="#end" title="Link to this heading"></a></h2>
+<p>終了処理機能のAPI仕様です。</p>
+<section id="id8">
+<h3>Controller層<a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
+</section>
+<section id="id9">
+<h3>Service層<a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
+<dl class="py class" id="module-common.end.service.status">
+<dt class="sig sig-object py" id="common.end.service.status.Status">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">common.end.service.status.</span></span><span class="sig-name descname"><span class="pre">Status</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">EndStatusRequest</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#common.end.service.status.Status" title="Link to this definition"></a></dt>
+<dd><p>ベースクラス: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="common.end.service.status.Status.get_next_status">
+<span class="sig-name descname"><span class="pre">get_next_status</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#common.end.service.status.Status.get_next_status" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+<section id="id10">
+<h2>共通モジュール<a class="headerlink" href="#id10" title="Link to this heading"></a></h2>
+<section id="module-common.layer.response.response">
+<span id="id11"></span><h3>レイヤー間通信<a class="headerlink" href="#module-common.layer.response.response" title="Link to this heading"></a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="common.layer.response.response.Response">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">common.layer.response.response.</span></span><span class="sig-name descname"><span class="pre">Response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><span class="pre">Any</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#common.layer.code.code.Code" title="common.layer.code.code.Code"><span class="pre">Code</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#common.layer.response.response.Response" title="Link to this definition"></a></dt>
+<dd><p>ベースクラス: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Represents a response with associated data and result code.
+.. attribute:: _data</p>
+<blockquote>
+<div><p>The data associated with the response.</p>
+<dl class="field-list simple">
+<dt class="field-odd">type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Any</p>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.layer.response.response.Response._result">
+<span class="sig-name descname"><span class="pre">_result</span></span><a class="headerlink" href="#common.layer.response.response.Response._result" title="Link to this definition"></a></dt>
+<dd><p>The result code of the response.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#common.layer.code.code.Code" title="common.layer.code.code.Code">Code</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="common.layer.response.response.Response.data">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">data</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><span class="pre">Any</span></a></span><a class="headerlink" href="#common.layer.response.response.Response.data" title="Link to this definition"></a></dt>
+<dd><p>データを取得するプロパティ。
+:returns: レスポンスに関連付けられたデータ。
+:rtype: Any</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="common.layer.response.response.Response.is_argument_error">
+<span class="sig-name descname"><span class="pre">is_argument_error</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#common.layer.response.response.Response.is_argument_error" title="Link to this definition"></a></dt>
+<dd><p>「引数エラー」結果を示すかどうかをチェックするメソッド。
+:returns: True if the result is ARGUMENT_ERROR, False otherwise.
+:rtype: bool</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="common.layer.response.response.Response.is_do_nothing">
+<span class="sig-name descname"><span class="pre">is_do_nothing</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#common.layer.response.response.Response.is_do_nothing" title="Link to this definition"></a></dt>
+<dd><p>「何もしない」結果を示すかどうかをチェックするメソッド。
+:returns: True if the result is DO_NOTHING, False otherwise.
+:rtype: bool</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="common.layer.response.response.Response.is_not_ok">
+<span class="sig-name descname"><span class="pre">is_not_ok</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#common.layer.response.response.Response.is_not_ok" title="Link to this definition"></a></dt>
+<dd><p>「正常でない」結果を示すかどうかをチェックするメソッド。
+:returns: True if the result is not OK and not DO_NOTHING, False otherwise.
+:rtype: bool</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="common.layer.response.response.Response.is_ok">
+<span class="sig-name descname"><span class="pre">is_ok</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#common.layer.response.response.Response.is_ok" title="Link to this definition"></a></dt>
+<dd><p>「正常」な結果を示すかどうかをチェックするメソッド。
+:returns: True if the result is OK, False otherwise.
+:rtype: bool</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="common.layer.response.response.Response.is_screen_error">
+<span class="sig-name descname"><span class="pre">is_screen_error</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#common.layer.response.response.Response.is_screen_error" title="Link to this definition"></a></dt>
+<dd><p>「画面エラー」結果を示すかどうかをチェックするメソッド。
+:returns: True if the result is SCREEN_ERROR, False otherwise.
+:rtype: bool</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="common.layer.response.response.Response.is_sound_error">
+<span class="sig-name descname"><span class="pre">is_sound_error</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#common.layer.response.response.Response.is_sound_error" title="Link to this definition"></a></dt>
+<dd><p>「サウンドエラー」結果を示すかどうかをチェックするメソッド。
+:returns: True if the result is SOUND_ERROR, False otherwise.
+:rtype: bool</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="common.layer.response.response.Response.is_sound_pending">
+<span class="sig-name descname"><span class="pre">is_sound_pending</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#common.layer.response.response.Response.is_sound_pending" title="Link to this definition"></a></dt>
+<dd><p>「サウンド保留」結果を示すかどうかをチェックするメソッド。
+:returns: True if the result is SOUND_PENDING, False otherwise.
+:rtype: bool</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class" id="module-common.layer.code.code">
+<dt class="sig sig-object py" id="common.layer.code.code.Code">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">common.layer.code.code.</span></span><span class="sig-name descname"><span class="pre">Code</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#common.layer.code.code.Code" title="Link to this definition"></a></dt>
+<dd><p>ベースクラス: <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></a></p>
+<p>Result codes for responses.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.layer.code.code.Code.ARGUMENT_ERROR">
+<span class="sig-name descname"><span class="pre">ARGUMENT_ERROR</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'01'</span></span><a class="headerlink" href="#common.layer.code.code.Code.ARGUMENT_ERROR" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.layer.code.code.Code.DO_NOTHING">
+<span class="sig-name descname"><span class="pre">DO_NOTHING</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'FF'</span></span><a class="headerlink" href="#common.layer.code.code.Code.DO_NOTHING" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.layer.code.code.Code.OK">
+<span class="sig-name descname"><span class="pre">OK</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'00'</span></span><a class="headerlink" href="#common.layer.code.code.Code.OK" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.layer.code.code.Code.SCREEN_ERROR">
+<span class="sig-name descname"><span class="pre">SCREEN_ERROR</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'05'</span></span><a class="headerlink" href="#common.layer.code.code.Code.SCREEN_ERROR" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.layer.code.code.Code.SOUND_ERROR">
+<span class="sig-name descname"><span class="pre">SOUND_ERROR</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'03'</span></span><a class="headerlink" href="#common.layer.code.code.Code.SOUND_ERROR" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.layer.code.code.Code.SOUND_PENDING">
+<span class="sig-name descname"><span class="pre">SOUND_PENDING</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'04'</span></span><a class="headerlink" href="#common.layer.code.code.Code.SOUND_PENDING" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.layer.code.code.Code.UNEXPECTED_BEHAVIOR">
+<span class="sig-name descname"><span class="pre">UNEXPECTED_BEHAVIOR</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'02'</span></span><a class="headerlink" href="#common.layer.code.code.Code.UNEXPECTED_BEHAVIOR" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-common.config.constants">
+<span id="id12"></span><h3>定数・列挙型<a class="headerlink" href="#module-common.config.constants" title="Link to this heading"></a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="common.config.constants.ButtonPosition">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">common.config.constants.</span></span><span class="sig-name descname"><span class="pre">ButtonPosition</span></span><a class="headerlink" href="#common.config.constants.ButtonPosition" title="Link to this definition"></a></dt>
+<dd><p>ベースクラス: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Button positions for configuration screen.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.config.constants.ButtonPosition.BACK_BUTTON">
+<span class="sig-name descname"><span class="pre">BACK_BUTTON</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(540,</span> <span class="pre">670)</span></span><a class="headerlink" href="#common.config.constants.ButtonPosition.BACK_BUTTON" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.config.constants.ButtonPosition.GO_BUTTON">
+<span class="sig-name descname"><span class="pre">GO_BUTTON</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[(50,</span> <span class="pre">320),</span> <span class="pre">(260,</span> <span class="pre">320)]</span></span><a class="headerlink" href="#common.config.constants.ButtonPosition.GO_BUTTON" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.config.constants.ButtonPosition.OK_BUTTON">
+<span class="sig-name descname"><span class="pre">OK_BUTTON</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(750,</span> <span class="pre">670)</span></span><a class="headerlink" href="#common.config.constants.ButtonPosition.OK_BUTTON" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.config.constants.ButtonPosition.SLIDER">
+<span class="sig-name descname"><span class="pre">SLIDER</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(50,</span> <span class="pre">180)</span></span><a class="headerlink" href="#common.config.constants.ButtonPosition.SLIDER" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.config.constants.ButtonPosition.STEP_BUTTON">
+<span class="sig-name descname"><span class="pre">STEP_BUTTON</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[(50,</span> <span class="pre">460),</span> <span class="pre">(260,</span> <span class="pre">460)]</span></span><a class="headerlink" href="#common.config.constants.ButtonPosition.STEP_BUTTON" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.config.constants.ButtonPosition.TAB">
+<span class="sig-name descname"><span class="pre">TAB</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[(50,</span> <span class="pre">100),</span> <span class="pre">(300,</span> <span class="pre">100)]</span></span><a class="headerlink" href="#common.config.constants.ButtonPosition.TAB" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.config.constants.ButtonPosition.TEST_BUTTON">
+<span class="sig-name descname"><span class="pre">TEST_BUTTON</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(555,</span> <span class="pre">140)</span></span><a class="headerlink" href="#common.config.constants.ButtonPosition.TEST_BUTTON" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.config.constants.ButtonPosition.WAY_BUTTON">
+<span class="sig-name descname"><span class="pre">WAY_BUTTON</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[(50,</span> <span class="pre">180),</span> <span class="pre">(260,</span> <span class="pre">180)]</span></span><a class="headerlink" href="#common.config.constants.ButtonPosition.WAY_BUTTON" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="common.config.constants.ConfigButtonIndex">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">common.config.constants.</span></span><span class="sig-name descname"><span class="pre">ConfigButtonIndex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#common.config.constants.ConfigButtonIndex" title="Link to this definition"></a></dt>
+<dd><p>ベースクラス: <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntEnum" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">IntEnum</span></code></a></p>
+<p>Config button indices for configuration screen.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.config.constants.ConfigButtonIndex.TAB_SELECT">
+<span class="sig-name descname"><span class="pre">TAB_SELECT</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></span><a class="headerlink" href="#common.config.constants.ConfigButtonIndex.TAB_SELECT" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.config.constants.ConfigButtonIndex.TAB_TOUCH">
+<span class="sig-name descname"><span class="pre">TAB_TOUCH</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></span><a class="headerlink" href="#common.config.constants.ConfigButtonIndex.TAB_TOUCH" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.config.constants.ConfigButtonIndex.TAB_UNSELECT">
+<span class="sig-name descname"><span class="pre">TAB_UNSELECT</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></span><a class="headerlink" href="#common.config.constants.ConfigButtonIndex.TAB_UNSELECT" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="common.config.constants.GoKeyTypes">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">common.config.constants.</span></span><span class="sig-name descname"><span class="pre">GoKeyTypes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#common.config.constants.GoKeyTypes" title="Link to this definition"></a></dt>
+<dd><p>ベースクラス: <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntEnum" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">IntEnum</span></code></a></p>
+<p>Go key operation types.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.config.constants.GoKeyTypes.MAX">
+<span class="sig-name descname"><span class="pre">MAX</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></span><a class="headerlink" href="#common.config.constants.GoKeyTypes.MAX" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.config.constants.GoKeyTypes.TYPE_1">
+<span class="sig-name descname"><span class="pre">TYPE_1</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></span><a class="headerlink" href="#common.config.constants.GoKeyTypes.TYPE_1" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.config.constants.GoKeyTypes.TYPE_2">
+<span class="sig-name descname"><span class="pre">TYPE_2</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></span><a class="headerlink" href="#common.config.constants.GoKeyTypes.TYPE_2" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="common.config.constants.SetButtonIndex">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">common.config.constants.</span></span><span class="sig-name descname"><span class="pre">SetButtonIndex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#common.config.constants.SetButtonIndex" title="Link to this definition"></a></dt>
+<dd><p>ベースクラス: <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntEnum" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">IntEnum</span></code></a></p>
+<p>Set button indices for configuration screen.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.config.constants.SetButtonIndex.CANCEL">
+<span class="sig-name descname"><span class="pre">CANCEL</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">8</span></span><a class="headerlink" href="#common.config.constants.SetButtonIndex.CANCEL" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.config.constants.SetButtonIndex.CANCEL_TOUCH">
+<span class="sig-name descname"><span class="pre">CANCEL_TOUCH</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">9</span></span><a class="headerlink" href="#common.config.constants.SetButtonIndex.CANCEL_TOUCH" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.config.constants.SetButtonIndex.NOW_SELECT">
+<span class="sig-name descname"><span class="pre">NOW_SELECT</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></span><a class="headerlink" href="#common.config.constants.SetButtonIndex.NOW_SELECT" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.config.constants.SetButtonIndex.OK">
+<span class="sig-name descname"><span class="pre">OK</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">6</span></span><a class="headerlink" href="#common.config.constants.SetButtonIndex.OK" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.config.constants.SetButtonIndex.OK_DISABLE">
+<span class="sig-name descname"><span class="pre">OK_DISABLE</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">5</span></span><a class="headerlink" href="#common.config.constants.SetButtonIndex.OK_DISABLE" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.config.constants.SetButtonIndex.OK_TOUCH">
+<span class="sig-name descname"><span class="pre">OK_TOUCH</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">7</span></span><a class="headerlink" href="#common.config.constants.SetButtonIndex.OK_TOUCH" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.config.constants.SetButtonIndex.PLAYING">
+<span class="sig-name descname"><span class="pre">PLAYING</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">12</span></span><a class="headerlink" href="#common.config.constants.SetButtonIndex.PLAYING" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.config.constants.SetButtonIndex.TEST">
+<span class="sig-name descname"><span class="pre">TEST</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">10</span></span><a class="headerlink" href="#common.config.constants.SetButtonIndex.TEST" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.config.constants.SetButtonIndex.TEST_TOUCH">
+<span class="sig-name descname"><span class="pre">TEST_TOUCH</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">11</span></span><a class="headerlink" href="#common.config.constants.SetButtonIndex.TEST_TOUCH" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.config.constants.SetButtonIndex.TYPE1">
+<span class="sig-name descname"><span class="pre">TYPE1</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></span><a class="headerlink" href="#common.config.constants.SetButtonIndex.TYPE1" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.config.constants.SetButtonIndex.TYPE1_TOUCH">
+<span class="sig-name descname"><span class="pre">TYPE1_TOUCH</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></span><a class="headerlink" href="#common.config.constants.SetButtonIndex.TYPE1_TOUCH" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.config.constants.SetButtonIndex.TYPE2">
+<span class="sig-name descname"><span class="pre">TYPE2</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></span><a class="headerlink" href="#common.config.constants.SetButtonIndex.TYPE2" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.config.constants.SetButtonIndex.TYPE2_TOUCH">
+<span class="sig-name descname"><span class="pre">TYPE2_TOUCH</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4</span></span><a class="headerlink" href="#common.config.constants.SetButtonIndex.TYPE2_TOUCH" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="common.config.constants.SliderPosition">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">common.config.constants.</span></span><span class="sig-name descname"><span class="pre">SliderPosition</span></span><a class="headerlink" href="#common.config.constants.SliderPosition" title="Link to this definition"></a></dt>
+<dd><p>ベースクラス: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Slider positions for configuration screen.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.config.constants.SliderPosition.HEIGHT">
+<span class="sig-name descname"><span class="pre">HEIGHT</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">10</span></span><a class="headerlink" href="#common.config.constants.SliderPosition.HEIGHT" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.config.constants.SliderPosition.MAX">
+<span class="sig-name descname"><span class="pre">MAX</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">100</span></span><a class="headerlink" href="#common.config.constants.SliderPosition.MAX" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.config.constants.SliderPosition.MIN">
+<span class="sig-name descname"><span class="pre">MIN</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></span><a class="headerlink" href="#common.config.constants.SliderPosition.MIN" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.config.constants.SliderPosition.STEP">
+<span class="sig-name descname"><span class="pre">STEP</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></span><a class="headerlink" href="#common.config.constants.SliderPosition.STEP" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.config.constants.SliderPosition.WIDTH">
+<span class="sig-name descname"><span class="pre">WIDTH</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">400</span></span><a class="headerlink" href="#common.config.constants.SliderPosition.WIDTH" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.config.constants.SliderPosition.X">
+<span class="sig-name descname"><span class="pre">X</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">50</span></span><a class="headerlink" href="#common.config.constants.SliderPosition.X" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.config.constants.SliderPosition.Y">
+<span class="sig-name descname"><span class="pre">Y</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">195</span></span><a class="headerlink" href="#common.config.constants.SliderPosition.Y" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="common.config.constants.StepKeyTypes">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">common.config.constants.</span></span><span class="sig-name descname"><span class="pre">StepKeyTypes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#common.config.constants.StepKeyTypes" title="Link to this definition"></a></dt>
+<dd><p>ベースクラス: <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntEnum" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">IntEnum</span></code></a></p>
+<p>Step key operation types.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.config.constants.StepKeyTypes.MAX">
+<span class="sig-name descname"><span class="pre">MAX</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></span><a class="headerlink" href="#common.config.constants.StepKeyTypes.MAX" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.config.constants.StepKeyTypes.TYPE_1">
+<span class="sig-name descname"><span class="pre">TYPE_1</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></span><a class="headerlink" href="#common.config.constants.StepKeyTypes.TYPE_1" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.config.constants.StepKeyTypes.TYPE_2">
+<span class="sig-name descname"><span class="pre">TYPE_2</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></span><a class="headerlink" href="#common.config.constants.StepKeyTypes.TYPE_2" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="common.config.constants.TabTypes">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">common.config.constants.</span></span><span class="sig-name descname"><span class="pre">TabTypes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#common.config.constants.TabTypes" title="Link to this definition"></a></dt>
+<dd><p>ベースクラス: <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntEnum" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">IntEnum</span></code></a></p>
+<p>Tab types for configuration screen.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.config.constants.TabTypes.MAX">
+<span class="sig-name descname"><span class="pre">MAX</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></span><a class="headerlink" href="#common.config.constants.TabTypes.MAX" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.config.constants.TabTypes.OPERATION">
+<span class="sig-name descname"><span class="pre">OPERATION</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></span><a class="headerlink" href="#common.config.constants.TabTypes.OPERATION" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.config.constants.TabTypes.SOUND">
+<span class="sig-name descname"><span class="pre">SOUND</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></span><a class="headerlink" href="#common.config.constants.TabTypes.SOUND" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="common.config.constants.TextContents">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">common.config.constants.</span></span><span class="sig-name descname"><span class="pre">TextContents</span></span><a class="headerlink" href="#common.config.constants.TextContents" title="Link to this definition"></a></dt>
+<dd><p>ベースクラス: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Text constants for configuration screen.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.config.constants.TextContents.GO_KEY_TYPE">
+<span class="sig-name descname"><span class="pre">GO_KEY_TYPE</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'直進キー入力タイプ…'</span></span><a class="headerlink" href="#common.config.constants.TextContents.GO_KEY_TYPE" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.config.constants.TextContents.OPERATION_LIST">
+<span class="sig-name descname"><span class="pre">OPERATION_LIST</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['スペース押下',</span> <span class="pre">'エンター押下']</span></span><a class="headerlink" href="#common.config.constants.TextContents.OPERATION_LIST" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.config.constants.TextContents.SE_VOLUME">
+<span class="sig-name descname"><span class="pre">SE_VOLUME</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'SE</span> <span class="pre">VOLUME'</span></span><a class="headerlink" href="#common.config.constants.TextContents.SE_VOLUME" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.config.constants.TextContents.STEP_KEY_TYPE">
+<span class="sig-name descname"><span class="pre">STEP_KEY_TYPE</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'足踏み入力タイプ…'</span></span><a class="headerlink" href="#common.config.constants.TextContents.STEP_KEY_TYPE" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.config.constants.TextContents.WAY_KEY_TYPE">
+<span class="sig-name descname"><span class="pre">WAY_KEY_TYPE</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'方向キー入力タイプ…'</span></span><a class="headerlink" href="#common.config.constants.TextContents.WAY_KEY_TYPE" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.config.constants.TextContents.WAY_LIST">
+<span class="sig-name descname"><span class="pre">WAY_LIST</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['WASD操作',</span> <span class="pre">'方向キー操作']</span></span><a class="headerlink" href="#common.config.constants.TextContents.WAY_LIST" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="common.config.constants.TextPosition">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">common.config.constants.</span></span><span class="sig-name descname"><span class="pre">TextPosition</span></span><a class="headerlink" href="#common.config.constants.TextPosition" title="Link to this definition"></a></dt>
+<dd><p>ベースクラス: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Text positions for configuration screen.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.config.constants.TextPosition.GO_KEY_TYPE">
+<span class="sig-name descname"><span class="pre">GO_KEY_TYPE</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(50,</span> <span class="pre">285)</span></span><a class="headerlink" href="#common.config.constants.TextPosition.GO_KEY_TYPE" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.config.constants.TextPosition.SE_VOLUME">
+<span class="sig-name descname"><span class="pre">SE_VOLUME</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(50,</span> <span class="pre">150)</span></span><a class="headerlink" href="#common.config.constants.TextPosition.SE_VOLUME" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.config.constants.TextPosition.STEP_KEY_TYPE">
+<span class="sig-name descname"><span class="pre">STEP_KEY_TYPE</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(50,</span> <span class="pre">420)</span></span><a class="headerlink" href="#common.config.constants.TextPosition.STEP_KEY_TYPE" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.config.constants.TextPosition.VOLUME_COUNT">
+<span class="sig-name descname"><span class="pre">VOLUME_COUNT</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(475,</span> <span class="pre">190)</span></span><a class="headerlink" href="#common.config.constants.TextPosition.VOLUME_COUNT" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.config.constants.TextPosition.WAY_KEY_TYPE">
+<span class="sig-name descname"><span class="pre">WAY_KEY_TYPE</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(50,</span> <span class="pre">150)</span></span><a class="headerlink" href="#common.config.constants.TextPosition.WAY_KEY_TYPE" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="common.config.constants.VolumeSliderSize">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">common.config.constants.</span></span><span class="sig-name descname"><span class="pre">VolumeSliderSize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#common.config.constants.VolumeSliderSize" title="Link to this definition"></a></dt>
+<dd><p>ベースクラス: <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntEnum" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">IntEnum</span></code></a></p>
+<p>Volume slider size and range.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.config.constants.VolumeSliderSize.DIV">
+<span class="sig-name descname"><span class="pre">DIV</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4</span></span><a class="headerlink" href="#common.config.constants.VolumeSliderSize.DIV" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.config.constants.VolumeSliderSize.POS_X_MAX">
+<span class="sig-name descname"><span class="pre">POS_X_MAX</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">450</span></span><a class="headerlink" href="#common.config.constants.VolumeSliderSize.POS_X_MAX" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.config.constants.VolumeSliderSize.POS_X_MIN">
+<span class="sig-name descname"><span class="pre">POS_X_MIN</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">50</span></span><a class="headerlink" href="#common.config.constants.VolumeSliderSize.POS_X_MIN" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.config.constants.VolumeSliderSize.VOLUME_MAX">
+<span class="sig-name descname"><span class="pre">VOLUME_MAX</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">100</span></span><a class="headerlink" href="#common.config.constants.VolumeSliderSize.VOLUME_MAX" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.config.constants.VolumeSliderSize.VOLUME_MIN">
+<span class="sig-name descname"><span class="pre">VOLUME_MIN</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></span><a class="headerlink" href="#common.config.constants.VolumeSliderSize.VOLUME_MIN" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="common.config.constants.WayKeyTypes">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">common.config.constants.</span></span><span class="sig-name descname"><span class="pre">WayKeyTypes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#common.config.constants.WayKeyTypes" title="Link to this definition"></a></dt>
+<dd><p>ベースクラス: <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntEnum" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">IntEnum</span></code></a></p>
+<p>Direction key operation types.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.config.constants.WayKeyTypes.MAX">
+<span class="sig-name descname"><span class="pre">MAX</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></span><a class="headerlink" href="#common.config.constants.WayKeyTypes.MAX" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.config.constants.WayKeyTypes.TYPE_1">
+<span class="sig-name descname"><span class="pre">TYPE_1</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></span><a class="headerlink" href="#common.config.constants.WayKeyTypes.TYPE_1" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.config.constants.WayKeyTypes.TYPE_2">
+<span class="sig-name descname"><span class="pre">TYPE_2</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></span><a class="headerlink" href="#common.config.constants.WayKeyTypes.TYPE_2" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class" id="module-common.constants">
+<dt class="sig sig-object py" id="common.constants.ButtonIndex">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">common.constants.</span></span><span class="sig-name descname"><span class="pre">ButtonIndex</span></span><a class="headerlink" href="#common.constants.ButtonIndex" title="Link to this definition"></a></dt>
+<dd><p>ベースクラス: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>ボタンのインデックスを定義するクラス。
+このクラスは、各種ボタンのインデックスを定数として提供します。</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.constants.ButtonIndex.BACK">
+<span class="sig-name descname"><span class="pre">BACK</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">14</span></span><a class="headerlink" href="#common.constants.ButtonIndex.BACK" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.constants.ButtonIndex.BACK_TOUCH">
+<span class="sig-name descname"><span class="pre">BACK_TOUCH</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">15</span></span><a class="headerlink" href="#common.constants.ButtonIndex.BACK_TOUCH" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.constants.ButtonIndex.CONFIG">
+<span class="sig-name descname"><span class="pre">CONFIG</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">10</span></span><a class="headerlink" href="#common.constants.ButtonIndex.CONFIG" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.constants.ButtonIndex.CONFIG_TOUCH">
+<span class="sig-name descname"><span class="pre">CONFIG_TOUCH</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">11</span></span><a class="headerlink" href="#common.constants.ButtonIndex.CONFIG_TOUCH" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.constants.ButtonIndex.EXIT">
+<span class="sig-name descname"><span class="pre">EXIT</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></span><a class="headerlink" href="#common.constants.ButtonIndex.EXIT" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.constants.ButtonIndex.EXIT_TOUCH">
+<span class="sig-name descname"><span class="pre">EXIT_TOUCH</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></span><a class="headerlink" href="#common.constants.ButtonIndex.EXIT_TOUCH" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.constants.ButtonIndex.HOME">
+<span class="sig-name descname"><span class="pre">HOME</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4</span></span><a class="headerlink" href="#common.constants.ButtonIndex.HOME" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.constants.ButtonIndex.HOME_TOUCH">
+<span class="sig-name descname"><span class="pre">HOME_TOUCH</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">5</span></span><a class="headerlink" href="#common.constants.ButtonIndex.HOME_TOUCH" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.constants.ButtonIndex.LOAD">
+<span class="sig-name descname"><span class="pre">LOAD</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">6</span></span><a class="headerlink" href="#common.constants.ButtonIndex.LOAD" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.constants.ButtonIndex.LOAD_TOUCH">
+<span class="sig-name descname"><span class="pre">LOAD_TOUCH</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">7</span></span><a class="headerlink" href="#common.constants.ButtonIndex.LOAD_TOUCH" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.constants.ButtonIndex.RETRY">
+<span class="sig-name descname"><span class="pre">RETRY</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">12</span></span><a class="headerlink" href="#common.constants.ButtonIndex.RETRY" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.constants.ButtonIndex.RETRY_TOUCH">
+<span class="sig-name descname"><span class="pre">RETRY_TOUCH</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">13</span></span><a class="headerlink" href="#common.constants.ButtonIndex.RETRY_TOUCH" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.constants.ButtonIndex.SAVE">
+<span class="sig-name descname"><span class="pre">SAVE</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">8</span></span><a class="headerlink" href="#common.constants.ButtonIndex.SAVE" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.constants.ButtonIndex.SAVE_TOUCH">
+<span class="sig-name descname"><span class="pre">SAVE_TOUCH</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">9</span></span><a class="headerlink" href="#common.constants.ButtonIndex.SAVE_TOUCH" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.constants.ButtonIndex.START">
+<span class="sig-name descname"><span class="pre">START</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></span><a class="headerlink" href="#common.constants.ButtonIndex.START" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.constants.ButtonIndex.START_TOUCH">
+<span class="sig-name descname"><span class="pre">START_TOUCH</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></span><a class="headerlink" href="#common.constants.ButtonIndex.START_TOUCH" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="common.constants.Colors">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">common.constants.</span></span><span class="sig-name descname"><span class="pre">Colors</span></span><a class="headerlink" href="#common.constants.Colors" title="Link to this definition"></a></dt>
+<dd><p>ベースクラス: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>色の定数を定義するクラス。
+このクラスは、RGB形式で色を表す定数を提供します。</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.constants.Colors.BLACK">
+<span class="sig-name descname"><span class="pre">BLACK</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(0,</span> <span class="pre">0,</span> <span class="pre">0)</span></span><a class="headerlink" href="#common.constants.Colors.BLACK" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.constants.Colors.GREEN">
+<span class="sig-name descname"><span class="pre">GREEN</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(0,</span> <span class="pre">255,</span> <span class="pre">0)</span></span><a class="headerlink" href="#common.constants.Colors.GREEN" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.constants.Colors.RED">
+<span class="sig-name descname"><span class="pre">RED</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(255,</span> <span class="pre">0,</span> <span class="pre">0)</span></span><a class="headerlink" href="#common.constants.Colors.RED" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.constants.Colors.WHITE">
+<span class="sig-name descname"><span class="pre">WHITE</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(255,</span> <span class="pre">255,</span> <span class="pre">255)</span></span><a class="headerlink" href="#common.constants.Colors.WHITE" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="common.constants.SoundIndex">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">common.constants.</span></span><span class="sig-name descname"><span class="pre">SoundIndex</span></span><a class="headerlink" href="#common.constants.SoundIndex" title="Link to this definition"></a></dt>
+<dd><p>ベースクラス: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>サウンドのインデックスを定義するクラス。
+このクラスは、各種サウンドのインデックスを定数として提供します。</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.constants.SoundIndex.CLICK">
+<span class="sig-name descname"><span class="pre">CLICK</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></span><a class="headerlink" href="#common.constants.SoundIndex.CLICK" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.constants.SoundIndex.SEARCH">
+<span class="sig-name descname"><span class="pre">SEARCH</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></span><a class="headerlink" href="#common.constants.SoundIndex.SEARCH" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.constants.SoundIndex.TEST">
+<span class="sig-name descname"><span class="pre">TEST</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></span><a class="headerlink" href="#common.constants.SoundIndex.TEST" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common.constants.SoundIndex.WALK">
+<span class="sig-name descname"><span class="pre">WALK</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></span><a class="headerlink" href="#common.constants.SoundIndex.WALK" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-common.debug.debug">
+<span id="id13"></span><h3>共通機能<a class="headerlink" href="#module-common.debug.debug" title="Link to this heading"></a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="common.debug.debug.ERROR_LOG">
+<span class="sig-prename descclassname"><span class="pre">common.debug.debug.</span></span><span class="sig-name descname"><span class="pre">ERROR_LOG</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#common.debug.debug.ERROR_LOG" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="common.debug.debug.LOG">
+<span class="sig-prename descclassname"><span class="pre">common.debug.debug.</span></span><span class="sig-name descname"><span class="pre">LOG</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#common.debug.debug.LOG" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="common.debug.debug.init">
+<span class="sig-prename descclassname"><span class="pre">common.debug.debug.</span></span><span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#common.debug.debug.init" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="api_reference.html" class="btn btn-neutral float-left" title="APIリファレンス - 概要" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../guides/development_guide.html" class="btn btn-neutral float-right" title="開発ガイド" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Kurosu.
+      <span class="lastupdated">最終更新: 2026-02-28
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

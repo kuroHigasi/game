@@ -1,0 +1,941 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>開発ガイド &mdash; ゲーム制作 v1.0</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=90d9a163"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../_static/translations.js?v=4755f45a"></script>
+      <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="検索" href="../search.html" />
+    <link rel="next" title="createExe プロジェクト - モジュール管理ガイド" href="../MODULE_MANAGEMENT_GUIDE.html" />
+    <link rel="prev" title="モジュール別APIリファレンス" href="../api/module_api.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            ゲーム制作
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">システム概要:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../system_overview.html">システム概要</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../system_overview.html#id2">アーキテクチャ概要</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../system_overview.html#id3">システム全体の構成</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../system_overview.html#id4">3層アーキテクチャ</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../system_overview.html#id5">データフロー</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../system_overview.html#id6">共通基盤</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../system_overview.html#id7">レイヤー間通信</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../system_overview.html#id8">リソース管理</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../system_overview.html#id9">技術スタック</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../system_overview.html#id10">モジュール概要</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../system_overview.html#id11">実装済みモジュール</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../system_overview.html#id12">計画中モジュール</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">モジュール別概要:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../modules/config_overview.html">CONFIG機能の概要</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../modules/config_overview.html#id1">概要</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/config_overview.html#id2">主要機能</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../modules/config_overview.html#id3">操作設定</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modules/config_overview.html#id4">音響設定</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modules/config_overview.html#id5">データ管理</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/config_overview.html#id6">画面構成</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/config_overview.html#id7">技術仕様</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../modules/config_overview.html#id8">アーキテクチャ</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modules/config_overview.html#id9">データフロー</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/config_overview.html#id10">関連ページ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/home_overview.html">HOME機能の概要</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../modules/home_overview.html#id1">概要</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/home_overview.html#id2">主要機能</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../modules/home_overview.html#id3">メニュー選択</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modules/home_overview.html#id4">画面構成</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/home_overview.html#id5">技術仕様</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../modules/home_overview.html#id6">アーキテクチャ</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modules/home_overview.html#id7">状態管理</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modules/home_overview.html#id8">データフロー</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/home_overview.html#id9">関連ファイル</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../modules/home_overview.html#controller">Controller層</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modules/home_overview.html#service">Service層</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modules/home_overview.html#component">Component層</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modules/home_overview.html#id10">リクエスト・レスポンス</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/home_overview.html#id11">今後の拡張予定</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/save_overview.html">SAVE機能の概要</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../modules/save_overview.html#id1">概要</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/save_overview.html#id2">主要機能</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../modules/save_overview.html#id3">データ管理</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modules/save_overview.html#id4">セーブスロット</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modules/save_overview.html#id5">データ保護</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/save_overview.html#id6">技術仕様</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../modules/save_overview.html#id7">アーキテクチャ</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modules/save_overview.html#id8">データ形式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modules/save_overview.html#id9">ファイル構成</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modules/save_overview.html#id10">暗号化仕様</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/save_overview.html#id11">データフロー</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../modules/save_overview.html#id12">保存処理</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modules/save_overview.html#id13">読み込み処理</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/save_overview.html#id14">関連ファイル</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../modules/save_overview.html#controller">Controller層</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modules/save_overview.html#service">Service層</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modules/save_overview.html#id15">共通機能</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/save_overview.html#id16">エラーハンドリング</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../modules/save_overview.html#id17">想定エラー</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modules/save_overview.html#id18">復旧手順</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/save_overview.html#id19">今後の拡張予定</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/end_overview.html">END機能の概要</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../modules/end_overview.html#id1">概要</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/end_overview.html#id2">主要機能</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../modules/end_overview.html#id3">終了処理</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modules/end_overview.html#id4">確認処理</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modules/end_overview.html#id5">画面構成</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/end_overview.html#id6">技術仕様</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../modules/end_overview.html#id7">アーキテクチャ</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modules/end_overview.html#id8">終了シーケンス</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modules/end_overview.html#id9">リソース管理</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../modules/end_overview.html#id10">解放対象リソース</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../modules/end_overview.html#id11">解放順序</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/end_overview.html#id12">データフロー</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../modules/end_overview.html#id13">正常終了</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modules/end_overview.html#id14">異常終了対応</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/end_overview.html#id15">関連ファイル</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../modules/end_overview.html#controller">Controller層</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modules/end_overview.html#service">Service層</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modules/end_overview.html#id16">リクエスト・レスポンス</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/end_overview.html#id17">エラーハンドリング</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../modules/end_overview.html#id18">想定ケース</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modules/end_overview.html#id19">ログ出力</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/end_overview.html#id20">今後の拡張予定</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API・開発者向け:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../api/api_reference.html">APIリファレンス - 概要</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api/api_reference.html#id1">概要</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/api_reference.html#id2">アーキテクチャ構成</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_reference.html#id3">3層構造の統一</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_reference.html#id4">レイヤー間通信</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../api/api_reference.html#id5">共通インターフェース</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_reference.html#request">Request オブジェクト</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_reference.html#response">Response オブジェクト</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_reference.html#id6">結果判定メソッド</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../api/api_reference.html#id7">モジュール別API仕様</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_reference.html#id8">主要モジュール概要</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../api/api_reference.html#id9">使用パターン</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_reference.html#id10">標準的な使用パターン</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_reference.html#id11">エラーハンドリング</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_reference.html#id12">バリデーション</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../api/api_reference.html#id13">型安全性</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_reference.html#id14">型注釈の活用</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_reference.html#mypy">mypyによる型チェック</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../api/api_reference.html#id15">テスト支援</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_reference.html#id16">モックとテスト</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_reference.html#id17">ファクトリーメソッド</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../api/api_reference.html#id18">パフォーマンス考慮事項</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_reference.html#id19">効率的な使用</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_reference.html#id20">メモリ使用量</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../api/api_reference.html#id21">拡張性</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_reference.html#id22">新モジュール追加</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_reference.html#id23">下位互換性</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../api/api_reference.html#id24">関連ドキュメント</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../api/module_api.html">モジュール別APIリファレンス</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api/module_api.html#config">CONFIGモジュール</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api/module_api.html#controller">Controller層</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/module_api.html#module-common.config.service.action">Service層</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#common.config.service.action.Action"><code class="docutils literal notranslate"><span class="pre">Action</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../api/module_api.html#component">Component層</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#module-common.config.service.component.actionRequestValidator">Validator系</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#module-common.config.service.component.statusConvertManager">Manager系</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#check">Check系</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../api/module_api.html#home">HOMEモジュール</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api/module_api.html#id1">Controller層</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/module_api.html#id2">Service層</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#common.home.service.sound.Sound"><code class="docutils literal notranslate"><span class="pre">Sound</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#common.home.service.status.Status"><code class="docutils literal notranslate"><span class="pre">Status</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../api/module_api.html#id3">Component層</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#id4">Validator系</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#id5">Manager系</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../api/module_api.html#save">SAVEモジュール</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api/module_api.html#id6">Controller層</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#common.save.sound.Sound"><code class="docutils literal notranslate"><span class="pre">Sound</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../api/module_api.html#id7">Service層</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#common.save.service.sound.Sound"><code class="docutils literal notranslate"><span class="pre">Sound</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#common.save.service.status.Status"><code class="docutils literal notranslate"><span class="pre">Status</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../api/module_api.html#end">ENDモジュール</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api/module_api.html#id8">Controller層</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/module_api.html#id9">Service層</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#common.end.service.status.Status"><code class="docutils literal notranslate"><span class="pre">Status</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../api/module_api.html#id10">共通モジュール</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api/module_api.html#module-common.layer.response.response">レイヤー間通信</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#common.layer.response.response.Response"><code class="docutils literal notranslate"><span class="pre">Response</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#common.layer.code.code.Code"><code class="docutils literal notranslate"><span class="pre">Code</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../api/module_api.html#module-common.config.constants">定数・列挙型</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#common.config.constants.ButtonPosition"><code class="docutils literal notranslate"><span class="pre">ButtonPosition</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#common.config.constants.ConfigButtonIndex"><code class="docutils literal notranslate"><span class="pre">ConfigButtonIndex</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#common.config.constants.GoKeyTypes"><code class="docutils literal notranslate"><span class="pre">GoKeyTypes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#common.config.constants.SetButtonIndex"><code class="docutils literal notranslate"><span class="pre">SetButtonIndex</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#common.config.constants.SliderPosition"><code class="docutils literal notranslate"><span class="pre">SliderPosition</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#common.config.constants.StepKeyTypes"><code class="docutils literal notranslate"><span class="pre">StepKeyTypes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#common.config.constants.TabTypes"><code class="docutils literal notranslate"><span class="pre">TabTypes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#common.config.constants.TextContents"><code class="docutils literal notranslate"><span class="pre">TextContents</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#common.config.constants.TextPosition"><code class="docutils literal notranslate"><span class="pre">TextPosition</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#common.config.constants.VolumeSliderSize"><code class="docutils literal notranslate"><span class="pre">VolumeSliderSize</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#common.config.constants.WayKeyTypes"><code class="docutils literal notranslate"><span class="pre">WayKeyTypes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#common.constants.ButtonIndex"><code class="docutils literal notranslate"><span class="pre">ButtonIndex</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#common.constants.Colors"><code class="docutils literal notranslate"><span class="pre">Colors</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#common.constants.SoundIndex"><code class="docutils literal notranslate"><span class="pre">SoundIndex</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../api/module_api.html#module-common.debug.debug">共通機能</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#common.debug.debug.ERROR_LOG"><code class="docutils literal notranslate"><span class="pre">ERROR_LOG()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#common.debug.debug.LOG"><code class="docutils literal notranslate"><span class="pre">LOG()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#common.debug.debug.init"><code class="docutils literal notranslate"><span class="pre">init()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">開発ガイド</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">開発環境セットアップ</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id3">必要なツール</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">環境構築</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">アーキテクチャ規約</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id6">3層構造の統一</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">ファイル命名規則</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">クラス設計原則</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#request-response">Request/Response パターン</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id9">新モジュール追加手順</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id10">1. ディレクトリ構造作成</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id11">2. 基本ファイル作成</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#service">3. Service層の実装</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id12">4. テストファイル作成</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id13">5. ドキュメント追加</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#api">6. API参照に追加</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id14">テスト作成ガイド</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id15">テスト方針</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id16">テストファイル構成</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id17">共通テストテンプレート</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id18">ドキュメント作成ガイド</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id19">ドキュメント構成</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id20">ドキュメント規約</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id21">コード品質管理</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id22">静的解析</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id23">継続的インテグレーション</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id24">モジュール別注意点</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#config">CONFIG</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#home">HOME</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#save">SAVE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#end">END</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id25">トラブルシューティング</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id26">よくある問題と対処法</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html">createExe プロジェクト - モジュール管理ガイド</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id1">目次</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id2">新モジュール追加手順</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id3">1. ディレクトリ構造作成</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id4">2. 基本ファイル作成</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#controller">Controller層ファイル作成</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#service">Service層ファイル作成</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id5">3. リクエスト・レスポンスオブジェクト作成</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id6">4. テストファイル作成</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id7">5. ドキュメント作成</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id8">モジュール概要ドキュメント</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#index-rst">index.rstに追加</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#api">API仕様に追加</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id9">6. 変更履歴更新</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id10">既存モジュール改修手順</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id11">1. 影響範囲の確認</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id12">2. 既存テストの実行</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id13">3. 修正実装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id14">4. テスト更新・追加</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id15">5. ドキュメント更新</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id16">モジュール概要の更新</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id17">APIドキュメントの確認</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id18">ドキュメント更新手順</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id19">1. モジュール概要ドキュメント作成・更新</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id20">2. index.rstの更新</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id21">3. API仕様の更新</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id22">4. 変更履歴の更新</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id23">5. ドキュメント生成確認</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id24">テスト追加手順</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id25">1. テストファイル作成</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id26">2. テストケース実装</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id27">基本テンプレート</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id28">3. テスト実行・カバレッジ確認</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id29">品質チェック手順</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id30">1. コード品質チェック</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id31">2. テストカバレッジチェック</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id32">3. ドキュメント品質チェック</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id33">4. 統合テスト</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id34">チェックリスト</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id35">新モジュール追加チェックリスト</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id36">既存モジュール改修チェックリスト</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id37">トラブルシューティング</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id38">よくある問題と対処法</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../MODULE_MANAGEMENT_GUIDE.html#id39">サポート情報</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">変更履歴</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../changelog.html#v1-3-0-2026-02-26">v1.3.0 (2026-02-26)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#id2">新機能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#id3">改善</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#id4">バグ修正</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#id5">技術的改善</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#id6">ドキュメント構成変更</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../changelog.html#v1-2-0-2026-01-15">v1.2.0 (2026-01-15)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#id7">新機能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#id8">改善</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../changelog.html#v1-1-0-2025-12-01">v1.1.0 (2025-12-01)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#id9">新機能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#id10">バグ修正</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../changelog.html#v1-0-0-2025-10-01">v1.0.0 (2025-10-01)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#id11">初回リリース</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../changelog.html#id12">既知の問題</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#v1-3-0">v1.3.0</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../changelog.html#id13">今後の予定</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#v1-4-0-2026-04-01">v1.4.0 (予定: 2026-04-01)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#v1-5-0-2026-07-01">v1.5.0 (予定: 2026-07-01)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ゲーム制作</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">開発ガイド</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>開発ガイド<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<p>全モジュール共通の開発・保守ガイドラインです。
+新しいモジュールを追加する際も、このガイドラインに従って実装してください。</p>
+<section id="id2">
+<h2>開発環境セットアップ<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<section id="id3">
+<h3>必要なツール<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Python 3.11+</p></li>
+<li><p>pytest (テスト実行)</p></li>
+<li><p>pygame (音声・グラフィック処理)</p></li>
+<li><p>sphinx (ドキュメント生成)</p></li>
+</ul>
+</section>
+<section id="id4">
+<h3>環境構築<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 依存関係のインストール</span>
+pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+
+<span class="c1"># テスト実行（全モジュール）</span>
+python<span class="w"> </span>-m<span class="w"> </span>pytest<span class="w"> </span>test/
+
+<span class="c1"># 特定モジュールのテスト実行</span>
+python<span class="w"> </span>-m<span class="w"> </span>pytest<span class="w"> </span>test/common/config/
+python<span class="w"> </span>-m<span class="w"> </span>pytest<span class="w"> </span>test/common/home/
+python<span class="w"> </span>-m<span class="w"> </span>pytest<span class="w"> </span>test/common/save/
+
+<span class="c1"># ドキュメント生成</span>
+<span class="nb">cd</span><span class="w"> </span>docs
+make<span class="w"> </span>html
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id5">
+<h2>アーキテクチャ規約<a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
+<section id="id6">
+<h3>3層構造の統一<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<p>全モジュールは以下の3層構造で実装：</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>common/{module_name}/
+├── {function}.py              # Controller層
+├── service/
+│   └── {function}.py          # Service層
+└── component/                 # Component層（必要に応じて）
+    ├── {target}Validator.py   # バリデーション
+    ├── {target}Manager.py     # リソース管理
+    └── {target}Check.py       # 状態チェック
+</pre></div>
+</div>
+</section>
+<section id="id7">
+<h3>ファイル命名規則<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 30.0%" />
+<col style="width: 40.0%" />
+<col style="width: 30.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>レイヤー</p></th>
+<th class="head"><p>ファイル名</p></th>
+<th class="head"><p>例</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Controller</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">{機能名}.py</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">action.py</span></code>, <code class="docutils literal notranslate"><span class="pre">display.py</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Service</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">service/{機能名}.py</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">service/sound.py</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Validator</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">component/{対象}RequestValidator.py</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">actionRequestValidator.py</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Manager</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">component/{対象}{リソース}Manager.py</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">soundChannelManager.py</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Check</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">component/{対象}{機能}Check.py</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">soundChannelCheck.py</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id8">
+<h3>クラス設計原則<a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p><strong>単一責任原則</strong>: 1つのクラスは1つの責任のみ</p></li>
+<li><p><strong>依存関係逆転</strong>: 具象ではなく抽象に依存</p></li>
+<li><p><strong>オープン・クローズド</strong>: 拡張に開いて修正に閉じる</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Good: 単一責任</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">SoundChannelManager</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;音声チャンネルの管理のみを行う&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="o">...</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="o">...</span>
+
+<span class="c1"># Good: バリデーションの分離</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">RequestValidator</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;リクエスト検証のみを行う&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">raise_if_invalid</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="o">...</span>
+</pre></div>
+</div>
+</section>
+<section id="request-response">
+<h3>Request/Response パターン<a class="headerlink" href="#request-response" title="Link to this heading"></a></h3>
+<p>全モジュール間の通信は統一されたパターンを使用：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Request オブジェクト</span>
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ModuleActionRequest</span><span class="p">:</span>
+    <span class="n">param1</span><span class="p">:</span> <span class="nb">bool</span>
+    <span class="n">param2</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">param3</span><span class="p">:</span> <span class="nb">int</span>
+
+<span class="c1"># Response オブジェクト</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">common.layer.response.response</span><span class="w"> </span><span class="kn">import</span> <span class="n">Response</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">common.layer.code.code</span><span class="w"> </span><span class="kn">import</span> <span class="n">Code</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">process</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">ModuleActionRequest</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">valid_condition</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">result_data</span><span class="p">,</span> <span class="n">result</span><span class="o">=</span><span class="n">Code</span><span class="o">.</span><span class="n">OK</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">error_data</span><span class="p">,</span> <span class="n">result</span><span class="o">=</span><span class="n">Code</span><span class="o">.</span><span class="n">ARGUMENT_ERROR</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id9">
+<h2>新モジュール追加手順<a class="headerlink" href="#id9" title="Link to this heading"></a></h2>
+<section id="id10">
+<h3>1. ディレクトリ構造作成<a class="headerlink" href="#id10" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>common/<span class="o">{</span>new_module<span class="o">}</span>
+mkdir<span class="w"> </span>common/<span class="o">{</span>new_module<span class="o">}</span>/service
+mkdir<span class="w"> </span>common/<span class="o">{</span>new_module<span class="o">}</span>/service/component<span class="w">  </span><span class="c1"># 必要に応じて</span>
+mkdir<span class="w"> </span>test/common/<span class="o">{</span>new_module<span class="o">}</span>
+mkdir<span class="w"> </span>test/common/<span class="o">{</span>new_module<span class="o">}</span>/service
+mkdir<span class="w"> </span>test/common/<span class="o">{</span>new_module<span class="o">}</span>/service/component
+</pre></div>
+</div>
+</section>
+<section id="id11">
+<h3>2. 基本ファイル作成<a class="headerlink" href="#id11" title="Link to this heading"></a></h3>
+<p>Controller層の基本ファイル：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># common/{new_module}/action.py</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">common.abstract.</span><span class="p">{</span><span class="n">new_module</span><span class="p">}</span><span class="o">.</span><span class="n">abstractAction</span> <span class="kn">import</span><span class="w"> </span><span class="nn">AbstractAction</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Action</span><span class="p">(</span><span class="n">AbstractAction</span><span class="p">):</span>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">execute</span><span class="p">(</span><span class="n">form</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+        <span class="n">service</span> <span class="o">=</span> <span class="n">Service</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">service</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+        <span class="c1"># フォームの更新処理</span>
+</pre></div>
+</div>
+</section>
+<section id="service">
+<h3>3. Service層の実装<a class="headerlink" href="#service" title="Link to this heading"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># common/{new_module}/service/action.py</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Action</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_request</span> <span class="o">=</span> <span class="n">request</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># ビジネスロジックの実装</span>
+        <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">result</span><span class="p">,</span> <span class="n">result</span><span class="o">=</span><span class="n">Code</span><span class="o">.</span><span class="n">OK</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="id12">
+<h3>4. テストファイル作成<a class="headerlink" href="#id12" title="Link to this heading"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># test/common/{new_module}/action_test.py</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">unittest</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">ActionTest</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_normal_case</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># テスト実装</span>
+        <span class="k">pass</span>
+</pre></div>
+</div>
+</section>
+<section id="id13">
+<h3>5. ドキュメント追加<a class="headerlink" href="#id13" title="Link to this heading"></a></h3>
+<div class="highlight-rst notranslate"><div class="highlight"><pre><span></span># docs/modules/{new_module}_overview.rst
+<span class="gh">{MODULE}機能の概要</span>
+<span class="gh">==================</span>
+
+<span class="gh">概要</span>
+<span class="gh">----</span>
+
+機能の概要説明
+</pre></div>
+</div>
+</section>
+<section id="api">
+<h3>6. API参照に追加<a class="headerlink" href="#api" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">docs/api/module_api.rst</span></code> に新モジュールのautomodule定義を追加</p>
+</section>
+</section>
+<section id="id14">
+<h2>テスト作成ガイド<a class="headerlink" href="#id14" title="Link to this heading"></a></h2>
+<section id="id15">
+<h3>テスト方針<a class="headerlink" href="#id15" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>正常系</strong>: 期待される入力での動作確認</p></li>
+<li><p><strong>異常系</strong>: エラー条件での例外処理確認</p></li>
+<li><p><strong>境界値</strong>: 最小値・最大値での動作確認</p></li>
+</ul>
+</section>
+<section id="id16">
+<h3>テストファイル構成<a class="headerlink" href="#id16" title="Link to this heading"></a></h3>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>test/common/{module}/
+├── action_test.py                    # Controller層のテスト
+├── display_test.py
+├── sound_test.py
+├── status_test.py
+└── service/
+    ├── action_test.py                # Service層のテスト
+    └── component/
+        ├── {target}_validator_test.py
+        └── {target}_manager_test.py
+</pre></div>
+</div>
+</section>
+<section id="id17">
+<h3>共通テストテンプレート<a class="headerlink" href="#id17" title="Link to this heading"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 例: test/common/config/status_test.py</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">unittest</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">common.config.service.status</span><span class="w"> </span><span class="kn">import</span> <span class="n">Status</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">StatusTest</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Statusのテストクラス</span>
+
+<span class="sd">    実際の実装時は、以下のようにモジュール名に合わせて変更:</span>
+<span class="sd">    - インポート: from common.{モジュール}.service.{機能} import {クラス}</span>
+<span class="sd">    - クラス名: {クラス}Test</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_normal_case_returns_expected_result</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        正常系: 正しい入力での期待結果確認</span>
+<span class="sd">            - 条件: 有効な入力データ</span>
+<span class="sd">            - 期待結果: 期待される戻り値</span>
+<span class="sd">            - 例外: なし</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Arrange</span>
+        <span class="n">component</span> <span class="o">=</span> <span class="n">Status</span><span class="p">(</span><span class="n">valid_input</span><span class="p">)</span>
+
+        <span class="c1"># Act</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">component</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+
+        <span class="c1"># Assert</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">expected_result</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_invalid_input_raises_value_error</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        異常系: 無効な入力での例外発生確認</span>
+<span class="sd">            - 条件: 無効な入力データ</span>
+<span class="sd">            - 期待結果: ValueError例外が発生</span>
+<span class="sd">            - 例外: ValueError</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
+            <span class="n">Status</span><span class="p">(</span><span class="n">invalid_input</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id18">
+<h2>ドキュメント作成ガイド<a class="headerlink" href="#id18" title="Link to this heading"></a></h2>
+<section id="id19">
+<h3>ドキュメント構成<a class="headerlink" href="#id19" title="Link to this heading"></a></h3>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>docs/
+├── index.rst                    # メインページ
+├── system_overview.rst          # システム全体概要
+├── modules/                     # モジュール別概要
+│   ├── config_overview.rst
+│   ├── home_overview.rst
+│   ├── save_overview.rst
+│   ├── end_overview.rst
+│   └── {new_module}_overview.rst
+├── api/                         # API詳細仕様
+│   └── module_api.rst
+├── development_guide.rst        # 開発ガイド（本ファイル）
+├── changelog.rst               # 変更履歴
+└── diagrams/                   # フローチャート
+    └── {module}/
+        └── {function}_flow.md
+</pre></div>
+</div>
+</section>
+<section id="id20">
+<h3>ドキュメント規約<a class="headerlink" href="#id20" title="Link to this heading"></a></h3>
+<p>すべての公開クラス・メソッドには以下を記述：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">example_method</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">param</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    メソッドの概要を1行で記述。</span>
+
+<span class="sd">    詳細な説明がある場合はここに記述する。</span>
+
+<span class="sd">    .. dropdown:: 処理フロー図を確認する</span>
+<span class="sd">       :color: primary</span>
+<span class="sd">       :icon: eye</span>
+
+<span class="sd">       .. mermaid:: /diagrams/{module}/{function}_flow.md</span>
+<span class="sd">          :alt: 処理フロー図</span>
+
+<span class="sd">    :param param: パラメータの説明</span>
+<span class="sd">    :type param: str</span>
+<span class="sd">    :return: 戻り値の説明</span>
+<span class="sd">    :rtype: Response</span>
+<span class="sd">    :raises ValueError: 例外が発生する条件の説明</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id21">
+<h2>コード品質管理<a class="headerlink" href="#id21" title="Link to this heading"></a></h2>
+<section id="id22">
+<h3>静的解析<a class="headerlink" href="#id22" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># コード品質チェック</span>
+flake8<span class="w"> </span>common/<span class="o">{</span>module<span class="o">}</span>/
+pylint<span class="w"> </span>common/<span class="o">{</span>module<span class="o">}</span>/
+
+<span class="c1"># 型チェック</span>
+mypy<span class="w"> </span>common/<span class="o">{</span>module<span class="o">}</span>/
+</pre></div>
+</div>
+</section>
+<section id="id23">
+<h3>継続的インテグレーション<a class="headerlink" href="#id23" title="Link to this heading"></a></h3>
+<p>全モジュールで以下を自動実行：</p>
+<ol class="arabic simple">
+<li><p><strong>単体テスト実行</strong></p></li>
+<li><p><strong>静的解析チェック</strong></p></li>
+<li><p><strong>ドキュメント生成確認</strong></p></li>
+<li><p><strong>テストカバレッジ測定</strong></p></li>
+</ol>
+</section>
+</section>
+<section id="id24">
+<h2>モジュール別注意点<a class="headerlink" href="#id24" title="Link to this heading"></a></h2>
+<section id="config">
+<h3>CONFIG<a class="headerlink" href="#config" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>設定値の型チェックを厳密に</p></li>
+<li><p>デフォルト値の適切な管理</p></li>
+<li><p>暗号化処理のテスト</p></li>
+</ul>
+</section>
+<section id="home">
+<h3>HOME<a class="headerlink" href="#home" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>UI操作のタイミング制御</p></li>
+<li><p>音声リソースの適切な管理</p></li>
+<li><p>画面遷移の状態管理</p></li>
+</ul>
+</section>
+<section id="save">
+<h3>SAVE<a class="headerlink" href="#save" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>データ整合性の確保</p></li>
+<li><p>暗号化・復号化の確実性</p></li>
+<li><p>エラー時の復旧処理</p></li>
+</ul>
+</section>
+<section id="end">
+<h3>END<a class="headerlink" href="#end" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>リソース解放の完全性</p></li>
+<li><p>異常終了時の対応</p></li>
+<li><p>ログ出力の適切な実装</p></li>
+</ul>
+</section>
+</section>
+<section id="id25">
+<h2>トラブルシューティング<a class="headerlink" href="#id25" title="Link to this heading"></a></h2>
+<section id="id26">
+<h3>よくある問題と対処法<a class="headerlink" href="#id26" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 30.0%" />
+<col style="width: 70.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>問題</p></th>
+<th class="head"><p>対処法</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>インポートエラー</strong></p></td>
+<td><p>モジュールパス・<code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> の確認</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>テスト失敗</strong></p></td>
+<td><p>モック設定とテストデータの見直し</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>ドキュメント生成失敗</strong></p></td>
+<td><p>automoduleのパス・構文確認</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>型エラー</strong></p></td>
+<td><p>型注釈の修正・mypy設定確認</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../api/module_api.html" class="btn btn-neutral float-left" title="モジュール別APIリファレンス" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../MODULE_MANAGEMENT_GUIDE.html" class="btn btn-neutral float-right" title="createExe プロジェクト - モジュール管理ガイド" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Kurosu.
+      <span class="lastupdated">最終更新: 2026-02-28
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
