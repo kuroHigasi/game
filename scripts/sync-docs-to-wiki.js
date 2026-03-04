@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * docs/ 配下の設計書を GitHub Wiki に同期するスクリプト
+ * 01_DOCS/ 配下の設計書を GitHub Wiki に同期するスクリプト
  *
  * このスクリプトはGitHub Actions環境でのみ実行可能です。
  * ローカル環境からの実行は許可されていません。
@@ -43,14 +43,14 @@ if (!owner || !repo) {
 }
 
 // ここは実際の構成に合わせて変更してください
-const DOCS_DIR = path.join(process.cwd(), 'docs', 'wiki');
+const DOCS_DIR = path.join(process.cwd(), '01_DOCS', 'wiki');
 
 // Wiki にのみ残すべきページ（削除対象外）
 // [private] で始まるページは自動的に保護されます
 const PROTECTED_WIKI_PAGES = [];
 
 /**
- * docs/wiki/ 配下の Markdown ファイルを再帰的に取得
+ * 01_DOCS/wiki/ 配下の Markdown ファイルを再帰的に取得
  */
 function getMarkdownFiles(dir, basePath = '') {
     const files = [];
@@ -185,9 +185,9 @@ function deleteWikiPages(wikiDir, pagesToDelete) {
 function main() {
     console.log(`📚 ${GITHUB_REPO} の Wiki に同期を開始します...\n`);
 
-    // docs/wiki/ ディレクトリの存在確認
+    // 01_DOCS/wiki/ ディレクトリの存在確認
     if (!fs.existsSync(DOCS_DIR)) {
-        console.error(`❌ docs/wiki/ ディレクトリが見つかりません: ${DOCS_DIR}`);
+        console.error(`❌ 01_DOCS/wiki/ ディレクトリが見つかりません: ${DOCS_DIR}`);
         process.exit(1);
     }
 
@@ -283,7 +283,7 @@ ${protectedPages.length > 0 ? `## Wiki 専用ページ\n\n${protectedPages.map(p
                 if (isProtectedPage(title)) {
                     return false;
                 }
-                // docs/wiki/ に存在しないページのみ削除対象
+                // 01_DOCS/wiki/ に存在しないページのみ削除対象
                 return !docsWikiTitles.has(title);
             })
             .map(page => page.title);
@@ -310,7 +310,7 @@ ${protectedPages.length > 0 ? `## Wiki 専用ページ\n\n${protectedPages.map(p
         } catch {
             // 変更がある場合はコミット・プッシュ
             console.log('\n💾 変更をコミット中...');
-            execSync(`cd "${wikiDir}" && git commit -m "Sync docs/wiki to GitHub Wiki"`, { stdio: 'inherit' });
+            execSync(`cd "${wikiDir}" && git commit -m "Sync 01_DOCS/wiki to GitHub Wiki"`, { stdio: 'inherit' });
 
             console.log('📤 変更をプッシュ中...');
             execSync(`cd "${wikiDir}" && git push origin master`, {
