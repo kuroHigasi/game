@@ -134,7 +134,7 @@ function generateSidebarContent(files, protectedPages) {
                 const fileName = key.replace('_file_', '');
                 // wikiTitleは「フォルダ名-フォルダ名-ファイル名」形式
                 // リンク形式：[[リンク先ページ|表示名称]]
-                lines.push(`${indent}- [[${item.wikiTitle}|${fileName}]]`);
+                lines.push(`${indent}- [[${fileName}|${item.wikiTitle}]]`);
             } else {
                 // フォルダの場合：フォルダ名を表示（リンクなし）
                 lines.push(`${indent}- ${key}`);
