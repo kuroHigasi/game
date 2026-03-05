@@ -85,7 +85,83 @@ function getWikiTitle(relativePath) {
     // パス区切りをハイフンに変換（必要に応じて調整）
     // 例: "01_要件定義書" -> "01_要件定義書"
     // 例: "01_要件定義書/顧客要件" -> "01_要件定義書-顧客要件"
-    return nameWithoutExt.replace(/\//g, '-');
+    return nameWithoutExt.replace(/\\/g, '-').replace(/\//g, '-');
+}
+
+/**
+ * ファイル一覧をツリー構造に変換してサイドバーコンテンツを生成
+ */
+function generateSidebarContent(files, protectedPages) {
+    // ファイルをパス順にソート
+    const sortedFiles = files
+        .filter(f => !f.relativePath?.includes('wiki-backup'))
+        .sort((a, b) => a.relativePath.localeCompare(b.relativePath, 'ja'));
+
+    // フォルダ構造を構築
+    const folderStructure = {};
+
+    for (const file of sortedFiles) {
+        const pathParts = file.relativePath.replace(/\.md$/, '').split(path.sep);
+        let current = folderStructure;
+
+        // フォルダ階層を生成
+        for (let i = 0; i < pathParts.length - 1; i++) {
+            const folder = pathParts[i];
+            if (!current[folder]) {
+                current[folder] = {};
+            }
+            current = current[folder];
+        }
+
+        // ファイルを追加
+        const fileName = pathParts[pathParts.length - 1];
+        current[`_file_${fileName}`] = file;
+    }
+
+    // 再帰的にツリーを生成
+    function buildTree(obj, depth = 0) {
+        const lines = [];
+        const indent = '  '.repeat(depth);
+        const keys = Object.keys(obj).sort();
+
+        for (const key of keys) {
+            const item = obj[key];
+
+            if (key.startsWith('_file_')) {
+                // ファイルの場合
+                const fileName = key.replace('_file_', '');
+                const displayName = fileName;
+                lines.push(`${indent}- [[${item.wikiTitle}|${displayName}]]`);
+            } else {
+                // フォルダの場合
+                lines.push(`${indent}- ${key}`);
+                const subLines = buildTree(item, depth + 1);
+                if (subLines.length > 0) {
+                    lines.push(...subLines);
+                }
+            }
+        }
+
+        return lines;
+    }
+
+    // ツリーを生成
+    const treeLines = buildTree(folderStructure);
+
+    // サイドバーコンテンツを組み立て
+    let content = '# 目次\n\n';
+    content += treeLines.join('\n');
+
+    // 保護対象ページを追加
+    if (protectedPages.length > 0) {
+        content += '\n\n## Wiki 専用ページ\n\n';
+        content += protectedPages
+            .map(p => `- [[${p.wikiTitle}|${p.wikiTitle}]]`)
+            .join('\n');
+    }
+
+    content += '\n';
+    return content;
 }
 
 /**
@@ -349,16 +425,8 @@ function main() {
             createOrUpdateWikiPage(file.wikiTitle, content, wikiDir);
         }
 
-        // サイドバーを作成
-        const sidebarContent = `# 目次
-
-${files
-            .filter(f => !f.relativePath?.includes('wiki-backup'))
-            .map(f => `- [[${f.wikiTitle}|${f.wikiTitle}]]`)
-            .join('\n')}
-
-${protectedPages.length > 0 ? `## Wiki 専用ページ\n\n${protectedPages.map(p => `- [[${p.wikiTitle}|${p.wikiTitle}]]`).join('\n')}\n` : ''}
-`;
+        // サイドバーを作成（階層的なフォルダ構造を反映）
+        const sidebarContent = generateSidebarContent(files, protectedPages);
         createOrUpdateWikiPage('_Sidebar', sidebarContent, wikiDir);
 
         // 削除対象のページを処理
