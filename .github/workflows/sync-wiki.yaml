@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - develop
     paths:
       - '01_DOCS/wiki/**/*.md'
   workflow_dispatch: # 手動実行も可能
