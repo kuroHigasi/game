@@ -98,6 +98,7 @@ function autoNumberTable(content) {
     let headerRowIndex = -1;
     let noColumnIndex = -1;
     let rowNumber = 1;
+    const tableNameStack = [];
 
     for (let i = 0; i < lines.length; i++) {
         const line = lines[i];
@@ -110,6 +111,16 @@ function autoNumberTable(content) {
                 // ヘッダー行からNO列のインデックスを取得
                 const headers = line.split('|').map(h => h.trim());
                 noColumnIndex = headers.findIndex(h => h.toUpperCase() === 'NO');
+
+                // デバッグ: ヘッダー検出
+                const tableName = `Table at line ${i + 1}`;
+                tableNameStack.push(tableName);
+                if (process.env.DEBUG_AUTONUMBER) {
+                    console.log(`[DEBUG] 表検出: ${tableName}`);
+                    console.log(`[DEBUG] ヘッダー: ${headers.join(' | ')}`);
+                    console.log(`[DEBUG] NO列インデックス: ${noColumnIndex}`);
+                }
+
                 result.push(line);
                 continue;
             }
@@ -123,11 +134,21 @@ function autoNumberTable(content) {
             // NO列が存在する場合、自動採番
             if (noColumnIndex >= 0) {
                 const cells = line.split('|');
-                if (cells.length > noColumnIndex && cells[noColumnIndex].trim() !== '') {
-                    cells[noColumnIndex] = ` ${rowNumber} `;
-                    result.push(cells.join('|'));
-                    rowNumber++;
-                    continue;
+                // セルが十分に存在し、NO列が空の場合のみ採番
+                if (cells.length > noColumnIndex) {
+                    const cellContent = cells[noColumnIndex].trim();
+                    // 空のセルのみ採番対象（区切り行や既に値が入っているものは除外）
+                    if (cellContent === '' && !line.includes('---')) {
+                        cells[noColumnIndex] = ` ${rowNumber} `;
+                        rowNumber++;
+
+                        if (process.env.DEBUG_AUTONUMBER) {
+                            console.log(`[DEBUG] 採番行 ${rowNumber - 1}: ${cells.join('|').substring(0, 80)}`);
+                        }
+
+                        result.push(cells.join('|'));
+                        continue;
+                    }
                 }
             }
 
@@ -136,6 +157,10 @@ function autoNumberTable(content) {
             // 表の終了
             if (inTable) {
                 inTable = false;
+                const tableName = tableNameStack.pop();
+                if (process.env.DEBUG_AUTONUMBER && tableName) {
+                    console.log(`[DEBUG] 表終了: ${tableName}（採番: ${rowNumber - 1}行）`);
+                }
                 rowNumber = 1;
                 noColumnIndex = -1;
             }
@@ -390,6 +415,47 @@ ${protectedPages.length > 0 ? `## Wiki 専用ページ\n\n${protectedPages.map(p
 }
 
 try {
+    // ローカルテストモード: DEBUG_AUTONUMBER=true かつ GITHUB_ACTIONS=false で実行可能
+    if (process.env.DEBUG_AUTONUMBER && !GITHUB_ACTIONS) {
+        console.log('🧪 ローカルテストモード: 自動採番機能のテスト\n');
+
+        // テスト対象の Markdown ファイルを処理
+        const files = getMarkdownFiles(DOCS_DIR);
+        console.log(`📄 ${files.length} 個の Markdown ファイルをテストします\n`);
+
+        for (const file of files) {
+            const content = fs.readFileSync(file.filePath, 'utf-8');
+            console.log(`\n📋 ファイル: ${file.relativePath}`);
+            console.log(`━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`);
+
+            const processedContent = autoNumberTable(content);
+
+            // 変更があったかどうかを確認
+            if (content === processedContent) {
+                console.log('✅ 変更なし（NO列が見つからないか、既に採番済み）');
+            } else {
+                console.log('✨ 変更あり（自動採番処理が実行されました）\n');
+                console.log('--- 処理後の内容 ---');
+                // テーブル部分だけを抽出して表示
+                const processedLines = processedContent.split('\n');
+                let inTable = false;
+                for (const line of processedLines) {
+                    if (line.trim().startsWith('|')) {
+                        inTable = true;
+                        console.log(line);
+                    } else if (inTable && line.trim() === '') {
+                        break;
+                    } else if (inTable) {
+                        console.log(line);
+                    }
+                }
+            }
+        }
+
+        console.log('\n✅ テスト完了（ファイルは変更されていません）');
+        process.exit(0);
+    }
+
     main();
 } catch (error) {
     console.error('\n❌ エラーが発生しました:', error);
