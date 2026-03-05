@@ -121,7 +121,7 @@ function generateSidebarContent(files, protectedPages) {
     }
 
     // 再帰的にツリーを生成
-    function buildTree(obj, depth = 0) {
+    function buildTree(obj, depth = 0, parentPath = '') {
         const lines = [];
         const indent = '  '.repeat(depth);
         const keys = Object.keys(obj).sort();
@@ -132,12 +132,14 @@ function generateSidebarContent(files, protectedPages) {
             if (key.startsWith('_file_')) {
                 // ファイルの場合：表示名称はファイル名のみ
                 const fileName = key.replace('_file_', '');
+                // wikiTitleは「フォルダ名-フォルダ名-ファイル名」形式
                 // リンク形式：[[リンク先ページ|表示名称]]
                 lines.push(`${indent}- [[${item.wikiTitle}|${fileName}]]`);
             } else {
                 // フォルダの場合：フォルダ名を表示（リンクなし）
                 lines.push(`${indent}- ${key}`);
-                const subLines = buildTree(item, depth + 1);
+                const currentPath = parentPath ? `${parentPath}/${key}` : key;
+                const subLines = buildTree(item, depth + 1, currentPath);
                 if (subLines.length > 0) {
                     lines.push(...subLines);
                 }
