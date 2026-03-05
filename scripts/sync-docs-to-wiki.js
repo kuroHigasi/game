@@ -101,7 +101,9 @@ function generateSidebarContent(files, protectedPages) {
     const folderStructure = {};
 
     for (const file of sortedFiles) {
-        const pathParts = file.relativePath.replace(/\.md$/, '').split(path.sep);
+        // パス区切りを統一（Windowsの \ も / も対応）
+        const normalizedPath = file.relativePath.replace(/\\/g, '/').replace(/\.md$/, '');
+        const pathParts = normalizedPath.split('/');
         let current = folderStructure;
 
         // フォルダ階層を生成
@@ -128,12 +130,12 @@ function generateSidebarContent(files, protectedPages) {
             const item = obj[key];
 
             if (key.startsWith('_file_')) {
-                // ファイルの場合
+                // ファイルの場合：表示名称はファイル名のみ
                 const fileName = key.replace('_file_', '');
-                const displayName = fileName;
-                lines.push(`${indent}- [[${item.wikiTitle}|${displayName}]]`);
+                // リンク形式：[[リンク先ページ|表示名称]]
+                lines.push(`${indent}- [[${item.wikiTitle}|${fileName}]]`);
             } else {
-                // フォルダの場合
+                // フォルダの場合：フォルダ名を表示（リンクなし）
                 lines.push(`${indent}- ${key}`);
                 const subLines = buildTree(item, depth + 1);
                 if (subLines.length > 0) {
