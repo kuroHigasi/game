@@ -89,6 +89,64 @@ function getWikiTitle(relativePath) {
 }
 
 /**
+ * Markdown表のNO列を自動連番に変換
+ */
+function autoNumberTable(content) {
+    const lines = content.split('\n');
+    const result = [];
+    let inTable = false;
+    let headerRowIndex = -1;
+    let noColumnIndex = -1;
+    let rowNumber = 1;
+
+    for (let i = 0; i < lines.length; i++) {
+        const line = lines[i];
+
+        // 表の開始を検出（| で始まり | を含む行）
+        if (line.trim().startsWith('|') && line.includes('|')) {
+            if (!inTable) {
+                inTable = true;
+                headerRowIndex = i;
+                // ヘッダー行からNO列のインデックスを取得
+                const headers = line.split('|').map(h => h.trim());
+                noColumnIndex = headers.findIndex(h => h.toUpperCase() === 'NO');
+                result.push(line);
+                continue;
+            }
+
+            // 区切り行（:---|---: など）はそのまま
+            if (line.includes('---')) {
+                result.push(line);
+                continue;
+            }
+
+            // NO列が存在する場合、自動採番
+            if (noColumnIndex >= 0) {
+                const cells = line.split('|');
+                if (cells.length > noColumnIndex && cells[noColumnIndex].trim() !== '') {
+                    cells[noColumnIndex] = ` ${rowNumber} `;
+                    result.push(cells.join('|'));
+                    rowNumber++;
+                    continue;
+                }
+            }
+
+            result.push(line);
+        } else {
+            // 表の終了
+            if (inTable) {
+                inTable = false;
+                rowNumber = 1;
+                noColumnIndex = -1;
+            }
+            result.push(line);
+        }
+    }
+
+    return result.join('\n');
+}
+
+/**
  * Wiki ページを作成または更新（Gitリポジトリ経由）
  */
 function createOrUpdateWikiPage(title, content, wikiDir) {
@@ -98,8 +156,11 @@ function createOrUpdateWikiPage(title, content, wikiDir) {
     // ファイルが既に存在するか確認
     const exists = fs.existsSync(filePath);
 
+    // 自動連番処理を適用
+    const processedContent = autoNumberTable(content);
+
     // ファイルを書き込み
-    fs.writeFileSync(filePath, content, 'utf-8');
+    fs.writeFileSync(filePath, processedContent, 'utf-8');
 
     // Gitに追加
     execSync(`cd "${wikiDir}" && git add "${fileName}"`, { stdio: 'pipe' });
