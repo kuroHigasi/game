@@ -1,8 +1,14 @@
 # ホーム画面要素一覧
+- ホーム画面の要素一覧を記載するページです。
+- 画面要素IDは、画面要素を識別するための一意のIDです。
+- 種別は、画面要素の種類を示します（例：ボタン、テキスト、画像など）。
+- ステータス遷移有無は、その画面要素がユーザーの操作によってステータス遷移を引き起こすかどうかを示します。
+- 名称は、画面要素の日本語名称です。
 
-| NO | 画面要素ID             | 種別  | ステータス遷移有無 | 名称        |
-|:-:|:-------------------|:----|:----------|:----------|
-|    | HOME_START_BUTTON  | ボタン | <span style="color:red;"><strong>有</strong></span>         | STARTボタン  |
-|    | HOME_SAVE_BUTTON   | ボタン | <span style="color:red;"><strong>有</strong></span>         | SAVEボタン   |
-|    | HOME_CONFIG_BUTTON | ボタン | <span style="color:red;"><strong>有</strong></span>         | CONFIGボタン |
-|    | HOME_EXIT_BUTTON   | ボタン | <span style="color:red;"><strong>有</strong></span>         | EXITボタン   |
+### ホーム画面の要素一覧
+| NO | 画面要素ID             | 種別  | ステータス遷移有無          | 名称        |
+|:--:|:-------------------|:----|:-------------------|:----------|
+|    | HOME_START_BUTTON  | ボタン | <strong>有</strong> | STARTボタン  |
+|    | HOME_SAVE_BUTTON   | ボタン | <strong>有</strong> | SAVEボタン   |
+|    | HOME_CONFIG_BUTTON | ボタン | <strong>有</strong> | CONFIGボタン |
+|    | HOME_EXIT_BUTTON   | ボタン | <strong>有</strong> | EXITボタン   |
