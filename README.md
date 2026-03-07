@@ -8,7 +8,9 @@
     - 優先度が低く来月以降に対応予定のタスクは、「00_TODO/TODO_tentative.md」に記載する
 - 01_DOCS: ドキュメント管理
     - wikiは「01_DOCS/wiki」フォルダ内のMarkdownファイルで管理する
+        - 「01_DOCS/wiki/HOME.md」にはWikiの概要や運用ルールを記載する
     - 仕様書や設計書などのドキュメントは「01_DOCS」フォルダ内で管理する
+    - バージョン管理は「01_DOCS/VERSION.md」で行う
 - 02_OUTPUT: 成果物管理
     - バージョン管理は「02_OUTPUT/VERSION.md」で行う
     - その他の成果物は「02_OUTPUT」フォルダ内で管理する
