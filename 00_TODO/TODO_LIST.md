@@ -8,8 +8,8 @@
 - [ ] 共通部品（SAVE_STATUS）の改善
 
 ## テスト
-- [ ] CONFIG_SOUNDテスト作成
-- [ ] CONFIG_STATUSテスト作成
+- [ ] HOME_SOUNDテスト作成
+- [ ] HOME_STATUSテスト作成
 - [ ] SAVE_DISPLAYテスト作成
 - [ ] SAVE_ACTIONテスト作成
 - [ ] SAVE_SOUNDテスト作成
