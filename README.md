@@ -6,6 +6,7 @@
     - 月毎にTODOリストを作成し、過去のTODOリストは「old」フォルダに移動する
         - 例: `00_TODO/old/TODO_2024-06.md`、`00_TODO/old/TODO_2024-05.md`
     - 優先度が低く来月以降に対応予定のタスクは、「00_TODO/TODO_tentative.md」に記載する
+    - タスクのテンプレートは「00_TODO/template/TODO_template.md」で管理する
 - 01_DOCS: ドキュメント管理
     - wikiは「01_DOCS/wiki」フォルダ内のMarkdownファイルで管理する
         - 「01_DOCS/wiki/HOME.md」にはWikiの概要や運用ルールを記載する
@@ -30,9 +31,14 @@
 .
 ├── README.md
 ├── 00_TODO/
-│   └── ...
+│   ├── old/
+│   │   └── ...
+│   ├── template/
+│   │   └── TODO_template.md
+│   ├── TODO_tentative.md
+│   └── TODO.md
 ├── 01_DOCS/
-│   ├── 仕様書.md
+│   ├── VERSION.md
 │   └── wiki/
 │       └── ...
 ├── 02_OUTPUT/
