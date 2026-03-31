@@ -132,15 +132,22 @@
 <li class="toctree-l2"><a class="reference internal" href="modules/save_overview.html#id14">関連ファイル</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="modules/save_overview.html#controller">Controller層</a></li>
 <li class="toctree-l3"><a class="reference internal" href="modules/save_overview.html#service">Service層</a></li>
-<li class="toctree-l3"><a class="reference internal" href="modules/save_overview.html#id15">共通機能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/save_overview.html#component">Component層</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="modules/save_overview.html#id15">表示コンポーネント</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modules/save_overview.html#id16">サウンドコンポーネント</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modules/save_overview.html#id17">暗号化・復号化処理</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modules/save_overview.html#id18">高速化処理</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="modules/save_overview.html#id16">エラーハンドリング</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="modules/save_overview.html#id17">想定エラー</a></li>
-<li class="toctree-l3"><a class="reference internal" href="modules/save_overview.html#id18">復旧手順</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/save_overview.html#id19">共通機能</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="modules/save_overview.html#id19">今後の拡張予定</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/save_overview.html#id20">エラーハンドリング</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/save_overview.html#id21">想定エラー</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/save_overview.html#id22">復旧手順</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modules/save_overview.html#id23">今後の拡張予定</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="modules/end_overview.html">END機能の概要</a><ul>
@@ -234,12 +241,13 @@
 <li class="toctree-l3"><a class="reference internal" href="api/module_api.html#controller">Controller層</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/module_api.html#module-common.config.service.action">Service層</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="api/module_api.html#common.config.service.action.Action"><code class="docutils literal notranslate"><span class="pre">Action</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/module_api.html#common.config.service.sound.Sound"><code class="docutils literal notranslate"><span class="pre">Sound</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="api/module_api.html#component">Component層</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="api/module_api.html#module-common.config.service.component.actionRequestValidator">Validator系</a></li>
-<li class="toctree-l4"><a class="reference internal" href="api/module_api.html#module-common.config.service.component.statusConvertManager">Manager系</a></li>
-<li class="toctree-l4"><a class="reference internal" href="api/module_api.html#check">Check系</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/module_api.html#module-common.config.service.component.soundChannelManager">Manager系</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/module_api.html#module-common.config.service.component.soundChannelCheck">Check系</a></li>
 </ul>
 </li>
 </ul>
@@ -247,6 +255,7 @@
 <li class="toctree-l2"><a class="reference internal" href="api/module_api.html#home">HOMEモジュール</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="api/module_api.html#id1">Controller層</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/module_api.html#id2">Service層</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/module_api.html#common.home.service.display.Display"><code class="docutils literal notranslate"><span class="pre">Display</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/module_api.html#common.home.service.sound.Sound"><code class="docutils literal notranslate"><span class="pre">Sound</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/module_api.html#common.home.service.status.Status"><code class="docutils literal notranslate"><span class="pre">Status</span></code></a></li>
 </ul>
@@ -259,26 +268,28 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="api/module_api.html#save">SAVEモジュール</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/module_api.html#id6">Controller層</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="api/module_api.html#common.save.sound.Sound"><code class="docutils literal notranslate"><span class="pre">Sound</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/module_api.html#id6">Controller層</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/module_api.html#id7">Service層</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/module_api.html#common.save.service.display.Display"><code class="docutils literal notranslate"><span class="pre">Display</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/module_api.html#common.save.service.sound.Sound"><code class="docutils literal notranslate"><span class="pre">Sound</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="api/module_api.html#id7">Service層</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="api/module_api.html#common.save.service.sound.Sound"><code class="docutils literal notranslate"><span class="pre">Sound</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api/module_api.html#common.save.service.status.Status"><code class="docutils literal notranslate"><span class="pre">Status</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/module_api.html#id8">Component層</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/module_api.html#id9">Validator系</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/module_api.html#id10">Manager系</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="api/module_api.html#end">ENDモジュール</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/module_api.html#id8">Controller層</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/module_api.html#id9">Service層</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/module_api.html#id11">Controller層</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/module_api.html#id12">Service層</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="api/module_api.html#common.end.service.status.Status"><code class="docutils literal notranslate"><span class="pre">Status</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="api/module_api.html#id10">共通モジュール</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/module_api.html#id13">共通モジュール</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="api/module_api.html#module-common.layer.response.response">レイヤー間通信</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="api/module_api.html#common.layer.response.response.Response"><code class="docutils literal notranslate"><span class="pre">Response</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/module_api.html#common.layer.code.code.Code"><code class="docutils literal notranslate"><span class="pre">Code</span></code></a></li>
@@ -298,7 +309,9 @@
 <li class="toctree-l4"><a class="reference internal" href="api/module_api.html#common.config.constants.WayKeyTypes"><code class="docutils literal notranslate"><span class="pre">WayKeyTypes</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/module_api.html#common.constants.ButtonIndex"><code class="docutils literal notranslate"><span class="pre">ButtonIndex</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/module_api.html#common.constants.Colors"><code class="docutils literal notranslate"><span class="pre">Colors</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/module_api.html#common.constants.DefaultButtonSize"><code class="docutils literal notranslate"><span class="pre">DefaultButtonSize</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/module_api.html#common.constants.SoundIndex"><code class="docutils literal notranslate"><span class="pre">SoundIndex</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/module_api.html#common.constants.Text"><code class="docutils literal notranslate"><span class="pre">Text</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="api/module_api.html#module-common.debug.debug">共通機能</a><ul>
@@ -632,7 +645,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2026, Kurosu.
-      <span class="lastupdated">最終更新: 2026-02-28
+      <span class="lastupdated">最終更新: 2026-03-31
       </span></p>
   </div>
 

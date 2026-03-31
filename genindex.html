@@ -452,7 +452,8 @@ mermaid.initialize(
     }
 );
 
-window.addEventListener("load", load);</script>
+window.addEventListener("load", load);
+window.runMermaid = runMermaid;</script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="索引" href="#" />
     <link rel="search" title="検索" href="search.html" /> 
@@ -565,15 +566,22 @@ window.addEventListener("load", load);</script>
 <li class="toctree-l2"><a class="reference internal" href="modules/save_overview.html#id14">関連ファイル</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="modules/save_overview.html#controller">Controller層</a></li>
 <li class="toctree-l3"><a class="reference internal" href="modules/save_overview.html#service">Service層</a></li>
-<li class="toctree-l3"><a class="reference internal" href="modules/save_overview.html#id15">共通機能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/save_overview.html#component">Component層</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="modules/save_overview.html#id15">表示コンポーネント</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modules/save_overview.html#id16">サウンドコンポーネント</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modules/save_overview.html#id17">暗号化・復号化処理</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modules/save_overview.html#id18">高速化処理</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="modules/save_overview.html#id16">エラーハンドリング</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="modules/save_overview.html#id17">想定エラー</a></li>
-<li class="toctree-l3"><a class="reference internal" href="modules/save_overview.html#id18">復旧手順</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/save_overview.html#id19">共通機能</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="modules/save_overview.html#id19">今後の拡張予定</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/save_overview.html#id20">エラーハンドリング</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/save_overview.html#id21">想定エラー</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/save_overview.html#id22">復旧手順</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modules/save_overview.html#id23">今後の拡張予定</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="modules/end_overview.html">END機能の概要</a><ul>
@@ -667,12 +675,13 @@ window.addEventListener("load", load);</script>
 <li class="toctree-l3"><a class="reference internal" href="api/module_api.html#controller">Controller層</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/module_api.html#module-common.config.service.action">Service層</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="api/module_api.html#common.config.service.action.Action"><code class="docutils literal notranslate"><span class="pre">Action</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/module_api.html#common.config.service.sound.Sound"><code class="docutils literal notranslate"><span class="pre">Sound</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="api/module_api.html#component">Component層</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="api/module_api.html#module-common.config.service.component.actionRequestValidator">Validator系</a></li>
-<li class="toctree-l4"><a class="reference internal" href="api/module_api.html#module-common.config.service.component.statusConvertManager">Manager系</a></li>
-<li class="toctree-l4"><a class="reference internal" href="api/module_api.html#check">Check系</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/module_api.html#module-common.config.service.component.soundChannelManager">Manager系</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/module_api.html#module-common.config.service.component.soundChannelCheck">Check系</a></li>
 </ul>
 </li>
 </ul>
@@ -680,6 +689,7 @@ window.addEventListener("load", load);</script>
 <li class="toctree-l2"><a class="reference internal" href="api/module_api.html#home">HOMEモジュール</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="api/module_api.html#id1">Controller層</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/module_api.html#id2">Service層</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/module_api.html#common.home.service.display.Display"><code class="docutils literal notranslate"><span class="pre">Display</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/module_api.html#common.home.service.sound.Sound"><code class="docutils literal notranslate"><span class="pre">Sound</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/module_api.html#common.home.service.status.Status"><code class="docutils literal notranslate"><span class="pre">Status</span></code></a></li>
 </ul>
@@ -692,26 +702,28 @@ window.addEventListener("load", load);</script>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="api/module_api.html#save">SAVEモジュール</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/module_api.html#id6">Controller層</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="api/module_api.html#common.save.sound.Sound"><code class="docutils literal notranslate"><span class="pre">Sound</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/module_api.html#id6">Controller層</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/module_api.html#id7">Service層</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/module_api.html#common.save.service.display.Display"><code class="docutils literal notranslate"><span class="pre">Display</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/module_api.html#common.save.service.sound.Sound"><code class="docutils literal notranslate"><span class="pre">Sound</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="api/module_api.html#id7">Service層</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="api/module_api.html#common.save.service.sound.Sound"><code class="docutils literal notranslate"><span class="pre">Sound</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api/module_api.html#common.save.service.status.Status"><code class="docutils literal notranslate"><span class="pre">Status</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/module_api.html#id8">Component層</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/module_api.html#id9">Validator系</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/module_api.html#id10">Manager系</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="api/module_api.html#end">ENDモジュール</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/module_api.html#id8">Controller層</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/module_api.html#id9">Service層</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/module_api.html#id11">Controller層</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/module_api.html#id12">Service層</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="api/module_api.html#common.end.service.status.Status"><code class="docutils literal notranslate"><span class="pre">Status</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="api/module_api.html#id10">共通モジュール</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/module_api.html#id13">共通モジュール</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="api/module_api.html#module-common.layer.response.response">レイヤー間通信</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="api/module_api.html#common.layer.response.response.Response"><code class="docutils literal notranslate"><span class="pre">Response</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/module_api.html#common.layer.code.code.Code"><code class="docutils literal notranslate"><span class="pre">Code</span></code></a></li>
@@ -731,7 +743,9 @@ window.addEventListener("load", load);</script>
 <li class="toctree-l4"><a class="reference internal" href="api/module_api.html#common.config.constants.WayKeyTypes"><code class="docutils literal notranslate"><span class="pre">WayKeyTypes</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/module_api.html#common.constants.ButtonIndex"><code class="docutils literal notranslate"><span class="pre">ButtonIndex</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/module_api.html#common.constants.Colors"><code class="docutils literal notranslate"><span class="pre">Colors</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/module_api.html#common.constants.DefaultButtonSize"><code class="docutils literal notranslate"><span class="pre">DefaultButtonSize</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/module_api.html#common.constants.SoundIndex"><code class="docutils literal notranslate"><span class="pre">SoundIndex</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/module_api.html#common.constants.Text"><code class="docutils literal notranslate"><span class="pre">Text</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="api/module_api.html#module-common.debug.debug">共通機能</a><ul>
@@ -982,10 +996,20 @@ window.addEventListener("load", load);</script>
 </li>
       <li><a href="api/module_api.html#common.constants.ButtonIndex.BACK_TOUCH">BACK_TOUCH (common.constants.ButtonIndex の属性)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/module_api.html#common.constants.Colors.BLACK">BLACK (common.constants.Colors の属性)</a>
 </li>
+      <li><a href="api/module_api.html#common.constants.Text.BLANK">BLANK (common.constants.Text の属性)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/module_api.html#common.home.service.component.displayScreenManager.DisplayScreenManager.blit">blit() (common.home.service.component.displayScreenManager.DisplayScreenManager のメソッド)</a>
+
+      <ul>
+        <li><a href="api/module_api.html#common.save.service.component.displayScreenManager.DisplayScreenManager.blit">(common.save.service.component.displayScreenManager.DisplayScreenManager のメソッド)</a>
+</li>
+        <li><a href="api/module_api.html#common.save.service.component.displayTextManager.DisplayTextManager.blit">(common.save.service.component.displayTextManager.DisplayTextManager のメソッド)</a>
+</li>
+      </ul></li>
       <li><a href="api/module_api.html#common.constants.ButtonIndex">ButtonIndex (common.constants のクラス)</a>
 </li>
       <li><a href="api/module_api.html#common.config.constants.ButtonPosition">ButtonPosition (common.config.constants のクラス)</a>
@@ -996,9 +1020,13 @@ window.addEventListener("load", load);</script>
 <h2 id="C">C</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/module_api.html#common.config.service.component.soundChannelCheck.SoundChannelCheck.can_sound_start">can_sound_start() (common.config.service.component.soundChannelCheck.SoundChannelCheck のメソッド)</a>
+</li>
       <li><a href="api/module_api.html#common.config.constants.SetButtonIndex.CANCEL">CANCEL (common.config.constants.SetButtonIndex の属性)</a>
 </li>
       <li><a href="api/module_api.html#common.config.constants.SetButtonIndex.CANCEL_TOUCH">CANCEL_TOUCH (common.config.constants.SetButtonIndex の属性)</a>
+</li>
+      <li><a href="api/module_api.html#common.config.service.component.soundChannelManager.SoundChannelManager.channel">channel (common.config.service.component.soundChannelManager.SoundChannelManager の属性)</a>
 </li>
       <li><a href="api/module_api.html#common.constants.SoundIndex.CLICK">CLICK (common.constants.SoundIndex の属性)</a>
 </li>
@@ -1044,6 +1072,27 @@ window.addEventListener("load", load);</script>
 </li>
       </ul></li>
       <li>
+    common.config.service.component.soundChannelCheck
+
+      <ul>
+        <li><a href="api/module_api.html#module-common.config.service.component.soundChannelCheck">module</a>
+</li>
+      </ul></li>
+      <li>
+    common.config.service.component.soundChannelManager
+
+      <ul>
+        <li><a href="api/module_api.html#module-common.config.service.component.soundChannelManager">module</a>
+</li>
+      </ul></li>
+      <li>
+    common.config.service.component.soundRequestValidator
+
+      <ul>
+        <li><a href="api/module_api.html#module-common.config.service.component.soundRequestValidator">module</a>
+</li>
+      </ul></li>
+      <li>
     common.config.service.component.statusConvertManager
 
       <ul>
@@ -1055,6 +1104,13 @@ window.addEventListener("load", load);</script>
 
       <ul>
         <li><a href="api/module_api.html#module-common.config.service.component.statusRequestValidator">module</a>
+</li>
+      </ul></li>
+      <li>
+    common.config.service.sound
+
+      <ul>
+        <li><a href="api/module_api.html#module-common.config.service.sound">module</a>
 </li>
       </ul></li>
       <li>
@@ -1088,6 +1144,34 @@ window.addEventListener("load", load);</script>
 </li>
       </ul></li>
       <li>
+    common.home.service.component.displayScreenManager
+
+      <ul>
+        <li><a href="api/module_api.html#module-common.home.service.component.displayScreenManager">module</a>
+</li>
+      </ul></li>
+      <li>
+    common.home.service.component.soundChannelManager
+
+      <ul>
+        <li><a href="api/module_api.html#module-common.home.service.component.soundChannelManager">module</a>
+</li>
+      </ul></li>
+      <li>
+    common.home.service.component.soundRequestValidator
+
+      <ul>
+        <li><a href="api/module_api.html#module-common.home.service.component.soundRequestValidator">module</a>
+</li>
+      </ul></li>
+      <li>
+    common.home.service.display
+
+      <ul>
+        <li><a href="api/module_api.html#module-common.home.service.display">module</a>
+</li>
+      </ul></li>
+      <li>
     common.home.service.sound
 
       <ul>
@@ -1116,24 +1200,38 @@ window.addEventListener("load", load);</script>
 </li>
       </ul></li>
       <li>
+    common.save.service.component.displayRequestValidator
+
+      <ul>
+        <li><a href="api/module_api.html#module-common.save.service.component.displayRequestValidator">module</a>
+</li>
+      </ul></li>
+      <li>
+    common.save.service.component.displayScreenManager
+
+      <ul>
+        <li><a href="api/module_api.html#module-common.save.service.component.displayScreenManager">module</a>
+</li>
+      </ul></li>
+      <li>
+    common.save.service.component.displayTextManager
+
+      <ul>
+        <li><a href="api/module_api.html#module-common.save.service.component.displayTextManager">module</a>
+</li>
+      </ul></li>
+      <li>
+    common.save.service.display
+
+      <ul>
+        <li><a href="api/module_api.html#module-common.save.service.display">module</a>
+</li>
+      </ul></li>
+      <li>
     common.save.service.sound
 
       <ul>
         <li><a href="api/module_api.html#module-common.save.service.sound">module</a>
-</li>
-      </ul></li>
-      <li>
-    common.save.service.status
-
-      <ul>
-        <li><a href="api/module_api.html#module-common.save.service.status">module</a>
-</li>
-      </ul></li>
-      <li>
-    common.save.sound
-
-      <ul>
-        <li><a href="api/module_api.html#module-common.save.sound">module</a>
 </li>
       </ul></li>
       <li><a href="api/module_api.html#common.constants.ButtonIndex.CONFIG">CONFIG (common.constants.ButtonIndex の属性)</a>
@@ -1141,8 +1239,6 @@ window.addEventListener("load", load);</script>
       <li><a href="api/module_api.html#common.constants.ButtonIndex.CONFIG_TOUCH">CONFIG_TOUCH (common.constants.ButtonIndex の属性)</a>
 </li>
       <li><a href="api/module_api.html#common.config.constants.ConfigButtonIndex">ConfigButtonIndex (common.config.constants のクラス)</a>
-</li>
-      <li><a href="api/module_api.html#common.save.sound.Sound.create_request_data">create_request_data() (common.save.sound.Sound の静的メソッド)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -1152,8 +1248,50 @@ window.addEventListener("load", load);</script>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/module_api.html#common.layer.response.response.Response.data">data (common.layer.response.response.Response のプロパティ)</a>
 </li>
+      <li><a href="api/module_api.html#common.constants.DefaultButtonSize">DefaultButtonSize (common.constants のクラス)</a>
+</li>
+      <li><a href="api/module_api.html#common.save.service.display.Display.disp_back_button">disp_back_button() (common.save.service.display.Display のメソッド)</a>
+</li>
+      <li><a href="api/module_api.html#common.home.service.display.Display.disp_config_button">disp_config_button() (common.home.service.display.Display のメソッド)</a>
+</li>
+      <li><a href="api/module_api.html#common.save.service.display.Display.disp_delete_button">disp_delete_button() (common.save.service.display.Display のメソッド)</a>
+</li>
+      <li><a href="api/module_api.html#common.home.service.display.Display.disp_exit_button">disp_exit_button() (common.home.service.display.Display のメソッド)</a>
+</li>
+      <li><a href="api/module_api.html#common.save.service.display.Display.disp_home_button">disp_home_button() (common.save.service.display.Display のメソッド)</a>
+</li>
+      <li><a href="api/module_api.html#common.save.service.display.Display.disp_init">disp_init() (common.save.service.display.Display のメソッド)</a>
+</li>
+      <li><a href="api/module_api.html#common.save.service.display.Display.disp_list">disp_list() (common.save.service.display.Display のメソッド)</a>
+</li>
+      <li><a href="api/module_api.html#common.save.service.display.Display.disp_list_text">disp_list_text() (common.save.service.display.Display のメソッド)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/module_api.html#common.home.service.display.Display.disp_load_button">disp_load_button() (common.home.service.display.Display のメソッド)</a>
+
+      <ul>
+        <li><a href="api/module_api.html#common.save.service.display.Display.disp_load_button">(common.save.service.display.Display のメソッド)</a>
+</li>
+      </ul></li>
+      <li><a href="api/module_api.html#common.save.service.display.Display.disp_save_button">disp_save_button() (common.save.service.display.Display のメソッド)</a>
+</li>
+      <li><a href="api/module_api.html#common.home.service.display.Display.disp_start_button">disp_start_button() (common.home.service.display.Display のメソッド)</a>
+</li>
+      <li><a href="api/module_api.html#common.home.service.display.Display">Display (common.home.service.display のクラス)</a>
+
+      <ul>
+        <li><a href="api/module_api.html#common.save.service.display.Display">(common.save.service.display のクラス)</a>
+</li>
+      </ul></li>
+      <li><a href="api/module_api.html#common.home.service.component.displayScreenManager.DisplayScreenManager">DisplayScreenManager (common.home.service.component.displayScreenManager のクラス)</a>
+
+      <ul>
+        <li><a href="api/module_api.html#common.save.service.component.displayScreenManager.DisplayScreenManager">(common.save.service.component.displayScreenManager のクラス)</a>
+</li>
+      </ul></li>
+      <li><a href="api/module_api.html#common.save.service.component.displayTextManager.DisplayTextManager">DisplayTextManager (common.save.service.component.displayTextManager のクラス)</a>
+</li>
       <li><a href="api/module_api.html#common.config.constants.VolumeSliderSize.DIV">DIV (common.config.constants.VolumeSliderSize の属性)</a>
 </li>
       <li><a href="api/module_api.html#common.layer.code.code.Code.DO_NOTHING">DO_NOTHING (common.layer.code.code.Code の属性)</a>
@@ -1164,12 +1302,14 @@ window.addEventListener("load", load);</script>
 <h2 id="E">E</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/module_api.html#common.debug.debug.ERROR_LOG">ERROR_LOG() (common.debug.debug モジュール)</a>
+      <li><a href="api/module_api.html#common.constants.DefaultButtonSize.ERROR_HEIGHT">ERROR_HEIGHT (common.constants.DefaultButtonSize の属性)</a>
 </li>
-      <li><a href="api/module_api.html#common.save.sound.Sound.execute">execute() (common.save.sound.Sound の静的メソッド)</a>
+      <li><a href="api/module_api.html#common.debug.debug.ERROR_LOG">ERROR_LOG() (common.debug.debug モジュール)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/module_api.html#common.constants.DefaultButtonSize.ERROR_WIDTH">ERROR_WIDTH (common.constants.DefaultButtonSize の属性)</a>
+</li>
       <li><a href="api/module_api.html#common.constants.ButtonIndex.EXIT">EXIT (common.constants.ButtonIndex の属性)</a>
 </li>
       <li><a href="api/module_api.html#common.constants.ButtonIndex.EXIT_TOUCH">EXIT_TOUCH (common.constants.ButtonIndex の属性)</a>
@@ -1184,8 +1324,6 @@ window.addEventListener("load", load);</script>
 
       <ul>
         <li><a href="api/module_api.html#common.home.service.status.Status.get_next_status">(common.home.service.status.Status のメソッド)</a>
-</li>
-        <li><a href="api/module_api.html#common.save.service.status.Status.get_next_status">(common.save.service.status.Status のメソッド)</a>
 </li>
       </ul></li>
       <li><a href="api/module_api.html#common.config.constants.ButtonPosition.GO_BUTTON">GO_BUTTON (common.config.constants.ButtonPosition の属性)</a>
@@ -1209,7 +1347,11 @@ window.addEventListener("load", load);</script>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/module_api.html#common.config.constants.SliderPosition.HEIGHT">HEIGHT (common.config.constants.SliderPosition の属性)</a>
+
+      <ul>
+        <li><a href="api/module_api.html#common.constants.DefaultButtonSize.HEIGHT">(common.constants.DefaultButtonSize の属性)</a>
 </li>
+      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/module_api.html#common.constants.ButtonIndex.HOME">HOME (common.constants.ButtonIndex の属性)</a>
@@ -1306,9 +1448,17 @@ window.addEventListener("load", load);</script>
 </li>
         <li><a href="api/module_api.html#module-common.config.service.component.displayRequestValidator">common.config.service.component.displayRequestValidator</a>
 </li>
+        <li><a href="api/module_api.html#module-common.config.service.component.soundChannelCheck">common.config.service.component.soundChannelCheck</a>
+</li>
+        <li><a href="api/module_api.html#module-common.config.service.component.soundChannelManager">common.config.service.component.soundChannelManager</a>
+</li>
+        <li><a href="api/module_api.html#module-common.config.service.component.soundRequestValidator">common.config.service.component.soundRequestValidator</a>
+</li>
         <li><a href="api/module_api.html#module-common.config.service.component.statusConvertManager">common.config.service.component.statusConvertManager</a>
 </li>
         <li><a href="api/module_api.html#module-common.config.service.component.statusRequestValidator">common.config.service.component.statusRequestValidator</a>
+</li>
+        <li><a href="api/module_api.html#module-common.config.service.sound">common.config.service.sound</a>
 </li>
         <li><a href="api/module_api.html#module-common.constants">common.constants</a>
 </li>
@@ -1318,6 +1468,14 @@ window.addEventListener("load", load);</script>
 </li>
         <li><a href="api/module_api.html#module-common.home.service.component.displayRequestValidator">common.home.service.component.displayRequestValidator</a>
 </li>
+        <li><a href="api/module_api.html#module-common.home.service.component.displayScreenManager">common.home.service.component.displayScreenManager</a>
+</li>
+        <li><a href="api/module_api.html#module-common.home.service.component.soundChannelManager">common.home.service.component.soundChannelManager</a>
+</li>
+        <li><a href="api/module_api.html#module-common.home.service.component.soundRequestValidator">common.home.service.component.soundRequestValidator</a>
+</li>
+        <li><a href="api/module_api.html#module-common.home.service.display">common.home.service.display</a>
+</li>
         <li><a href="api/module_api.html#module-common.home.service.sound">common.home.service.sound</a>
 </li>
         <li><a href="api/module_api.html#module-common.home.service.status">common.home.service.status</a>
@@ -1326,11 +1484,23 @@ window.addEventListener("load", load);</script>
 </li>
         <li><a href="api/module_api.html#module-common.layer.response.response">common.layer.response.response</a>
 </li>
+        <li><a href="api/module_api.html#module-common.save.service.component.displayRequestValidator">common.save.service.component.displayRequestValidator</a>
+</li>
+        <li><a href="api/module_api.html#module-common.save.service.component.displayScreenManager">common.save.service.component.displayScreenManager</a>
+</li>
+        <li><a href="api/module_api.html#module-common.save.service.component.displayTextManager">common.save.service.component.displayTextManager</a>
+</li>
+        <li><a href="api/module_api.html#module-common.save.service.display">common.save.service.display</a>
+</li>
         <li><a href="api/module_api.html#module-common.save.service.sound">common.save.service.sound</a>
 </li>
-        <li><a href="api/module_api.html#module-common.save.service.status">common.save.service.status</a>
-</li>
-        <li><a href="api/module_api.html#module-common.save.sound">common.save.sound</a>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/module_api.html#common.config.service.component.soundChannelManager.SoundChannelManager.mp3_path">mp3_path (common.config.service.component.soundChannelManager.SoundChannelManager の属性)</a>
+
+      <ul>
+        <li><a href="api/module_api.html#common.home.service.component.soundChannelManager.SoundChannelManager.mp3_path">(common.home.service.component.soundChannelManager.SoundChannelManager の属性)</a>
 </li>
       </ul></li>
   </ul></td>
@@ -1390,9 +1560,15 @@ window.addEventListener("load", load);</script>
       <ul>
         <li><a href="api/module_api.html#common.config.service.component.displayRequestValidator.RequestValidator.raise_if_invalid">(common.config.service.component.displayRequestValidator.RequestValidator のメソッド)</a>
 </li>
+        <li><a href="api/module_api.html#common.config.service.component.soundRequestValidator.RequestValidator.raise_if_invalid">(common.config.service.component.soundRequestValidator.RequestValidator のメソッド)</a>
+</li>
         <li><a href="api/module_api.html#common.config.service.component.statusRequestValidator.RequestValidator.raise_if_invalid">(common.config.service.component.statusRequestValidator.RequestValidator のメソッド)</a>
 </li>
         <li><a href="api/module_api.html#common.home.service.component.displayRequestValidator.RequestValidator.raise_if_invalid">(common.home.service.component.displayRequestValidator.RequestValidator のメソッド)</a>
+</li>
+        <li><a href="api/module_api.html#common.home.service.component.soundRequestValidator.RequestValidator.raise_if_invalid">(common.home.service.component.soundRequestValidator.RequestValidator のメソッド)</a>
+</li>
+        <li><a href="api/module_api.html#common.save.service.component.displayRequestValidator.RequestValidator.raise_if_invalid">(common.save.service.component.displayRequestValidator.RequestValidator のメソッド)</a>
 </li>
       </ul></li>
       <li><a href="api/module_api.html#common.constants.Colors.RED">RED (common.constants.Colors の属性)</a>
@@ -1402,9 +1578,15 @@ window.addEventListener("load", load);</script>
       <ul>
         <li><a href="api/module_api.html#common.config.service.component.displayRequestValidator.RequestValidator">(common.config.service.component.displayRequestValidator のクラス)</a>
 </li>
+        <li><a href="api/module_api.html#common.config.service.component.soundRequestValidator.RequestValidator">(common.config.service.component.soundRequestValidator のクラス)</a>
+</li>
         <li><a href="api/module_api.html#common.config.service.component.statusRequestValidator.RequestValidator">(common.config.service.component.statusRequestValidator のクラス)</a>
 </li>
         <li><a href="api/module_api.html#common.home.service.component.displayRequestValidator.RequestValidator">(common.home.service.component.displayRequestValidator のクラス)</a>
+</li>
+        <li><a href="api/module_api.html#common.home.service.component.soundRequestValidator.RequestValidator">(common.home.service.component.soundRequestValidator のクラス)</a>
+</li>
+        <li><a href="api/module_api.html#common.save.service.component.displayRequestValidator.RequestValidator">(common.save.service.component.displayRequestValidator のクラス)</a>
 </li>
       </ul></li>
   </ul></td>
@@ -1455,27 +1637,41 @@ window.addEventListener("load", load);</script>
 </li>
       <li><a href="api/module_api.html#common.config.constants.TabTypes.SOUND">SOUND (common.config.constants.TabTypes の属性)</a>
 </li>
-      <li><a href="api/module_api.html#common.home.service.sound.Sound">Sound (common.home.service.sound のクラス)</a>
+      <li><a href="api/module_api.html#common.config.service.sound.Sound">Sound (common.config.service.sound のクラス)</a>
 
       <ul>
+        <li><a href="api/module_api.html#common.home.service.sound.Sound">(common.home.service.sound のクラス)</a>
+</li>
         <li><a href="api/module_api.html#common.save.service.sound.Sound">(common.save.service.sound のクラス)</a>
 </li>
-        <li><a href="api/module_api.html#common.save.sound.Sound">(common.save.sound のクラス)</a>
-</li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/module_api.html#common.layer.code.code.Code.SOUND_ERROR">SOUND_ERROR (common.layer.code.code.Code の属性)</a>
 </li>
       <li><a href="api/module_api.html#common.layer.code.code.Code.SOUND_PENDING">SOUND_PENDING (common.layer.code.code.Code の属性)</a>
 </li>
+      <li><a href="api/module_api.html#common.config.service.component.soundChannelCheck.SoundChannelCheck">SoundChannelCheck (common.config.service.component.soundChannelCheck のクラス)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/module_api.html#common.config.service.component.soundChannelManager.SoundChannelManager">SoundChannelManager (common.config.service.component.soundChannelManager のクラス)</a>
+
+      <ul>
+        <li><a href="api/module_api.html#common.home.service.component.soundChannelManager.SoundChannelManager">(common.home.service.component.soundChannelManager のクラス)</a>
+</li>
+      </ul></li>
       <li><a href="api/module_api.html#common.constants.SoundIndex">SoundIndex (common.constants のクラス)</a>
 </li>
       <li><a href="api/module_api.html#common.constants.ButtonIndex.START">START (common.constants.ButtonIndex の属性)</a>
 </li>
-      <li><a href="api/module_api.html#common.home.service.sound.Sound.start">start() (common.home.service.sound.Sound のメソッド)</a>
+      <li><a href="api/module_api.html#common.config.service.component.soundChannelManager.SoundChannelManager.start">start() (common.config.service.component.soundChannelManager.SoundChannelManager のメソッド)</a>
 
       <ul>
+        <li><a href="api/module_api.html#common.config.service.sound.Sound.start">(common.config.service.sound.Sound のメソッド)</a>
+</li>
+        <li><a href="api/module_api.html#common.home.service.component.soundChannelManager.SoundChannelManager.start">(common.home.service.component.soundChannelManager.SoundChannelManager のメソッド)</a>
+</li>
+        <li><a href="api/module_api.html#common.home.service.sound.Sound.start">(common.home.service.sound.Sound のメソッド)</a>
+</li>
         <li><a href="api/module_api.html#common.save.service.sound.Sound.start">(common.save.service.sound.Sound のメソッド)</a>
 </li>
       </ul></li>
@@ -1485,8 +1681,6 @@ window.addEventListener("load", load);</script>
 
       <ul>
         <li><a href="api/module_api.html#common.home.service.status.Status">(common.home.service.status のクラス)</a>
-</li>
-        <li><a href="api/module_api.html#common.save.service.status.Status">(common.save.service.status のクラス)</a>
 </li>
       </ul></li>
       <li><a href="api/module_api.html#common.config.service.component.statusConvertManager.StatusConvertManager">StatusConvertManager (common.config.service.component.statusConvertManager のクラス)</a>
@@ -1503,6 +1697,16 @@ window.addEventListener("load", load);</script>
       </ul></li>
       <li><a href="api/module_api.html#common.config.constants.StepKeyTypes">StepKeyTypes (common.config.constants のクラス)</a>
 </li>
+      <li><a href="api/module_api.html#common.config.service.component.soundChannelManager.SoundChannelManager.stop">stop() (common.config.service.component.soundChannelManager.SoundChannelManager のメソッド)</a>
+
+      <ul>
+        <li><a href="api/module_api.html#common.config.service.sound.Sound.stop">(common.config.service.sound.Sound の静的メソッド)</a>
+</li>
+        <li><a href="api/module_api.html#common.home.service.component.soundChannelManager.SoundChannelManager.stop">(common.home.service.component.soundChannelManager.SoundChannelManager のメソッド)</a>
+</li>
+        <li><a href="api/module_api.html#common.save.service.sound.Sound.stop">(common.save.service.sound.Sound の静的メソッド)</a>
+</li>
+      </ul></li>
   </ul></td>
 </tr></table>
 
@@ -1528,6 +1732,8 @@ window.addEventListener("load", load);</script>
       <li><a href="api/module_api.html#common.config.constants.ButtonPosition.TEST_BUTTON">TEST_BUTTON (common.config.constants.ButtonPosition の属性)</a>
 </li>
       <li><a href="api/module_api.html#common.config.constants.SetButtonIndex.TEST_TOUCH">TEST_TOUCH (common.config.constants.SetButtonIndex の属性)</a>
+</li>
+      <li><a href="api/module_api.html#common.constants.Text">Text (common.constants のクラス)</a>
 </li>
       <li><a href="api/module_api.html#common.config.constants.TextContents">TextContents (common.config.constants のクラス)</a>
 </li>
@@ -1573,12 +1779,18 @@ window.addEventListener("load", load);</script>
 <h2 id="V">V</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/module_api.html#common.config.constants.TextPosition.VOLUME_COUNT">VOLUME_COUNT (common.config.constants.TextPosition の属性)</a>
+      <li><a href="api/module_api.html#common.config.service.component.soundChannelManager.SoundChannelManager.volume">volume (common.config.service.component.soundChannelManager.SoundChannelManager の属性)</a>
+
+      <ul>
+        <li><a href="api/module_api.html#common.home.service.component.soundChannelManager.SoundChannelManager.volume">(common.home.service.component.soundChannelManager.SoundChannelManager の属性)</a>
 </li>
-      <li><a href="api/module_api.html#common.config.constants.VolumeSliderSize.VOLUME_MAX">VOLUME_MAX (common.config.constants.VolumeSliderSize の属性)</a>
+      </ul></li>
+      <li><a href="api/module_api.html#common.config.constants.TextPosition.VOLUME_COUNT">VOLUME_COUNT (common.config.constants.TextPosition の属性)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/module_api.html#common.config.constants.VolumeSliderSize.VOLUME_MAX">VOLUME_MAX (common.config.constants.VolumeSliderSize の属性)</a>
+</li>
       <li><a href="api/module_api.html#common.config.constants.VolumeSliderSize.VOLUME_MIN">VOLUME_MIN (common.config.constants.VolumeSliderSize の属性)</a>
 </li>
       <li><a href="api/module_api.html#common.config.constants.VolumeSliderSize">VolumeSliderSize (common.config.constants のクラス)</a>
@@ -1608,7 +1820,11 @@ window.addEventListener("load", load);</script>
       <li><a href="api/module_api.html#common.constants.Colors.WHITE">WHITE (common.constants.Colors の属性)</a>
 </li>
       <li><a href="api/module_api.html#common.config.constants.SliderPosition.WIDTH">WIDTH (common.config.constants.SliderPosition の属性)</a>
+
+      <ul>
+        <li><a href="api/module_api.html#common.constants.DefaultButtonSize.WIDTH">(common.constants.DefaultButtonSize の属性)</a>
 </li>
+      </ul></li>
   </ul></td>
 </tr></table>
 
@@ -1638,7 +1854,7 @@ window.addEventListener("load", load);</script>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2026, Kurosu.
-      <span class="lastupdated">最終更新: 2026-02-28
+      <span class="lastupdated">最終更新: 2026-03-31
       </span></p>
   </div>
 

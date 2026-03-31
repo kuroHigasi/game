@@ -133,15 +133,22 @@
 <li class="toctree-l2"><a class="reference internal" href="#id14">関連ファイル</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#controller">Controller層</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#service">Service層</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id15">共通機能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#component">Component層</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id15">表示コンポーネント</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id16">サウンドコンポーネント</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id17">暗号化・復号化処理</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id18">高速化処理</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id16">エラーハンドリング</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id17">想定エラー</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id18">復旧手順</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id19">共通機能</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id19">今後の拡張予定</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id20">エラーハンドリング</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id21">想定エラー</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id22">復旧手順</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id23">今後の拡張予定</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="end_overview.html">END機能の概要</a><ul>
@@ -235,12 +242,13 @@
 <li class="toctree-l3"><a class="reference internal" href="../api/module_api.html#controller">Controller層</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../api/module_api.html#module-common.config.service.action">Service層</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#common.config.service.action.Action"><code class="docutils literal notranslate"><span class="pre">Action</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#common.config.service.sound.Sound"><code class="docutils literal notranslate"><span class="pre">Sound</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../api/module_api.html#component">Component層</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#module-common.config.service.component.actionRequestValidator">Validator系</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#module-common.config.service.component.statusConvertManager">Manager系</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#check">Check系</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#module-common.config.service.component.soundChannelManager">Manager系</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#module-common.config.service.component.soundChannelCheck">Check系</a></li>
 </ul>
 </li>
 </ul>
@@ -248,6 +256,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../api/module_api.html#home">HOMEモジュール</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../api/module_api.html#id1">Controller層</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../api/module_api.html#id2">Service層</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#common.home.service.display.Display"><code class="docutils literal notranslate"><span class="pre">Display</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#common.home.service.sound.Sound"><code class="docutils literal notranslate"><span class="pre">Sound</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#common.home.service.status.Status"><code class="docutils literal notranslate"><span class="pre">Status</span></code></a></li>
 </ul>
@@ -260,26 +269,28 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../api/module_api.html#save">SAVEモジュール</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../api/module_api.html#id6">Controller層</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#common.save.sound.Sound"><code class="docutils literal notranslate"><span class="pre">Sound</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/module_api.html#id6">Controller層</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/module_api.html#id7">Service層</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#common.save.service.display.Display"><code class="docutils literal notranslate"><span class="pre">Display</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#common.save.service.sound.Sound"><code class="docutils literal notranslate"><span class="pre">Sound</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="../api/module_api.html#id7">Service層</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#common.save.service.sound.Sound"><code class="docutils literal notranslate"><span class="pre">Sound</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#common.save.service.status.Status"><code class="docutils literal notranslate"><span class="pre">Status</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/module_api.html#id8">Component層</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#id9">Validator系</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#id10">Manager系</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../api/module_api.html#end">ENDモジュール</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../api/module_api.html#id8">Controller層</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../api/module_api.html#id9">Service層</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api/module_api.html#id11">Controller層</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/module_api.html#id12">Service層</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#common.end.service.status.Status"><code class="docutils literal notranslate"><span class="pre">Status</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../api/module_api.html#id10">共通モジュール</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api/module_api.html#id13">共通モジュール</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../api/module_api.html#module-common.layer.response.response">レイヤー間通信</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#common.layer.response.response.Response"><code class="docutils literal notranslate"><span class="pre">Response</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#common.layer.code.code.Code"><code class="docutils literal notranslate"><span class="pre">Code</span></code></a></li>
@@ -299,7 +310,9 @@
 <li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#common.config.constants.WayKeyTypes"><code class="docutils literal notranslate"><span class="pre">WayKeyTypes</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#common.constants.ButtonIndex"><code class="docutils literal notranslate"><span class="pre">ButtonIndex</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#common.constants.Colors"><code class="docutils literal notranslate"><span class="pre">Colors</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#common.constants.DefaultButtonSize"><code class="docutils literal notranslate"><span class="pre">DefaultButtonSize</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#common.constants.SoundIndex"><code class="docutils literal notranslate"><span class="pre">SoundIndex</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/module_api.html#common.constants.Text"><code class="docutils literal notranslate"><span class="pre">Text</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../api/module_api.html#module-common.debug.debug">共通機能</a><ul>
@@ -578,9 +591,12 @@
 <section id="id10">
 <h3>暗号化仕様<a class="headerlink" href="#id10" title="Link to this heading"></a></h3>
 <ul class="simple">
-<li><p><strong>暗号化方式</strong>: AES-256-CBC</p></li>
-<li><p><strong>キー管理</strong>: アプリケーション固有キーを使用</p></li>
-<li><p><strong>完全性</strong>: HMAC による改ざん検証</p></li>
+<li><p><strong>暗号化方式</strong>: AES-128-EAX</p></li>
+<li><p><strong>キー長</strong>: 128ビット（16バイト固定）</p></li>
+<li><p><strong>モード</strong>: EAX（認証付き暗号化）</p></li>
+<li><p><strong>認証タグ</strong>: 可変長（メタデータで記録）</p></li>
+<li><p><strong>NONCE</strong>: 自動生成・可変長管理</p></li>
+<li><p><strong>完全性</strong>: 認証タグによる改ざん検証（復号化時に自動検証）</p></li>
 </ul>
 </section>
 </section>
@@ -635,18 +651,200 @@ SAVE Controller（ゲームへデータ提供）
 <li><p><code class="docutils literal notranslate"><span class="pre">common/save/service/status.py</span></code> - 状態管理</p></li>
 </ul>
 </section>
+<section id="component">
+<h3>Component層<a class="headerlink" href="#component" title="Link to this heading"></a></h3>
 <section id="id15">
-<h3>共通機能<a class="headerlink" href="#id15" title="Link to this heading"></a></h3>
+<h4>表示コンポーネント<a class="headerlink" href="#id15" title="Link to this heading"></a></h4>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">common/common.py</span></code> - SaveMethod（暗号化・復号化）</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">pyd/save.cp311-win_amd64.pyd</span></code> - 高速化されたセーブ処理</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">common/save/service/component/displayScreenManager.py</span></code> - 画面描画管理コンポーネント</p>
+<ul>
+<li><p><strong>クラス</strong>: <code class="docutils literal notranslate"><span class="pre">DisplayScreenManager</span></code></p></li>
+<li><p><strong>主要メソッド</strong>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">blit()</span> <span class="pre">-&gt;</span> <span class="pre">bool</span></code> - 画面への画像描画</p>
+<ul>
+<li><p>None チェック（screen / img / pos）</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pygame.error</span></code> / <code class="docutils literal notranslate"><span class="pre">MemoryError</span></code> / <code class="docutils literal notranslate"><span class="pre">Exception</span></code> の多段ハンドリング</p></li>
+<li><p>ハンドラの戻り値（True/False）をそのまま返却</p></li>
+<li><p>ハンドラ自体が例外を起こした場合のみ <code class="docutils literal notranslate"><span class="pre">recovery_error</span></code> パスへ</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>実装詳細</strong>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">dataclass(frozen=True)</span></code> による不変オブジェクト</p></li>
+<li><p>抽象クラス <code class="docutils literal notranslate"><span class="pre">AbstractScreenComponent</span></code> の共通エラーハンドラを使用</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">common/save/service/component/displayTextManager.py</span></code> - テキスト描画管理コンポーネント</p>
+<ul>
+<li><p><strong>クラス</strong>: <code class="docutils literal notranslate"><span class="pre">DisplayTextManager</span></code></p></li>
+<li><p><strong>主要メソッド</strong>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">blit()</span> <span class="pre">-&gt;</span> <span class="pre">bool</span></code> - フォントレンダリングと画面描画</p>
+<ul>
+<li><p>None チェック（screen / font / text / pos）</p></li>
+<li><p>pygame.error / MemoryError / Exception を個別ログ出力</p></li>
+<li><p>成功時は <code class="docutils literal notranslate"><span class="pre">False</span></code>、エラー時は <code class="docutils literal notranslate"><span class="pre">True</span></code> を返却</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">common/save/service/component/displayRequestValidator.py</span></code> - 表示リクエスト検証コンポーネント</p>
+<ul>
+<li><p><strong>クラス</strong>: <code class="docutils literal notranslate"><span class="pre">RequestValidator</span></code></p></li>
+<li><p><strong>主要メソッド</strong>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">raise_if_invalid()</span> <span class="pre">-&gt;</span> <span class="pre">None</span></code> - リクエスト属性の一括検証</p>
+<ul>
+<li><p>全属性の存在・None・型チェック</p></li>
+<li><p>不正な場合は <code class="docutils literal notranslate"><span class="pre">ValueError</span></code> を raise</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="id16">
+<h4>サウンドコンポーネント<a class="headerlink" href="#id16" title="Link to this heading"></a></h4>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">common/save/service/component/soundChannelManager.py</span></code> - 音声チャンネル管理コンポーネント</p>
+<ul>
+<li><p><strong>クラス</strong>: <code class="docutils literal notranslate"><span class="pre">SoundChannelManager</span></code></p></li>
+<li><p><strong>主要メソッド</strong>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">start()</span> <span class="pre">-&gt;</span> <span class="pre">None</span></code> - 音声再生開始</p>
+<ul>
+<li><p>volume / mp3_path の妥当性検証</p></li>
+<li><p>チャンネル有効性チェック後に再生</p></li>
+<li><p>失敗時は <code class="docutils literal notranslate"><span class="pre">Exception</span></code> を raise</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">stop()</span> <span class="pre">-&gt;</span> <span class="pre">None</span></code> - 音声再生停止</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">hasattr</span></code> によるチャンネル確認</p></li>
+<li><p>pygame.error / Exception をログ出力してもみ消す</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>実装詳細</strong>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">dataclass(frozen=True)</span></code> による不変オブジェクト</p></li>
+<li><p>抽象クラス <code class="docutils literal notranslate"><span class="pre">AbstractSoundManager</span></code> を継承</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">common/save/service/component/soundChannelCheck.py</span></code> - 音声チャンネル状態確認コンポーネント</p>
+<ul>
+<li><p><strong>クラス</strong>: <code class="docutils literal notranslate"><span class="pre">SoundChannelCheck</span></code></p></li>
+<li><p><strong>主要メソッド</strong>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">can_sound_start()</span> <span class="pre">-&gt;</span> <span class="pre">bool</span></code> - 再生開始可否の判定</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">_has_channel_available</span></code> が True</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">_channel_index</span></code> が <code class="docutils literal notranslate"><span class="pre">RELEASED_CHANNEL_INDEX</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">_channel</span></code> が None、の全条件を満たす場合に True を返却</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">common/save/service/component/soundRequestValidator.py</span></code> - サウンドリクエスト検証コンポーネント</p>
+<ul>
+<li><p><strong>クラス</strong>: <code class="docutils literal notranslate"><span class="pre">RequestValidator</span></code></p></li>
+<li><p><strong>主要メソッド</strong>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">raise_if_invalid()</span> <span class="pre">-&gt;</span> <span class="pre">None</span></code> - リクエスト属性の一括検証</p>
+<ul>
+<li><p>bool属性 11件（save/load/delete タッチ状態等）を検証</p></li>
+<li><p>int属性 2件（volume / channel_index）を検証</p></li>
+<li><p>channel 属性の型検証</p></li>
+<li><p>sound_list 属性の存在・型検証</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="id17">
+<h4>暗号化・復号化処理<a class="headerlink" href="#id17" title="Link to this heading"></a></h4>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">common/save/aes.py</span></code> - AES-EAX暗号化コンポーネント</p>
+<ul>
+<li><p><strong>クラス</strong>: <code class="docutils literal notranslate"><span class="pre">Aes</span></code></p></li>
+<li><p><strong>主要メソッド</strong>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">encrypt(text:</span> <span class="pre">str)</span> <span class="pre">-&gt;</span> <span class="pre">bytes</span></code> - テキスト暗号化</p>
+<ul>
+<li><p>AES-EAX モード採用</p></li>
+<li><p>NONCE自動生成</p></li>
+<li><p>認証タグ付き（改ざん検出可能）</p></li>
+<li><p>戻り値形式: <code class="docutils literal notranslate"><span class="pre">[tagLen:4bytes][tag][nonceLen:4bytes][nonce][cipherText]</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">decrypt(datalist:</span> <span class="pre">list)</span> <span class="pre">-&gt;</span> <span class="pre">str</span></code> - テキスト復号化</p>
+<ul>
+<li><p>暗号化データから認証タグ・NONCE・暗号文を抽出</p></li>
+<li><p>完全性検証後に復号化</p></li>
+<li><p>改ざん検出時は例外発生</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>実装詳細</strong>:</p>
+<ul>
+<li><p>pycryptodome ライブラリ使用</p></li>
+<li><p>EAX モード（認証付き暗号化）</p></li>
+<li><p>自動デバッグログ出力機能</p></li>
+<li><p>エラー発生時の空バイト列返却</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="id18">
+<h4>高速化処理<a class="headerlink" href="#id18" title="Link to this heading"></a></h4>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">pyd/save.cp311-win_amd64.pyd</span></code> - Cython実装のセーブ処理エンジン</p>
+<ul>
+<li><p><strong>用途</strong>: 大規模ゲームデータの高速化</p></li>
+<li><p><strong>インターフェース</strong>: <code class="docutils literal notranslate"><span class="pre">pyd.save</span></code> モジュールとして import</p></li>
+<li><p><strong>処理対象</strong>:</p>
+<ul>
+<li><p>バイナリシリアライズ</p></li>
+<li><p>チャンク単位での処理</p></li>
+<li><p>メモリ効率的な大規模データ対応</p></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </section>
 </section>
-<section id="id16">
-<h2>エラーハンドリング<a class="headerlink" href="#id16" title="Link to this heading"></a></h2>
-<section id="id17">
-<h3>想定エラー<a class="headerlink" href="#id17" title="Link to this heading"></a></h3>
+<section id="id19">
+<h3>共通機能<a class="headerlink" href="#id19" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">common/common.py</span></code> - 全体共通機能</p></li>
+</ul>
+</section>
+</section>
+<section id="id20">
+<h2>エラーハンドリング<a class="headerlink" href="#id20" title="Link to this heading"></a></h2>
+<section id="id21">
+<h3>想定エラー<a class="headerlink" href="#id21" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 30.0%" />
@@ -673,8 +871,8 @@ SAVE Controller（ゲームへデータ提供）
 </tbody>
 </table>
 </section>
-<section id="id18">
-<h3>復旧手順<a class="headerlink" href="#id18" title="Link to this heading"></a></h3>
+<section id="id22">
+<h3>復旧手順<a class="headerlink" href="#id22" title="Link to this heading"></a></h3>
 <ol class="arabic simple">
 <li><p><strong>自動復旧</strong>: バックアップファイルからの自動復元</p></li>
 <li><p><strong>手動復旧</strong>: ユーザーによるバックアップ選択復元</p></li>
@@ -682,8 +880,8 @@ SAVE Controller（ゲームへデータ提供）
 </ol>
 </section>
 </section>
-<section id="id19">
-<h2>今後の拡張予定<a class="headerlink" href="#id19" title="Link to this heading"></a></h2>
+<section id="id23">
+<h2>今後の拡張予定<a class="headerlink" href="#id23" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><strong>クラウド同期</strong>: オンラインストレージとの同期機能</p></li>
 <li><p><strong>エクスポート機能</strong>: セーブデータの外部出力</p></li>
@@ -706,7 +904,7 @@ SAVE Controller（ゲームへデータ提供）
 
   <div role="contentinfo">
     <p>&#169; Copyright 2026, Kurosu.
-      <span class="lastupdated">最終更新: 2026-02-28
+      <span class="lastupdated">最終更新: 2026-03-31
       </span></p>
   </div>
 
