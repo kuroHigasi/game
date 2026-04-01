@@ -1,22 +1,18 @@
-# 2026年3月対応予定のTODOリスト
+# 2026年4月対応予定のTODOリスト
 ## 実装
-- [x] 共通部品（HOME_SOUND）の改善
-- [x] 共通部品（HOME_STATUS）の改善
-- [x] 共通部品（SAVE_DISPLAY）の改善
-- [x] 共通部品（SAVE_ACTION）の改善
-- [x] 共通部品（SAVE_SOUND）の改善
-- [x] 共通部品（SAVE_STATUS）の改善
+- [ ] 共通部品（END_ACTION）の改善
+- [ ] 共通部品（END_DISPLAY）の改善
+- [ ] 共通部品（END_STATUS）の改善
+- [ ] LOADINGモジュールの追加
+- [ ] 抽象クラスのリファクタリング
 
 ## テスト
-- [x] HOME_SOUNDテスト作成
-- [x] HOME_STATUSテスト作成
-- [x] SAVE_DISPLAYテスト作成
-- [x] SAVE_ACTIONテスト作成
-- [x] SAVE_SOUNDテスト作成
-- [x] SAVE_STATUSテスト作成
+- [ ] END_ACTIONテスト作成
+- [ ] END_DISPLAYテスト作成
+- [ ] END_STATUSテスト作成
+- [ ] LOADINGモジュールのテストコード作成
 
 ## 設計
-- [x] ステータス遷移図の作成
+- [ ] LOADINGモジュールの追加に伴うステータス遷移図の更新
 
 ## 開発環境関連
-- [x] AGENTの指示の改善
