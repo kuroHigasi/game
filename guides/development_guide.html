@@ -59,10 +59,13 @@
 <li class="toctree-l3"><a class="reference internal" href="../system_overview.html#id8">リソース管理</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../system_overview.html#id9">技術スタック</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../system_overview.html#id10">モジュール概要</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../system_overview.html#id11">実装済みモジュール</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../system_overview.html#id12">計画中モジュール</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../system_overview.html#id9">技術スタック</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../system_overview.html#id10">パフォーマンス最適化について</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../system_overview.html#id11">モジュール概要</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../system_overview.html#id12">実装済みモジュール</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../system_overview.html#id13">計画中モジュール</a></li>
 </ul>
 </li>
 </ul>
@@ -328,50 +331,55 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">開発ガイド</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#id2">開発環境セットアップ</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#id3">必要なツール</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id4">環境構築</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">環境構築</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#c">Cライブラリの構築</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">テスト実行</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id6">ドキュメント生成</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id5">アーキテクチャ規約</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id6">3層構造の統一</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id7">ファイル命名規則</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id8">クラス設計原則</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">アーキテクチャ規約</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id8">3層構造の統一</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">ファイル命名規則</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id10">クラス設計原則</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#request-response">Request/Response パターン</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id9">新モジュール追加手順</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id10">1. ディレクトリ構造作成</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id11">2. 基本ファイル作成</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id11">新モジュール追加手順</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id12">1. ディレクトリ構造作成</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id13">2. 基本ファイル作成</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#service">3. Service層の実装</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id12">4. テストファイル作成</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id13">5. ドキュメント追加</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id14">4. テストファイル作成</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id15">5. ドキュメント追加</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#api">6. API参照に追加</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id14">テスト作成ガイド</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id15">テスト方針</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id16">テストファイル構成</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id17">共通テストテンプレート</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id16">テスト作成ガイド</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id17">テスト方針</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id18">テストファイル構成</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id19">共通テストテンプレート</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id18">ドキュメント作成ガイド</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id19">ドキュメント構成</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id20">ドキュメント規約</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id20">ドキュメント作成ガイド</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id21">ドキュメント構成</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id22">ドキュメント規約</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id21">コード品質管理</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id22">静的解析</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id23">継続的インテグレーション</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id23">コード品質管理</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id24">静的解析</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id25">継続的インテグレーション</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id24">モジュール別注意点</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id26">モジュール別注意点</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#config">CONFIG</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#home">HOME</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#save">SAVE</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#end">END</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id25">トラブルシューティング</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id26">よくある問題と対処法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id27">トラブルシューティング</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id28">よくある問題と対処法</a></li>
 </ul>
 </li>
 </ul>
@@ -524,26 +532,54 @@
 <h3>環境構築<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 依存関係のインストール</span>
 pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+</pre></div>
+</div>
+<section id="c">
+<h4>Cライブラリの構築<a class="headerlink" href="#c" title="Link to this heading"></a></h4>
+<p><code class="docutils literal notranslate"><span class="pre">pyd</span></code> フォルダにはゲーム処理の高速化用Cライブラリが含まれています。初回セットアップ時や Cファイルを修正した後には、以下のコマンドでライブラリを更新してください：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># pydフォルダに移動</span>
+<span class="nb">cd</span><span class="w"> </span>pyd
 
-<span class="c1"># テスト実行（全モジュール）</span>
+<span class="c1"># Cライブラリをビルド</span>
+python<span class="w"> </span>setup.py<span class="w"> </span>build_ext<span class="w"> </span>-i
+
+<span class="c1"># プロジェクトルートに戻る</span>
+<span class="nb">cd</span><span class="w"> </span>..
+</pre></div>
+</div>
+<p>このコマンドにより、以下の処理が実行されます：</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">pyd/source/</span></code> 内の C ソースファイルがコンパイルされます</p></li>
+<li><p>コンパイル済みライブラリ（<code class="docutils literal notranslate"><span class="pre">*.pyd</span></code> ファイル）が <code class="docutils literal notranslate"><span class="pre">pyd/</span></code> フォルダに生成されます</p></li>
+<li><p>これらのライブラリが Pythonから直接インポートできるようになります</p></li>
+</ul>
+</section>
+<section id="id5">
+<h4>テスト実行<a class="headerlink" href="#id5" title="Link to this heading"></a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># テスト実行（全モジュール）</span>
 python<span class="w"> </span>-m<span class="w"> </span>pytest<span class="w"> </span>test/
 
 <span class="c1"># 特定モジュールのテスト実行</span>
 python<span class="w"> </span>-m<span class="w"> </span>pytest<span class="w"> </span>test/common/config/
 python<span class="w"> </span>-m<span class="w"> </span>pytest<span class="w"> </span>test/common/home/
 python<span class="w"> </span>-m<span class="w"> </span>pytest<span class="w"> </span>test/common/save/
-
-<span class="c1"># ドキュメント生成</span>
+</pre></div>
+</div>
+</section>
+<section id="id6">
+<h4>ドキュメント生成<a class="headerlink" href="#id6" title="Link to this heading"></a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># ドキュメント生成</span>
 <span class="nb">cd</span><span class="w"> </span>docs
 make<span class="w"> </span>html
 </pre></div>
 </div>
 </section>
 </section>
-<section id="id5">
-<h2>アーキテクチャ規約<a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
-<section id="id6">
-<h3>3層構造の統一<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+</section>
+<section id="id7">
+<h2>アーキテクチャ規約<a class="headerlink" href="#id7" title="Link to this heading"></a></h2>
+<section id="id8">
+<h3>3層構造の統一<a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
 <p>全モジュールは以下の3層構造で実装：</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>common/{module_name}/
 ├── {function}.py              # Controller層
@@ -556,8 +592,8 @@ make<span class="w"> </span>html
 </pre></div>
 </div>
 </section>
-<section id="id7">
-<h3>ファイル命名規則<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
+<section id="id9">
+<h3>ファイル命名規則<a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 30.0%" />
@@ -594,8 +630,8 @@ make<span class="w"> </span>html
 </tbody>
 </table>
 </section>
-<section id="id8">
-<h3>クラス設計原則<a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
+<section id="id10">
+<h3>クラス設計原則<a class="headerlink" href="#id10" title="Link to this heading"></a></h3>
 <ol class="arabic simple">
 <li><p><strong>単一責任原則</strong>: 1つのクラスは1つの責任のみ</p></li>
 <li><p><strong>依存関係逆転</strong>: 具象ではなく抽象に依存</p></li>
@@ -637,10 +673,10 @@ make<span class="w"> </span>html
 </div>
 </section>
 </section>
-<section id="id9">
-<h2>新モジュール追加手順<a class="headerlink" href="#id9" title="Link to this heading"></a></h2>
-<section id="id10">
-<h3>1. ディレクトリ構造作成<a class="headerlink" href="#id10" title="Link to this heading"></a></h3>
+<section id="id11">
+<h2>新モジュール追加手順<a class="headerlink" href="#id11" title="Link to this heading"></a></h2>
+<section id="id12">
+<h3>1. ディレクトリ構造作成<a class="headerlink" href="#id12" title="Link to this heading"></a></h3>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>common/<span class="o">{</span>new_module<span class="o">}</span>
 mkdir<span class="w"> </span>common/<span class="o">{</span>new_module<span class="o">}</span>/service
 mkdir<span class="w"> </span>common/<span class="o">{</span>new_module<span class="o">}</span>/service/component<span class="w">  </span><span class="c1"># 必要に応じて</span>
@@ -650,8 +686,8 @@ mkdir<span class="w"> </span>test/common/<span class="o">{</span>new_module<span
 </pre></div>
 </div>
 </section>
-<section id="id11">
-<h3>2. 基本ファイル作成<a class="headerlink" href="#id11" title="Link to this heading"></a></h3>
+<section id="id13">
+<h3>2. 基本ファイル作成<a class="headerlink" href="#id13" title="Link to this heading"></a></h3>
 <p>Controller層の基本ファイル：</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># common/{new_module}/action.py</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">common.abstract.</span><span class="p">{</span><span class="n">new_module</span><span class="p">}</span><span class="o">.</span><span class="n">abstractAction</span> <span class="kn">import</span><span class="w"> </span><span class="nn">AbstractAction</span>
@@ -678,8 +714,8 @@ mkdir<span class="w"> </span>test/common/<span class="o">{</span>new_module<span
 </pre></div>
 </div>
 </section>
-<section id="id12">
-<h3>4. テストファイル作成<a class="headerlink" href="#id12" title="Link to this heading"></a></h3>
+<section id="id14">
+<h3>4. テストファイル作成<a class="headerlink" href="#id14" title="Link to this heading"></a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># test/common/{new_module}/action_test.py</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">unittest</span>
 
@@ -690,8 +726,8 @@ mkdir<span class="w"> </span>test/common/<span class="o">{</span>new_module<span
 </pre></div>
 </div>
 </section>
-<section id="id13">
-<h3>5. ドキュメント追加<a class="headerlink" href="#id13" title="Link to this heading"></a></h3>
+<section id="id15">
+<h3>5. ドキュメント追加<a class="headerlink" href="#id15" title="Link to this heading"></a></h3>
 <div class="highlight-rst notranslate"><div class="highlight"><pre><span></span># docs/modules/{new_module}_overview.rst
 <span class="gh">{MODULE}機能の概要</span>
 <span class="gh">==================</span>
@@ -708,18 +744,18 @@ mkdir<span class="w"> </span>test/common/<span class="o">{</span>new_module<span
 <p><code class="docutils literal notranslate"><span class="pre">docs/api/module_api.rst</span></code> に新モジュールのautomodule定義を追加</p>
 </section>
 </section>
-<section id="id14">
-<h2>テスト作成ガイド<a class="headerlink" href="#id14" title="Link to this heading"></a></h2>
-<section id="id15">
-<h3>テスト方針<a class="headerlink" href="#id15" title="Link to this heading"></a></h3>
+<section id="id16">
+<h2>テスト作成ガイド<a class="headerlink" href="#id16" title="Link to this heading"></a></h2>
+<section id="id17">
+<h3>テスト方針<a class="headerlink" href="#id17" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p><strong>正常系</strong>: 期待される入力での動作確認</p></li>
 <li><p><strong>異常系</strong>: エラー条件での例外処理確認</p></li>
 <li><p><strong>境界値</strong>: 最小値・最大値での動作確認</p></li>
 </ul>
 </section>
-<section id="id16">
-<h3>テストファイル構成<a class="headerlink" href="#id16" title="Link to this heading"></a></h3>
+<section id="id18">
+<h3>テストファイル構成<a class="headerlink" href="#id18" title="Link to this heading"></a></h3>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>test/common/{module}/
 ├── action_test.py                    # Controller層のテスト
 ├── display_test.py
@@ -733,8 +769,8 @@ mkdir<span class="w"> </span>test/common/<span class="o">{</span>new_module<span
 </pre></div>
 </div>
 </section>
-<section id="id17">
-<h3>共通テストテンプレート<a class="headerlink" href="#id17" title="Link to this heading"></a></h3>
+<section id="id19">
+<h3>共通テストテンプレート<a class="headerlink" href="#id19" title="Link to this heading"></a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 例: test/common/config/status_test.py</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">unittest</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">common.config.service.status</span><span class="w"> </span><span class="kn">import</span> <span class="n">Status</span>
@@ -777,10 +813,10 @@ mkdir<span class="w"> </span>test/common/<span class="o">{</span>new_module<span
 </div>
 </section>
 </section>
-<section id="id18">
-<h2>ドキュメント作成ガイド<a class="headerlink" href="#id18" title="Link to this heading"></a></h2>
-<section id="id19">
-<h3>ドキュメント構成<a class="headerlink" href="#id19" title="Link to this heading"></a></h3>
+<section id="id20">
+<h2>ドキュメント作成ガイド<a class="headerlink" href="#id20" title="Link to this heading"></a></h2>
+<section id="id21">
+<h3>ドキュメント構成<a class="headerlink" href="#id21" title="Link to this heading"></a></h3>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>docs/
 ├── index.rst                    # メインページ
 ├── system_overview.rst          # システム全体概要
@@ -800,8 +836,8 @@ mkdir<span class="w"> </span>test/common/<span class="o">{</span>new_module<span
 </pre></div>
 </div>
 </section>
-<section id="id20">
-<h3>ドキュメント規約<a class="headerlink" href="#id20" title="Link to this heading"></a></h3>
+<section id="id22">
+<h3>ドキュメント規約<a class="headerlink" href="#id22" title="Link to this heading"></a></h3>
 <p>すべての公開クラス・メソッドには以下を記述：</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">example_method</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">param</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
@@ -826,10 +862,10 @@ mkdir<span class="w"> </span>test/common/<span class="o">{</span>new_module<span
 </div>
 </section>
 </section>
-<section id="id21">
-<h2>コード品質管理<a class="headerlink" href="#id21" title="Link to this heading"></a></h2>
-<section id="id22">
-<h3>静的解析<a class="headerlink" href="#id22" title="Link to this heading"></a></h3>
+<section id="id23">
+<h2>コード品質管理<a class="headerlink" href="#id23" title="Link to this heading"></a></h2>
+<section id="id24">
+<h3>静的解析<a class="headerlink" href="#id24" title="Link to this heading"></a></h3>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># コード品質チェック</span>
 flake8<span class="w"> </span>common/<span class="o">{</span>module<span class="o">}</span>/
 pylint<span class="w"> </span>common/<span class="o">{</span>module<span class="o">}</span>/
@@ -839,8 +875,8 @@ mypy<span class="w"> </span>common/<span class="o">{</span>module<span class="o"
 </pre></div>
 </div>
 </section>
-<section id="id23">
-<h3>継続的インテグレーション<a class="headerlink" href="#id23" title="Link to this heading"></a></h3>
+<section id="id25">
+<h3>継続的インテグレーション<a class="headerlink" href="#id25" title="Link to this heading"></a></h3>
 <p>全モジュールで以下を自動実行：</p>
 <ol class="arabic simple">
 <li><p><strong>単体テスト実行</strong></p></li>
@@ -850,8 +886,8 @@ mypy<span class="w"> </span>common/<span class="o">{</span>module<span class="o"
 </ol>
 </section>
 </section>
-<section id="id24">
-<h2>モジュール別注意点<a class="headerlink" href="#id24" title="Link to this heading"></a></h2>
+<section id="id26">
+<h2>モジュール別注意点<a class="headerlink" href="#id26" title="Link to this heading"></a></h2>
 <section id="config">
 <h3>CONFIG<a class="headerlink" href="#config" title="Link to this heading"></a></h3>
 <ul class="simple">
@@ -885,10 +921,10 @@ mypy<span class="w"> </span>common/<span class="o">{</span>module<span class="o"
 </ul>
 </section>
 </section>
-<section id="id25">
-<h2>トラブルシューティング<a class="headerlink" href="#id25" title="Link to this heading"></a></h2>
-<section id="id26">
-<h3>よくある問題と対処法<a class="headerlink" href="#id26" title="Link to this heading"></a></h3>
+<section id="id27">
+<h2>トラブルシューティング<a class="headerlink" href="#id27" title="Link to this heading"></a></h2>
+<section id="id28">
+<h3>よくある問題と対処法<a class="headerlink" href="#id28" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 30.0%" />
@@ -930,7 +966,7 @@ mypy<span class="w"> </span>common/<span class="o">{</span>module<span class="o"
 
   <div role="contentinfo">
     <p>&#169; Copyright 2026, Kurosu.
-      <span class="lastupdated">最終更新: 2026-03-31
+      <span class="lastupdated">最終更新: 2026-05-03
       </span></p>
   </div>
 
